@@ -121,7 +121,17 @@ export const translations: Record<Language, Translation> = {
       noOrders: "لا توجد طلبيات بعد",
       shareVia: "مشاركة هذه القطعة عبر",
       sharedVia: "تمت المشاركة عبر",
-      close: "إغلاق"
+      close: "إغلاق",
+      search: "البحث عن حلي...",
+      buy: "شراء",
+      rent: "كراء",
+      categories: {
+        all: "الكل",
+        constantinois: "قسنطيني",
+        kabyle: "قبائلي",
+        chaoui: "شاوي",
+        sahraoui: "صحراوي"
+      }
     },
     cart: {
       title: "حقيبة المشتريات",

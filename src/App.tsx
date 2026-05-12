@@ -18,16 +18,18 @@ interface Product {
   nameEn: string;
   nameFr: string;
   price: number;
+  rentPrice?: number;
   img: string;
   artisan: string;
   artisanImg: string;
+  category: 'constantinois' | 'kabyle' | 'chaoui' | 'sahraoui' | 'other';
 }
 
 const products: Product[] = [
-  { id: 1, name: "خيط الروح ذهب خالص", nameEn: "Khait El Rouh Pure Gold", nameFr: "Khait El Rouh Or Pur", price: 125000, img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=600", artisan: "نور Photographe", artisanImg: "https://i.pravatar.cc/150?u=nour" },
-  { id: 2, name: "طقم مرجان أحمر أصلي", nameEn: "Original Red Coral Set", nameFr: "Parure Corail Rouge", price: 45000, img: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?q=80&w=600", artisan: "حرفي القبائل", artisanImg: "https://i.pravatar.cc/150?u=kab" },
-  { id: 3, name: "خلخال فضة منقوش", nameEn: "Engraved Silver Anklet", nameFr: "Chevillère en Argent", price: 32000, img: "https://images.unsplash.com/photo-1630019852942-f89202989a59?q=80&w=600", artisan: "نور Photographe", artisanImg: "https://i.pravatar.cc/150?u=nour" },
-  { id: 4, name: "سكاب تلمساني أصيل", nameEn: "Authentic Tlemcen Skab", nameFr: "Skab Tlemcen Authentique", price: 28000, img: "https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?q=80&w=600", artisan: "لالة تلمسان", artisanImg: "https://i.pravatar.cc/150?u=tlem" }
+  { id: 1, name: "خيط الروح ذهب خالص", nameEn: "Khait El Rouh Pure Gold", nameFr: "Khait El Rouh Or Pur", price: 125000, rentPrice: 5000, img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=600", artisan: "نور (Admin)", artisanImg: "https://i.pravatar.cc/150?u=nour", category: 'constantinois' },
+  { id: 2, name: "طقم مرجان أحمر أصلي", nameEn: "Original Red Coral Set", nameFr: "Parure Corail Rouge", price: 45000, rentPrice: 2500, img: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?q=80&w=600", artisan: "حرفي القبائل", artisanImg: "https://i.pravatar.cc/150?u=kab", category: 'kabyle' },
+  { id: 3, name: "خلخال فضة منقوش", nameEn: "Engraved Silver Anklet", nameFr: "Chevillère en Argent", price: 32000, rentPrice: 1500, img: "https://images.unsplash.com/photo-1630019852942-f89202989a59?q=80&w=600", artisan: "نور (Admin)", artisanImg: "https://i.pravatar.cc/150?u=nour", category: 'chaoui' },
+  { id: 4, name: "سكاب تلمساني أصيل", nameEn: "Authentic Tlemcen Skab", nameFr: "Skab Tlemcen Authentique", price: 28000, rentPrice: 2000, img: "https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?q=80&w=600", artisan: "لالة تلمسان", artisanImg: "https://i.pravatar.cc/150?u=tlem", category: 'sahraoui' }
 ];
 
 type Tab = 'home' | 'shop' | 'cart' | 'dash' | 'add';
@@ -54,9 +56,11 @@ export default function App() {
   
   // New States
   const [allProducts, setAllProducts] = useState<Product[]>(products);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [orders, setOrders] = useState<Order[]>([]);
   const [notifications, setNotifications] = useState<string[]>([]);
-  const [newProduct, setNewProduct] = useState({ name: '', nameEn: '', nameFr: '', price: '', img: '' });
+  const [newProduct, setNewProduct] = useState({ name: '', nameEn: '', nameFr: '', price: '', img: '', category: 'other' as Product['category'] });
   const [loginCreds, setLoginCreds] = useState({ username: '', password: '' });
   const [loginError, setLoginError] = useState<string | null>(null);
 
@@ -105,6 +109,18 @@ export default function App() {
       setLoginError(t.auth.invalid);
     }
   };
+
+  const getName = (p: Product) => {
+    if (lang === 'en') return p.nameEn;
+    if (lang === 'fr') return p.nameFr;
+    return p.name;
+  };
+
+  const filteredProducts = allProducts.filter(p => {
+    const matchesSearch = getName(p).toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === 'all' || p.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
 
   const handleConfirmOrder = () => {
     if (!currentUser) {
@@ -160,11 +176,12 @@ export default function App() {
       price: parseInt(newProduct.price),
       img: newProduct.img,
       artisan: "نور (Admin)",
-      artisanImg: "https://i.pravatar.cc/150?u=nour"
+      artisanImg: "https://i.pravatar.cc/150?u=nour",
+      category: newProduct.category
     };
 
     setAllProducts([product, ...allProducts]);
-    setNewProduct({ name: '', nameEn: '', nameFr: '', price: '', img: '' });
+    setNewProduct({ name: '', nameEn: '', nameFr: '', price: '', img: '', category: 'other' });
     setCurrentTab('home');
     showToast(t.sections.successAdd);
   };
@@ -198,12 +215,6 @@ export default function App() {
       )}
     </div>
   );
-
-  const getName = (p: Product) => {
-    if (lang === 'en') return p.nameEn;
-    if (lang === 'fr') return p.nameFr;
-    return p.name;
-  };
 
   return (
     <div className="min-h-screen font-sans selection:bg-gold/30 selection:text-gold">
@@ -406,49 +417,75 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Selection */}
-              <div className="flex justify-between items-end">
-                <h3 className="font-serif text-2xl font-bold">{t.sections.selected}</h3>
-                <button onClick={() => setCurrentTab('shop')} className="text-gold font-bold text-sm underline underline-offset-4">{t.sections.viewAll}</button>
+              {/* Search & Categories */}
+              <div className="space-y-6">
+                <div className="relative max-w-xl mx-auto">
+                  <Search className={`absolute ${isRtl ? 'right-6' : 'left-6'} top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400`} />
+                  <input 
+                    type="text" 
+                    placeholder={t.sections.search}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className={`w-full ${isRtl ? 'pr-14 pl-6' : 'pl-14 pr-6'} py-5 bg-white border border-stone-100 rounded-[2rem] shadow-sm focus:outline-none focus:ring-2 focus:ring-gold/20 font-bold transition-all`}
+                  />
+                </div>
+
+                <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2 px-1">
+                  {Object.entries(t.sections.categories).map(([key, label]) => (
+                    <button
+                      key={key}
+                      onClick={() => setSelectedCategory(key)}
+                      className={`whitespace-nowrap px-8 py-3 rounded-full font-bold transition-all border ${selectedCategory === key ? 'bg-gold text-white border-gold shadow-lg shadow-gold/20' : 'bg-white text-stone-400 border-stone-100 hover:border-gold/50'}`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {allProducts.map((p) => (
+              {/* Selection */}
+               <div className="flex justify-between items-end">
+                <h3 className="font-serif text-2xl font-bold">{t.sections.selected}</h3>
+                <button onClick={() => { setCurrentTab('shop'); setSelectedCategory('all'); }} className="text-gold font-bold text-sm underline underline-offset-4">{t.sections.viewAll}</button>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                {filteredProducts.map((p) => (
                   <motion.div 
                     key={p.id}
                     whileHover={{ y: -10 }}
-                    className="bg-white rounded-[2.5rem] border border-stone-100 overflow-hidden group shadow-sm hover:shadow-xl transition-all cursor-pointer flex flex-col"
+                    className="bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-stone-100 overflow-hidden group shadow-sm hover:shadow-xl transition-all cursor-pointer flex flex-col"
                     onClick={() => setSelectedProduct(p)}
                   >
                     <div className="relative aspect-[4/5] overflow-hidden">
                       <img src={p.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={getName(p)} />
-                      <div className="absolute top-4 right-4 flex flex-col gap-2">
+                      <div className="absolute top-2 right-2 md:top-4 md:right-4 flex flex-col gap-2">
                         <button 
                           onClick={(e) => { 
                             e.stopPropagation(); 
                             if (!currentUser) setIsAuthModalOpen(true);
-                            else showToast(isRtl ? 'أضيف للمفضلة' : 'Added to favorites'); 
-                          }} 
-                          className="w-10 h-10 bg-white/90 rounded-xl flex items-center justify-center text-stone-400 hover:text-red-500 transition-colors shadow-lg"
+                            else showToast(t.sections.successAdd); 
+                          }}
+                          className="w-8 h-8 md:w-10 md:h-10 bg-white/90 rounded-lg md:rounded-xl flex items-center justify-center text-stone-400 hover:text-red-500 transition-colors shadow-lg"
                         >
-                          <Heart className="w-5 h-5" />
-                        </button>
-                        <button 
-                          onClick={(e) => { 
-                            e.stopPropagation(); 
-                            if (!currentUser) setIsAuthModalOpen(true);
-                            else setIsShareOpen(true); 
-                          }} 
-                          className="w-10 h-10 bg-white/90 rounded-xl flex items-center justify-center text-stone-400 hover:text-gold transition-colors shadow-lg"
-                        >
-                          <Share2 className="w-5 h-5" />
+                          <Heart className="w-4 h-4 md:w-5 md:h-5" />
                         </button>
                       </div>
+                      <div className={`absolute bottom-2 ${isRtl ? 'right-2' : 'left-2'} flex gap-1`}>
+                        <span className="px-2 py-0.5 md:px-3 md:py-1 bg-gold text-white text-[8px] md:text-[10px] font-black rounded-full uppercase shadow-lg">
+                          {t.sections.buy}
+                        </span>
+                        {p.rentPrice && (
+                          <span className="px-2 py-0.5 md:px-3 md:py-1 bg-stone-900 text-white text-[8px] md:text-[10px] font-black rounded-full uppercase shadow-lg">
+                            {t.sections.rent}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <div className="p-6 flex-grow flex flex-col">
-                      <h4 className="font-bold text-sm truncate text-stone-800 mb-1">{getName(p)}</h4>
-                      <p className="text-gold font-black text-lg mb-4">{p.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
-                      <div className="mt-auto pt-4 border-t border-stone-50">
+                    <div className="p-4 md:p-6 flex-grow flex flex-col">
+                      <h4 className="font-bold text-xs md:text-sm truncate text-stone-800 mb-1">{getName(p)}</h4>
+                      <p className="text-gold font-black text-sm md:text-lg mb-2 md:mb-4">{p.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
+                      <div className="mt-auto pt-2 md:pt-4 border-t border-stone-50 hidden md:block">
                         <ArtisanSignature artisan={p.artisan} artisanImg={p.artisanImg} />
                       </div>
                     </div>
@@ -812,6 +849,19 @@ export default function App() {
                         className="w-full px-6 py-4 bg-stone-50 border border-stone-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gold/50 font-bold"
                         placeholder="مثال: خيط الروح العاصمي"
                       />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Catégorie / التصنيف</label>
+                      <select 
+                        value={newProduct.category}
+                        onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value as Product['category'] })}
+                        className="w-full px-6 py-4 bg-stone-50 border border-stone-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gold/50 font-bold appearance-none cursor-pointer"
+                      >
+                        {Object.entries(t.sections.categories).filter(([key]) => key !== 'all').map(([key, label]) => (
+                          <option key={key} value={key}>{label}</option>
+                        ))}
+                        <option value="other">{isRtl ? 'أخرى' : 'Autre / Other'}</option>
+                      </select>
                     </div>
                     <div className="space-y-2">
                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.product.price}</label>
