@@ -32,6 +32,16 @@ export interface Translation {
     shareVia: string;
     sharedVia: string;
     close: string;
+    search: string;
+    buy: string;
+    rent: string;
+    categories: {
+      all: string;
+      constantinois: string;
+      kabyle: string;
+      chaoui: string;
+      sahraoui: string;
+    };
   };
   cart: {
     title: string;
@@ -219,7 +229,17 @@ export const translations: Record<Language, Translation> = {
       noOrders: "No orders yet",
       shareVia: "Share this piece via",
       sharedVia: "Shared via",
-      close: "Close"
+      close: "Close",
+      search: "Search for jewelry...",
+      buy: "Buy",
+      rent: "Rent",
+      categories: {
+        all: "All",
+        constantinois: "Constantinois",
+        kabyle: "Kabyle",
+        chaoui: "Chaoui",
+        sahraoui: "Sahraoui"
+      }
     },
     cart: {
       title: "Shopping Bag",
@@ -307,7 +327,17 @@ export const translations: Record<Language, Translation> = {
       noOrders: "Aucune commande",
       shareVia: "Partager cet article via",
       sharedVia: "Partagé via",
-      close: "Fermer"
+      close: "Fermer",
+      search: "Rechercher un bijou...",
+      buy: "Acheter",
+      rent: "Louer",
+      categories: {
+        all: "Tout",
+        constantinois: "Constantinois",
+        kabyle: "Kabyle",
+        chaoui: "Chaoui",
+        sahraoui: "Sahraoui"
+      }
     },
     cart: {
       title: "Sac d'Achat",

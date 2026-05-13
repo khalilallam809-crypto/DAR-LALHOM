@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   Menu, X, ShoppingCart, Home, LayoutDashboard, Plus, 
   ChevronRight, Star, Zap, Share2, Heart, User, 
-  Globe, LogOut, CheckCircle2, TrendingUp, Eye, Package
+  Globe, LogOut, CheckCircle2, TrendingUp, Eye, Package, Search
 } from 'lucide-react';
 import { translations, Language } from './translations';
 
@@ -384,7 +384,7 @@ export default function App() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="w-32 md:w-48 mb-8"
+                    className="w-40 md:w-64 mb-8"
                   >
                     <img src="/logo.png" className="w-full object-contain filter drop-shadow-2xl" alt="Hero Logo" />
                   </motion.div>
@@ -449,7 +449,7 @@ export default function App() {
                 <button onClick={() => { setCurrentTab('shop'); setSelectedCategory('all'); }} className="text-gold font-bold text-sm underline underline-offset-4">{t.sections.viewAll}</button>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6">
                 {filteredProducts.map((p) => (
                   <motion.div 
                     key={p.id}
@@ -503,51 +503,74 @@ export default function App() {
               exit={{ opacity: 0, y: -20 }}
               className="space-y-8"
             >
-              <div className="text-center space-y-4 mb-12">
+              <div className="text-center space-y-4 mb-4">
                 <h2 className="font-serif text-4xl md:text-5xl font-bold">{t.navigation.shop}</h2>
                 <p className="text-stone-400 max-w-xl mx-auto">{isRtl ? 'تصفح مجموعتنا الكاملة من الحلي التقليدية الجزائرية' : 'Browse our full collection of traditional Algerian jewelry'}</p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {products.concat(products).map((p, i) => (
+              {/* Categories Filter in Shop */}
+              <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2 px-1">
+                {Object.entries(t.sections.categories).map(([key, label]) => (
+                  <button
+                    key={key}
+                    onClick={() => setSelectedCategory(key)}
+                    className={`whitespace-nowrap px-6 py-2 rounded-full font-bold transition-all border text-xs md:text-sm ${selectedCategory === key ? 'bg-gold text-white border-gold shadow-lg shadow-gold/20' : 'bg-white text-stone-400 border-stone-100'}`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8">
+                {filteredProducts.map((p, i) => (
                   <div 
                     key={`${p.id}-${i}`}
-                    className="bg-white rounded-[2.5rem] border border-stone-100 overflow-hidden group shadow-sm hover:shadow-xl transition-all cursor-pointer"
+                    className="bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-stone-100 overflow-hidden group shadow-sm hover:shadow-xl transition-all cursor-pointer flex flex-col"
                     onClick={() => setSelectedProduct(p)}
                   >
                     <div className="relative aspect-[4/5] overflow-hidden">
                       <img src={p.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={getName(p)} />
-                      <div className="absolute top-4 right-4 focus-within:opacity-100">
+                      <div className="absolute top-2 right-2 md:top-4 md:right-4 flex flex-col gap-2">
                         <button 
                           onClick={(e) => { 
                             e.stopPropagation(); 
                             if (!currentUser) setIsAuthModalOpen(true);
                             else showToast(t.sections.successAdd); 
                           }}
-                          className="w-10 h-10 bg-white/90 rounded-xl flex items-center justify-center text-stone-400 hover:text-red-500 transition-colors shadow-lg"
+                          className="w-8 h-8 md:w-10 md:h-10 bg-white/90 rounded-lg md:rounded-xl flex items-center justify-center text-stone-400 hover:text-red-500 transition-colors shadow-lg"
                         >
-                          <Heart className="w-5 h-5" />
+                          <Heart className="w-4 h-4 md:w-5 md:h-5" />
                         </button>
                       </div>
+                      <div className={`absolute bottom-2 ${isRtl ? 'right-2' : 'left-2'} flex gap-1`}>
+                        <span className="px-2 py-0.5 md:px-3 md:py-1 bg-gold text-white text-[8px] md:text-[10px] font-black rounded-full uppercase">
+                          {t.sections.buy}
+                        </span>
+                        {p.rentPrice && (
+                          <span className="px-2 py-0.5 md:px-3 md:py-1 bg-stone-900 text-white text-[8px] md:text-[10px] font-black rounded-full uppercase">
+                            {t.sections.rent}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <div className="p-8">
-                      <div className="flex justify-between items-start mb-4">
-                        <div>
-                          <p className="text-[10px] text-stone-400 font-bold mb-1 uppercase tracking-widest">{p.artisan}</p>
-                          <h4 className="font-bold text-lg text-stone-800">{getName(p)}</h4>
+                    <div className="p-4 md:p-8 flex-grow flex flex-col">
+                      <div className="flex justify-between items-start mb-2 md:mb-4">
+                        <div className="min-w-0">
+                          <p className="text-[8px] md:text-[10px] text-stone-400 font-bold mb-1 uppercase tracking-widest truncate">{p.artisan}</p>
+                          <h4 className="font-bold text-xs md:text-lg text-stone-800 truncate">{getName(p)}</h4>
                         </div>
-                        <div className="flex items-center gap-1 text-gold">
+                        <div className="hidden md:flex items-center gap-1 text-gold">
                           <Star className="w-4 h-4 fill-gold" />
                           <span className="text-xs font-bold">4.9</span>
                         </div>
                       </div>
-                      <div className="flex justify-between items-center pt-6 border-t border-stone-50">
-                        <p className="text-gold font-black text-xl">{p.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
+                      <div className="flex justify-between items-center pt-2 md:pt-6 border-t border-stone-50 mt-auto">
+                        <p className="text-gold font-black text-xs md:text-xl truncate">{p.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
                         <button 
                           onClick={(e) => { e.stopPropagation(); addToCart(p); }}
-                          className="p-3 bg-stone-900 text-white rounded-2xl hover:bg-stone-800 transition-colors"
+                          className="p-2 md:p-3 bg-stone-900 text-white rounded-lg md:rounded-2xl hover:bg-stone-800 transition-colors"
                         >
-                          <ShoppingCart className="w-5 h-5" />
+                          <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
                         </button>
                       </div>
                     </div>
@@ -969,29 +992,51 @@ export default function App() {
               <div className="md:w-1/2 p-10 md:p-12 overflow-y-auto no-scrollbar space-y-8 flex flex-col justify-center">
                 <ArtisanSignature artisan={selectedProduct.artisan} artisanImg={selectedProduct.artisanImg} variant="full" />
 
-                <div>
+                <div className="flex flex-col gap-1">
                   <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900 mb-2">{getName(selectedProduct)}</h2>
-                  <p className="text-3xl font-black text-gold">{selectedProduct.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
+                  <div className="flex items-center gap-4">
+                    <p className="text-3xl font-black text-gold">{selectedProduct.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
+                    {selectedProduct.rentPrice && (
+                      <div className="px-3 py-1 bg-stone-100 rounded-full flex items-center gap-2">
+                        <span className="text-[10px] font-black text-stone-400 uppercase">{t.sections.rent}:</span>
+                        <span className="text-sm font-bold text-stone-900">{selectedProduct.rentPrice.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <p className="text-stone-500 text-sm leading-relaxed">
                   {t.product.descPrefix} {t.product.descSuffix}
                 </p>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col gap-3">
                   <button 
                     onClick={() => addToCart(selectedProduct)}
-                    className="bg-gold text-white py-5 rounded-[1.5rem] font-bold shadow-xl shadow-gold/20 active:scale-95 transition-all flex items-center justify-center gap-2"
+                    className="w-full bg-gold text-white py-5 rounded-[1.5rem] font-bold shadow-xl shadow-gold/20 active:scale-95 transition-all flex items-center justify-center gap-2"
                   >
                     <ShoppingCart className="w-5 h-5" />
-                    {t.product.addCart}
+                    {t.product.addCart} ({t.sections.buy})
                   </button>
+                  
+                  {selectedProduct.rentPrice && (
+                    <button 
+                      onClick={() => {
+                        if (!currentUser) setIsAuthModalOpen(true);
+                        else showToast(isRtl ? 'تم إرسال طلب الكراء' : 'Rent inquiry sent');
+                      }}
+                      className="w-full bg-stone-900 text-white py-5 rounded-[1.5rem] font-bold active:scale-95 transition-all flex items-center justify-center gap-2"
+                    >
+                      <Star className="w-5 h-5 fill-gold text-gold" />
+                      {t.sections.rent}
+                    </button>
+                  )}
+
                   <button 
                     onClick={() => {
                       if (!currentUser) setIsAuthModalOpen(true);
                       else showToast(t.product.inquirySent);
                     }}
-                    className="border-2 border-stone-100 text-stone-600 py-5 rounded-[1.5rem] font-bold active:scale-95 transition-all"
+                    className="w-full border-2 border-stone-100 text-stone-600 py-4 rounded-[1.5rem] font-bold active:scale-95 transition-all"
                   >
                     {t.product.inquiry}
                   </button>
