@@ -1,6 +1,6 @@
 {
   "name": "Dar Lalahom",
-  "description": "An exclusive marketplace for premium artisanal jewelry and traditional heritage pieces.",
+  "description": "Dar Lalahom - Exclusive marketplace for premium Algerian artisanal jewelry, traditional clothing, and heritage pieces. Featuring buy/rent options, artisan registration, and localized search.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

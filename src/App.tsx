@@ -3,36 +3,259 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Menu, X, ShoppingCart, Home, LayoutDashboard, Plus, 
   ChevronRight, Star, Zap, Share2, Heart, User, 
-  Globe, LogOut, CheckCircle2, TrendingUp, Eye, Package, Search
+  Globe, LogOut, CheckCircle2, TrendingUp, Eye, Package, Search,
+  Facebook, Instagram, MessageCircle, Briefcase, Camera, Trophy, ChevronDown, FileText
 } from 'lucide-react';
-import { translations, Language } from './translations';
+import { translations, Language, Translation } from './translations';
 
 interface Product {
   id: number;
   name: string;
   nameEn: string;
   nameFr: string;
+  description: string;
   price: number;
   rentPrice?: number;
   img: string;
   artisan: string;
   artisanImg: string;
-  category: 'constantinois' | 'kabyle' | 'chaoui' | 'sahraoui' | 'other';
+  category: 'jewelry' | 'clothing' | 'copper' | 'homeDecor' | 'hennaSetup' | 'hennaInk';
+  jewelryType?: 'constantinois' | 'kabyle' | 'chaoui' | 'sahraoui' | 'other';
+  wilaya?: string;
+  rating: number;
+  isOffer?: boolean;
+  isBestSeller?: boolean;
 }
 
 const products: Product[] = [
-  { id: 1, name: "خيط الروح ذهب خالص", nameEn: "Khait El Rouh Pure Gold", nameFr: "Khait El Rouh Or Pur", price: 125000, rentPrice: 5000, img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=600", artisan: "نور (Admin)", artisanImg: "https://i.pravatar.cc/150?u=nour", category: 'constantinois' },
-  { id: 2, name: "طقم مرجان أحمر أصلي", nameEn: "Original Red Coral Set", nameFr: "Parure Corail Rouge", price: 45000, rentPrice: 2500, img: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?q=80&w=600", artisan: "حرفي القبائل", artisanImg: "https://i.pravatar.cc/150?u=kab", category: 'kabyle' },
-  { id: 3, name: "خلخال فضة منقوش", nameEn: "Engraved Silver Anklet", nameFr: "Chevillère en Argent", price: 32000, rentPrice: 1500, img: "https://images.unsplash.com/photo-1630019852942-f89202989a59?q=80&w=600", artisan: "نور (Admin)", artisanImg: "https://i.pravatar.cc/150?u=nour", category: 'chaoui' },
-  { id: 4, name: "سكاب تلمساني أصيل", nameEn: "Authentic Tlemcen Skab", nameFr: "Skab Tlemcen Authentique", price: 28000, rentPrice: 2000, img: "https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?q=80&w=600", artisan: "لالة تلمسان", artisanImg: "https://i.pravatar.cc/150?u=tlem", category: 'sahraoui' }
+  // Jewelry
+  { 
+    id: 1, 
+    name: "خيط الروح ذهب خالص", 
+    nameEn: "Khait El Rouh Pure Gold", 
+    nameFr: "Khait El Rouh Or Pur", 
+    description: "حلي تقليدي عاصمي مصنوع من الذهب الخالص عيار 18 قيراط، قطعة فنية تلبس في الجبين تعبر عن عمق التراث العاصمي.",
+    price: 125000, 
+    rentPrice: 5000, 
+    img: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?q=80&w=600", 
+    artisan: "نور (Admin)", 
+    artisanImg: "https://i.pravatar.cc/150?u=nour", 
+    category: 'jewelry',
+    jewelryType: 'constantinois',
+    wilaya: 'Alger',
+    rating: 5,
+    isBestSeller: true
+  },
+  { 
+    id: 2, 
+    name: "طقم مرجان أحمر أصلي", 
+    nameEn: "Original Red Coral Set", 
+    nameFr: "Parure Corail Rouge", 
+    description: "طقم فضة مزين بالمرجان الأحمر الطبيعي من منطقة القبائل، يضم قلادة وأقراط بتصميم 'آث يني' العريق.",
+    price: 45000, 
+    rentPrice: 2500, 
+    img: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?q=80&w=600", 
+    artisan: "حرفي القبائل", 
+    artisanImg: "https://i.pravatar.cc/150?u=kab", 
+    category: 'jewelry',
+    jewelryType: 'kabyle',
+    wilaya: 'Tizi Ouzou',
+    rating: 4.8,
+    isOffer: true
+  },
+  { 
+    id: 3, 
+    name: "خلخال فضة منقوش", 
+    nameEn: "Engraved Silver Anklet", 
+    nameFr: "Chevillère en Argent", 
+    description: "خلخال تقليدي شاوي مصنوع من الفضة المنقوشة بزخارف أمازيغية أصيلة من منطقة الأوراس.",
+    price: 32000, 
+    rentPrice: 1500, 
+    img: "https://media.zid.store/thumbs/c330bdf6-d372-43c3-99d3-a72da9e4ad63/bbefc431-cadb-4005-a06b-e750f15f5d81-thumbnail-500x500.png", 
+    artisan: "نور (Admin)", 
+    artisanImg: "https://i.pravatar.cc/150?u=nour", 
+    category: 'jewelry',
+    jewelryType: 'chaoui',
+    wilaya: 'Batna',
+    rating: 5
+  },
+  { 
+    id: 4, 
+    name: "سكاب تلمساني أصيل", 
+    nameEn: "Authentic Tlemcen Skab", 
+    nameFr: "Skab Tlemcen Authentique", 
+    description: "عقد السكاب التقليدي التلمساني، يتميز برائحته الزكية المرتبطة بالعنبر والمسك والذهب.",
+    price: 28000, 
+    rentPrice: 2000, 
+    img: "https://pbs.twimg.com/media/GNjxiz1XMAAw8CZ.jpg", 
+    artisan: "لالة تلمسان", 
+    artisanImg: "https://i.pravatar.cc/150?u=tlem", 
+    category: 'jewelry',
+    jewelryType: 'sahraoui',
+    wilaya: 'Tlemcen',
+    rating: 4.9
+  },
+  // Clothing
+  {
+    id: 5,
+    name: "كراكو عاصمي مطرز بالفتلة",
+    nameEn: "Royal Karakou",
+    nameFr: "Karakou Royal Algerois",
+    description: "سترة مخملية مطرزة يدوياً بخيوط الفتلة الذهبية، مع سروال مدور حريري. قمة الأناقة العاصمية.",
+    price: 85000,
+    rentPrice: 8000,
+    img: "https://auroyaumeducaftan.com/cdn/shop/products/image_3c706e02-5315-4c1d-a964-a42145756504.jpg?v=1672681960&width=1445",
+    artisan: "نور (Admin)",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
+    category: 'clothing',
+    wilaya: 'Alger',
+    rating: 5,
+    isBestSeller: true
+  },
+  {
+    id: 6,
+    name: "جبة قبائلي عصرية",
+    nameEn: "Modern Kabyle Dress",
+    nameFr: "Robe Kabyle Moderne",
+    description: "فستان قبائلي مزين بالزيغزغ الملون التقليدي مع لمسة عصرية تناسب المناسبات الكبرى.",
+    price: 25000,
+    rentPrice: 3000,
+    img: "https://i.etsystatic.com/50756637/r/il/54a874/7807049017/il_340x270.7807049017_iymi.jpg",
+    artisan: "دار الحراير",
+    artisanImg: "https://i.pravatar.cc/150?u=harayer",
+    category: 'clothing',
+    wilaya: 'Béjaïa',
+    rating: 4.7
+  },
+  // Copper (N'hass)
+  {
+    id: 7,
+    name: "صينية نحاس منقوشة يدوياً",
+    nameEn: "Hand-Engraved Copper Tray",
+    nameFr: "Plateau Cuivre Gravé",
+    description: "صينية نحاس حمراء كبيرة منقوشة باليد بزخارف إسلامية معقدة. قطعة ديكور فاخرة.",
+    price: 35000,
+    img: "https://zazahomes.co.uk/wp-content/uploads/2020/01/P1019714.jpg",
+    artisan: "محترف النحاس",
+    artisanImg: "https://i.pravatar.cc/150?u=copper",
+    category: 'copper',
+    wilaya: 'Constantine',
+    rating: 4.9,
+    isOffer: true
+  },
+  {
+    id: 8,
+    name: "إبريق قهوة نحاسي (جزوة)",
+    nameEn: "Traditional Copper Pot",
+    nameFr: "Cafetière en Cuivre",
+    description: "إبريق قهوة تقليدي مصنوع من النحاس الخالص، يحافظ على نكهة القهوة الجزائرية الأصيلة.",
+    price: 12000,
+    img: "https://m.media-amazon.com/images/I/81OHi2zIB0L._AC_UF1000,1000_QL80_.jpg",
+    artisan: "نور (Admin)",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
+    category: 'copper',
+    wilaya: 'Tlemcen',
+    rating: 4.6
+  },
+  // Home Decor
+  {
+    id: 9,
+    name: "زربية بابار أوراسية",
+    nameEn: "Babar Berber Rug",
+    nameFr: "Tapis Babar Berbère",
+    description: "سجاد يدوي أصلي من منطقة الأوراس، منسوج بصوف طبيعي يحمل رموز الهوية الشاوية.",
+    price: 65000,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDm5dVCrtBiYki8vjEGNDx4Ycyi48aHodcAA&s",
+    artisan: "نساجات الأوراس",
+    artisanImg: "https://i.pravatar.cc/150?u=auras",
+    category: 'homeDecor',
+    wilaya: 'Khenchela',
+    rating: 5,
+    isBestSeller: true
+  },
+  {
+    id: 10,
+    name: "فخار مشلل بالأزهار الملونة",
+    nameEn: "Kabyle Glazed Pottery",
+    nameFr: "Poterie Kabyle Vernissée",
+    description: "مجموعة فخارية لتزيين المنزل مكونة من جرة وصحن كبير، مزينة بالألوان الطبيعية لمنطقة القبائل.",
+    price: 18000,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxHNC2UPBgT1w0DmlndhN8H24iDyyp4IDGnA&s",
+    artisan: "نور (Admin)",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
+    category: 'homeDecor',
+    wilaya: 'Tizi Ouzou',
+    rating: 4.8
+  },
+  // Henna Setup
+  {
+    id: 11,
+    name: "قعدة حنة كاملة مطرزة",
+    nameEn: "Full Henna Ceremony Set",
+    nameFr: "Set Complet Qâada Henna",
+    description: "تشمل وسائد كبيرة، غطاء صينية، وستائر صغيرة مطرزة بنفس النمط للعروس الجزائرية.",
+    price: 48000,
+    rentPrice: 6000,
+    img: "https://www.fatizaweddings.com/1367-large_default/coffret-henna-creme-mariage.jpg",
+    artisan: "دار العرس",
+    artisanImg: "https://i.pravatar.cc/150?u=wedding",
+    category: 'hennaSetup',
+    wilaya: 'Oran',
+    rating: 4.9,
+    isBestSeller: true
+  },
+  {
+    id: 12,
+    name: "شموع الحنة المزينة يدوياً",
+    nameEn: "Decorated Henna Candles",
+    nameFr: "Bougies de Henna Décorées",
+    description: "زوج من الشموع الكبيرة المخصصة لطقوس الحنة، مزينة بالدانتيل واللؤلؤ والورود.",
+    price: 4500,
+    img: "https://orientalart.fr/cdn/shop/files/BougieHenneFessi-styleAmazigh-bougieberbere-bougieChleuh-bougieTarz45_1200x.webp?v=1719951791",
+    artisan: "نور (Admin)",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
+    category: 'hennaSetup',
+    wilaya: 'Constantine',
+    rating: 5
+  },
+  // Henna Ink
+  {
+    id: 13,
+    name: "حرقوس تونسي جزائري أصلي",
+    nameEn: "Authentic Harqous Ink",
+    nameFr: "Harqous Authentique",
+    description: "قارورة حرقوس تقليدي أسود فاحم يدوم طويلاً، مخصص للنقوش الدقيقة على اليدين والرقبة.",
+    price: 1500,
+    img: "https://hraier.com/wp-content/uploads/2023/07/FB_IMG_1688611031900.jpg",
+    artisan: "خبير الحنة",
+    artisanImg: "https://i.pravatar.cc/150?u=henna",
+    category: 'hennaInk',
+    wilaya: 'Biskra',
+    rating: 4.5,
+    isOffer: true
+  },
+  {
+    id: 14,
+    name: "حنة خضراء طبيعية مصفاة",
+    nameEn: "Organic Pure Henna",
+    nameFr: "Henné Naturel Pur",
+    description: "حنة طبيعية مطحونة ومصفاة بعناية للحصول على لون أحمر داكن مثالي للعروس.",
+    price: 900,
+    img: "https://media.zid.store/thumbs/8217e26b-c978-493f-97a8-ad4030e58a9b/9301550b-87f0-464f-9d29-e35757998e1c-thumbnail-1000x1000-70.jpg",
+    artisan: "نور (Admin)",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
+    category: 'hennaInk',
+    wilaya: 'Adrar',
+    rating: 4.7
+  }
 ];
 
-type Tab = 'home' | 'shop' | 'cart' | 'dash' | 'add';
+type Tab = 'home' | 'shop' | 'cart' | 'dash' | 'add' | 'services';
 
 interface Order {
   id: string;
@@ -57,14 +280,20 @@ export default function App() {
   // New States
   const [allProducts, setAllProducts] = useState<Product[]>(products);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>('jewelry');
+  const [selectedJewelryType, setSelectedJewelryType] = useState<string>('all');
+  const [selectedSubFilter, setSelectedSubFilter] = useState<string>('all');
+  const [selectedWilaya, setSelectedWilaya] = useState<string>('all');
+  const [priceRange, setPriceRange] = useState<number>(500000);
   const [orders, setOrders] = useState<Order[]>([]);
   const [notifications, setNotifications] = useState<string[]>([]);
-  const [newProduct, setNewProduct] = useState({ name: '', nameEn: '', nameFr: '', price: '', img: '', category: 'other' as Product['category'] });
+  const [newProduct, setNewProduct] = useState({ name: '', nameEn: '', nameFr: '', price: '', img: '', category: 'jewelry' as Product['category'] });
   const [loginCreds, setLoginCreds] = useState({ username: '', password: '' });
   const [loginError, setLoginError] = useState<string | null>(null);
+  const [authMode, setAuthMode] = useState<'login' | 'register-client' | 'register-artisan'>('login');
+  const [artisanForm, setArtisanForm] = useState({ firstName: '', lastName: '', phone: '', wilaya: '', craft: '', hasDocuments: false });
 
-  const t = translations[lang];
+  const t = (translations as Record<Language, Translation>)[lang];
   const isRtl = lang === 'ar';
 
   useEffect(() => {
@@ -94,21 +323,94 @@ export default function App() {
   };
 
   const handleLogin = () => {
-    const { username, password } = loginCreds;
-    if (username.toUpperCase() === 'ADMIN' && password.toUpperCase() === 'ADMIN') {
-      setCurrentUser({ role: 'artisan', name: 'Nour (Admin)' });
+    if (authMode === 'login') {
+      const { username, password } = loginCreds;
+      if (username.toUpperCase() === 'ADMIN' && password.toUpperCase() === 'ADMIN') {
+        setCurrentUser({ role: 'artisan', name: 'Nour (Admin)' });
+        showToast(t.sections.welcomeMsg);
+        setIsAuthModalOpen(false);
+        setLoginError(null);
+      } else if (username.toUpperCase() === 'NOUR' && password.toUpperCase() === 'NOUR') {
+        setCurrentUser({ role: 'client', name: 'Nour (User)' });
+        showToast(t.sections.welcomeMsg);
+        setIsAuthModalOpen(false);
+        setLoginError(null);
+      } else {
+        setLoginError(t.auth.invalid);
+      }
+    } else if (authMode === 'register-client') {
+      setCurrentUser({ role: 'client', name: 'New Client' });
       showToast(t.sections.welcomeMsg);
       setIsAuthModalOpen(false);
-      setLoginError(null);
-    } else if (username.toUpperCase() === 'NOUR' && password.toUpperCase() === 'NOUR') {
-      setCurrentUser({ role: 'client', name: 'Nour (User)' });
-      showToast(t.sections.welcomeMsg);
-      setIsAuthModalOpen(false);
-      setLoginError(null);
-    } else {
-      setLoginError(t.auth.invalid);
+    } else if (authMode === 'register-artisan') {
+      if (artisanForm.firstName && artisanForm.phone) {
+        setCurrentUser({ role: 'artisan', name: `${artisanForm.firstName} ${artisanForm.lastName}` });
+        showToast(t.sections.welcomeMsg);
+        setIsAuthModalOpen(false);
+      } else {
+        setLoginError(t.product.fillAll);
+      }
     }
   };
+
+  const ProductCard = ({ p }: { p: Product }) => (
+    <motion.div 
+      layoutId={`product-${p.id}`}
+      className="bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-stone-100 overflow-hidden group shadow-sm hover:shadow-xl transition-all cursor-pointer flex flex-col h-full"
+      onClick={() => setSelectedProduct(p)}
+    >
+      <div className="relative aspect-[4/5] overflow-hidden">
+        <img src={p.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={getName(p)} />
+        <div className="absolute top-2 right-2 md:top-4 md:right-4 flex flex-col gap-1 md:gap-2">
+          {p.isOffer && (
+            <div className="bg-gold text-white text-[8px] md:text-[10px] font-black px-2 py-1 md:px-3 md:py-1 rounded-full uppercase tracking-widest shadow-lg">
+              Offre
+            </div>
+          )}
+          <button 
+            onClick={(e) => { 
+              e.stopPropagation(); 
+              if (!currentUser) setIsAuthModalOpen(true);
+              else showToast(t.sections.successAdd); 
+            }}
+            className="w-8 h-8 md:w-12 md:h-12 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-stone-600 hover:text-gold transition-colors shadow-lg"
+          >
+            <ShoppingCart className="w-4 h-4 md:w-6 md:h-6" />
+          </button>
+        </div>
+        <div className="absolute top-2 left-2 md:top-4 md:left-4">
+          <div className="flex gap-1 md:gap-2">
+            <span className="bg-white/90 backdrop-blur-md text-stone-800 text-[8px] md:text-[10px] font-black px-2 py-1 rounded-full uppercase">
+              {p.rentPrice ? t.sections.rent : t.sections.buy}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="p-3 md:p-6 flex-grow flex flex-col">
+        <div className="flex justify-between items-start mb-1 md:mb-2">
+          <h4 className="font-bold text-xs md:text-sm text-stone-800 leading-tight flex-grow line-clamp-1">{getName(p)}</h4>
+          <div className="flex items-center gap-0.5 text-gold ml-1">
+            <Star className="w-3 h-3 fill-gold" />
+            <span className="text-[10px] font-black">{p.rating}</span>
+          </div>
+        </div>
+        <p className="text-stone-400 text-[10px] mb-2 md:mb-4 line-clamp-2 leading-relaxed">
+          {p.description}
+        </p>
+        <div className="flex justify-between items-center mt-auto">
+          <p className="text-gold font-black text-sm md:text-lg">{p.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
+          <div className="flex gap-1">
+            <button 
+              onClick={(e) => { e.stopPropagation(); setIsShareOpen(true); }}
+              className="p-1 px-2 border border-stone-100 rounded-lg text-stone-400 hover:text-gold transition-colors"
+            >
+              <Share2 className="w-3 h-3" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
 
   const getName = (p: Product) => {
     if (lang === 'en') return p.nameEn;
@@ -119,7 +421,16 @@ export default function App() {
   const filteredProducts = allProducts.filter(p => {
     const matchesSearch = getName(p).toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || p.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    const matchesJewelryType = selectedJewelryType === 'all' || p.jewelryType === selectedJewelryType;
+    const matchesWilaya = selectedWilaya === 'all' || p.wilaya === selectedWilaya;
+    const matchesPrice = p.price <= priceRange;
+    
+    let matchesSubFilter = true;
+    if (selectedSubFilter === 'offers') matchesSubFilter = !!p.isOffer;
+    if (selectedSubFilter === 'bestSellers') matchesSubFilter = !!p.isBestSeller;
+    if (selectedSubFilter === 'rated5') matchesSubFilter = p.rating >= 5;
+
+    return matchesSearch && matchesCategory && matchesJewelryType && matchesWilaya && matchesPrice && matchesSubFilter;
   });
 
   const handleConfirmOrder = () => {
@@ -132,7 +443,7 @@ export default function App() {
       id: Math.random().toString(36).substr(2, 9).toUpperCase(),
       customerName: currentUser.name,
       items: [...cart],
-      total: cart.reduce((sum, item) => sum + item.price, 0),
+      total: cart.reduce((sum: number, item: Product) => sum + item.price, 0),
       date: new Date().toLocaleDateString(lang === 'ar' ? 'ar-DZ' : 'en-US'),
       status: 'pending'
     };
@@ -145,7 +456,7 @@ export default function App() {
     setCurrentTab('home');
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -173,15 +484,18 @@ export default function App() {
       name: newProduct.name,
       nameEn: newProduct.nameEn || newProduct.name,
       nameFr: newProduct.nameFr || newProduct.name,
+      description: isRtl ? "منتج جديد تم إضافته للحساب" : "New product added to account",
       price: parseInt(newProduct.price),
       img: newProduct.img,
-      artisan: "نور (Admin)",
+      artisan: currentUser?.name || "نور (Admin)",
       artisanImg: "https://i.pravatar.cc/150?u=nour",
-      category: newProduct.category
+      category: newProduct.category,
+      rating: 5,
+      wilaya: 'Alger'
     };
 
     setAllProducts([product, ...allProducts]);
-    setNewProduct({ name: '', nameEn: '', nameFr: '', price: '', img: '', category: 'other' });
+    setNewProduct({ name: '', nameEn: '', nameFr: '', price: '', img: '', category: 'jewelry' });
     setCurrentTab('home');
     showToast(t.sections.successAdd);
   };
@@ -305,11 +619,19 @@ export default function App() {
                   <span>{t.navigation.home}</span>
                 </button>
                 <button 
-                   onClick={() => { setCurrentTab('shop'); setIsSidebarOpen(false); }}
+                  onClick={() => { setCurrentTab('shop'); setIsSidebarOpen(false); }}
                   className={`w-full flex items-center gap-4 p-4 rounded-2xl font-bold transition-all ${currentTab === 'shop' ? 'bg-gold text-white shadow-lg shadow-gold/20' : 'text-stone-500 hover:bg-stone-50'}`}
                 >
                   <Package className="w-5 h-5" />
                   <span>{t.navigation.shop}</span>
+                </button>
+
+                <button 
+                  onClick={() => { setCurrentTab('services'); setIsSidebarOpen(false); }}
+                  className={`w-full flex items-center gap-4 p-4 rounded-2xl font-bold transition-all ${currentTab === 'services' ? 'bg-gold text-white shadow-lg shadow-gold/20' : 'text-stone-500 hover:bg-stone-50'}`}
+                >
+                  <Briefcase className="w-5 h-5" />
+                  <span>{t.navigation.services}</span>
                 </button>
 
                 {currentUser?.role === 'artisan' && (
@@ -376,48 +698,7 @@ export default function App() {
               exit={{ opacity: 0, y: -20 }}
               className="space-y-10"
             >
-              {/* Hero */}
-              <div className="relative rounded-[2.5rem] overflow-hidden aspect-[4/5] sm:aspect-[21/9] bg-stone-900 shadow-2xl flex items-center p-6 md:p-16">
-                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=1200" className="absolute inset-0 w-full h-full object-cover opacity-50" alt="Hero" />
-                <div className="relative z-10 space-y-6 max-w-2xl">
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className="w-40 md:w-64 mb-8"
-                  >
-                    <img src="/logo.png" className="w-full object-contain filter drop-shadow-2xl" alt="Hero Logo" />
-                  </motion.div>
-                  <motion.span 
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="inline-block px-4 py-1.5 bg-gold text-white text-[10px] font-black rounded-full uppercase tracking-widest"
-                  >
-                    {t.hero.badge}
-                  </motion.span>
-                  <motion.h2 
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="font-serif text-4xl sm:text-7xl text-white font-bold leading-[1.1] mb-8"
-                  >
-                    {t.hero.title}
-                  </motion.h2>
-                  <motion.button 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7 }}
-                    onClick={() => setCurrentTab('shop')}
-                    className="bg-white text-stone-900 px-8 py-4 rounded-2xl font-bold shadow-2xl active:scale-95 transition-all flex items-center justify-center gap-2 group"
-                  >
-                    {t.hero.cta}
-                    {isRtl ? <ChevronRight className="w-5 h-5 rotate-180" /> : <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
-                  </motion.button>
-                </div>
-              </div>
-
-              {/* Search & Categories */}
+              {/* Search & Main Categories */}
               <div className="space-y-6">
                 <div className="relative max-w-xl mx-auto">
                   <Search className={`absolute ${isRtl ? 'right-6' : 'left-6'} top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400`} />
@@ -430,17 +711,90 @@ export default function App() {
                   />
                 </div>
 
+                {/* Dropdown Filters (Wilaya & Price) */}
+                <div className="flex flex-wrap gap-4 justify-center">
+                  <div className="relative">
+                    <select 
+                      value={selectedWilaya}
+                      onChange={(e) => setSelectedWilaya(e.target.value)}
+                      className="appearance-none bg-white border border-stone-100 rounded-xl px-4 py-2 pr-10 font-bold text-stone-600 focus:ring-2 focus:ring-gold/20 outline-none cursor-pointer shadow-sm"
+                    >
+                      <option value="all">{isRtl ? 'كل الولايات' : 'All Wilayas'}</option>
+                      {['Alger', 'Tizi Ouzou', 'Batna', 'Tlemcen', 'Oran', 'Constantine', 'Sétif'].map(w => (
+                        <option key={w} value={w}>{w}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" />
+                  </div>
+
+                  <div className="flex items-center gap-3 bg-white border border-stone-100 rounded-xl px-4 py-2 shadow-sm">
+                    <span className="text-stone-400 font-bold text-xs uppercase">{isRtl ? 'السعر' : 'Price'}</span>
+                    <input 
+                      type="range" 
+                      min="0" 
+                      max="1000000" 
+                      step="5000"
+                      value={priceRange}
+                      onChange={(e) => setPriceRange(parseInt(e.target.value))}
+                      className="accent-gold w-32"
+                    />
+                    <span className="text-gold font-bold text-xs">{priceRange.toLocaleString()}</span>
+                  </div>
+                </div>
+
                 <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2 px-1">
-                  {Object.entries(t.sections.categories).map(([key, label]) => (
+                  {Object.entries(t.sections.mainCategories).map(([key, label]) => (
                     <button
                       key={key}
-                      onClick={() => setSelectedCategory(key)}
+                      onClick={() => {
+                        setSelectedCategory(key);
+                        if (key !== 'jewelry') {
+                          setSelectedJewelryType('all');
+                          setSelectedSubFilter('all');
+                        }
+                      }}
                       className={`whitespace-nowrap px-8 py-3 rounded-full font-bold transition-all border ${selectedCategory === key ? 'bg-gold text-white border-gold shadow-lg shadow-gold/20' : 'bg-white text-stone-400 border-stone-100 hover:border-gold/50'}`}
                     >
-                      {label}
+                      {label as string}
                     </button>
                   ))}
                 </div>
+
+                {/* Jewelry Types (Sub-categories) */}
+                {selectedCategory === 'jewelry' && (
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    className="flex flex-col gap-4 bg-stone-50/50 p-6 rounded-[2rem] border border-stone-100"
+                  >
+                    <div className="flex gap-2 overflow-x-auto no-scrollbar">
+                      {Object.entries(t.sections.jewelryFilters).map(([key, label]) => (
+                        <button
+                          key={key}
+                          onClick={() => setSelectedJewelryType(key)}
+                          className={`whitespace-nowrap px-6 py-2 rounded-full font-bold text-sm transition-all border ${selectedJewelryType === key ? 'bg-stone-900 text-white border-stone-900 shadow-lg' : 'bg-white text-stone-500 border-stone-200'}`}
+                        >
+                          {label as string}
+                        </button>
+                      ))}
+                    </div>
+                    
+                    <div className="flex gap-2 overflow-x-auto no-scrollbar border-t border-stone-100 pt-4">
+                      {Object.entries(t.sections.subFilters).map(([key, label]) => (
+                        <button
+                          key={key}
+                          onClick={() => setSelectedSubFilter(key)}
+                          className={`whitespace-nowrap flex items-center gap-2 px-4 py-2 font-bold text-xs transition-all ${selectedSubFilter === key ? 'text-gold fill-gold' : 'text-stone-400 hover:text-stone-600'}`}
+                        >
+                          {key === 'rated5' && <Star className="w-3 h-3" />}
+                          {key === 'offers' && <Zap className="w-3 h-3" />}
+                          {key === 'bestSellers' && <Trophy className="w-3 h-3" />}
+                          {label as string}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
               </div>
 
               {/* Selection */}
@@ -449,47 +803,9 @@ export default function App() {
                 <button onClick={() => { setCurrentTab('shop'); setSelectedCategory('all'); }} className="text-gold font-bold text-sm underline underline-offset-4">{t.sections.viewAll}</button>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-6">
                 {filteredProducts.map((p) => (
-                  <motion.div 
-                    key={p.id}
-                    whileHover={{ y: -10 }}
-                    className="bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-stone-100 overflow-hidden group shadow-sm hover:shadow-xl transition-all cursor-pointer flex flex-col"
-                    onClick={() => setSelectedProduct(p)}
-                  >
-                    <div className="relative aspect-[4/5] overflow-hidden">
-                      <img src={p.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={getName(p)} />
-                      <div className="absolute top-2 right-2 md:top-4 md:right-4 flex flex-col gap-2">
-                        <button 
-                          onClick={(e) => { 
-                            e.stopPropagation(); 
-                            if (!currentUser) setIsAuthModalOpen(true);
-                            else showToast(t.sections.successAdd); 
-                          }}
-                          className="w-8 h-8 md:w-10 md:h-10 bg-white/90 rounded-lg md:rounded-xl flex items-center justify-center text-stone-400 hover:text-red-500 transition-colors shadow-lg"
-                        >
-                          <Heart className="w-4 h-4 md:w-5 md:h-5" />
-                        </button>
-                      </div>
-                      <div className={`absolute bottom-2 ${isRtl ? 'right-2' : 'left-2'} flex gap-1`}>
-                        <span className="px-2 py-0.5 md:px-3 md:py-1 bg-gold text-white text-[8px] md:text-[10px] font-black rounded-full uppercase shadow-lg">
-                          {t.sections.buy}
-                        </span>
-                        {p.rentPrice && (
-                          <span className="px-2 py-0.5 md:px-3 md:py-1 bg-stone-900 text-white text-[8px] md:text-[10px] font-black rounded-full uppercase shadow-lg">
-                            {t.sections.rent}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="p-4 md:p-6 flex-grow flex flex-col">
-                      <h4 className="font-bold text-xs md:text-sm truncate text-stone-800 mb-1">{getName(p)}</h4>
-                      <p className="text-gold font-black text-sm md:text-lg mb-2 md:mb-4">{p.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
-                      <div className="mt-auto pt-2 md:pt-4 border-t border-stone-50 hidden md:block">
-                        <ArtisanSignature artisan={p.artisan} artisanImg={p.artisanImg} />
-                      </div>
-                    </div>
-                  </motion.div>
+                  <ProductCard key={p.id} p={p} />
                 ))}
               </div>
             </motion.section>
@@ -510,77 +826,45 @@ export default function App() {
 
               {/* Categories Filter in Shop */}
               <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2 px-1">
-                {Object.entries(t.sections.categories).map(([key, label]) => (
+                {Object.entries(t.sections.mainCategories).map(([key, label]) => (
                   <button
                     key={key}
                     onClick={() => setSelectedCategory(key)}
                     className={`whitespace-nowrap px-6 py-2 rounded-full font-bold transition-all border text-xs md:text-sm ${selectedCategory === key ? 'bg-gold text-white border-gold shadow-lg shadow-gold/20' : 'bg-white text-stone-400 border-stone-100'}`}
                   >
-                    {label}
+                    {label as string}
                   </button>
                 ))}
               </div>
 
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8">
-                {filteredProducts.map((p, i) => (
-                  <div 
-                    key={`${p.id}-${i}`}
-                    className="bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-stone-100 overflow-hidden group shadow-sm hover:shadow-xl transition-all cursor-pointer flex flex-col"
-                    onClick={() => setSelectedProduct(p)}
-                  >
-                    <div className="relative aspect-[4/5] overflow-hidden">
-                      <img src={p.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={getName(p)} />
-                      <div className="absolute top-2 right-2 md:top-4 md:right-4 flex flex-col gap-2">
-                        <button 
-                          onClick={(e) => { 
-                            e.stopPropagation(); 
-                            if (!currentUser) setIsAuthModalOpen(true);
-                            else showToast(t.sections.successAdd); 
-                          }}
-                          className="w-8 h-8 md:w-10 md:h-10 bg-white/90 rounded-lg md:rounded-xl flex items-center justify-center text-stone-400 hover:text-red-500 transition-colors shadow-lg"
-                        >
-                          <Heart className="w-4 h-4 md:w-5 md:h-5" />
-                        </button>
-                      </div>
-                      <div className={`absolute bottom-2 ${isRtl ? 'right-2' : 'left-2'} flex gap-1`}>
-                        <span className="px-2 py-0.5 md:px-3 md:py-1 bg-gold text-white text-[8px] md:text-[10px] font-black rounded-full uppercase">
-                          {t.sections.buy}
-                        </span>
-                        {p.rentPrice && (
-                          <span className="px-2 py-0.5 md:px-3 md:py-1 bg-stone-900 text-white text-[8px] md:text-[10px] font-black rounded-full uppercase">
-                            {t.sections.rent}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="p-4 md:p-8 flex-grow flex flex-col">
-                      <div className="flex justify-between items-start mb-2 md:mb-4">
-                        <div className="min-w-0">
-                          <p className="text-[8px] md:text-[10px] text-stone-400 font-bold mb-1 uppercase tracking-widest truncate">{p.artisan}</p>
-                          <h4 className="font-bold text-xs md:text-lg text-stone-800 truncate">{getName(p)}</h4>
-                        </div>
-                        <div className="hidden md:flex items-center gap-1 text-gold">
-                          <Star className="w-4 h-4 fill-gold" />
-                          <span className="text-xs font-bold">4.9</span>
-                        </div>
-                      </div>
-                      <div className="flex justify-between items-center pt-2 md:pt-6 border-t border-stone-50 mt-auto">
-                        <p className="text-gold font-black text-xs md:text-xl truncate">{p.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
-                        <button 
-                          onClick={(e) => { e.stopPropagation(); addToCart(p); }}
-                          className="p-2 md:p-3 bg-stone-900 text-white rounded-lg md:rounded-2xl hover:bg-stone-800 transition-colors"
-                        >
-                          <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-1 md:gap-8">
+                {filteredProducts.map((p) => (
+                  <ProductCard key={p.id} p={p} />
                 ))}
               </div>
             </motion.section>
           )}
 
-          {currentTab === 'cart' && (
+          {currentTab === 'services' && (
+          <div className="max-w-7xl mx-auto px-4 py-12">
+            <h1 className="text-3xl font-serif text-center mb-12">{t.services.title}</h1>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { title: t.services.photography, icon: <Camera className="w-8 h-8 text-gold" />, desc: isRtl ? "تصوير احترافي لمنتجاتك بطريقة تبرز جمال الحرفية التقليدية." : "Professional photo shoot for your traditional pieces." },
+                { title: t.services.marketing, icon: <TrendingUp className="w-8 h-8 text-gold" />, desc: isRtl ? "حملات تسويقية مستهدفة للوصول إلى جمهورك المهتم بالتراث." : "Targeted marketing campaigns to reach heritage lovers." },
+                { title: t.services.audience, icon: <Search className="w-8 h-8 text-gold" />, desc: isRtl ? "تحليل دقيق لسوق الحلي واللباس التقليدي في الجزائر." : "Deep analysis of the traditional Algerian market." }
+              ].map((s, i) => (
+                <div key={i} className="bg-white p-8 rounded-[3rem] shadow-sm border border-stone-100 flex flex-col items-center text-center hover:shadow-xl transition-all group">
+                  <div className="mb-6 p-6 bg-gold/5 rounded-[2rem] group-hover:bg-gold/10 transition-colors">{s.icon}</div>
+                  <h3 className="text-xl font-bold mb-4">{s.title as string}</h3>
+                  <p className="text-stone-500 text-sm leading-relaxed">{s.desc as string}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {currentTab === 'cart' && (
             <motion.section 
               key="cart"
               initial={{ opacity: 0, y: 20 }}
@@ -880,10 +1164,9 @@ export default function App() {
                         onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value as Product['category'] })}
                         className="w-full px-6 py-4 bg-stone-50 border border-stone-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gold/50 font-bold appearance-none cursor-pointer"
                       >
-                        {Object.entries(t.sections.categories).filter(([key]) => key !== 'all').map(([key, label]) => (
-                          <option key={key} value={key}>{label}</option>
+                        {Object.entries(t.sections.mainCategories).filter(([key]) => key !== 'all').map(([key, label]) => (
+                          <option key={key} value={key}>{label as string}</option>
                         ))}
-                        <option value="other">{isRtl ? 'أخرى' : 'Autre / Other'}</option>
                       </select>
                     </div>
                     <div className="space-y-2">
@@ -1006,8 +1289,31 @@ export default function App() {
                 </div>
 
                 <p className="text-stone-500 text-sm leading-relaxed">
-                  {t.product.descPrefix} {t.product.descSuffix}
+                  {selectedProduct.description}
                 </p>
+
+                <div className="flex flex-col gap-4">
+                  <p className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.sections.shareVia}</p>
+                  <div className="flex gap-4">
+                    <button onClick={() => showToast(t.sections.sharedVia + " Facebook")} className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center hover:scale-110 transition-transform"><Facebook className="w-5 h-5" /></button>
+                    <button onClick={() => showToast(t.sections.sharedVia + " Instagram")} className="w-12 h-12 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center hover:scale-110 transition-transform"><Instagram className="w-5 h-5" /></button>
+                    <button onClick={() => showToast(t.sections.sharedVia + " WhatsApp")} className="w-12 h-12 rounded-2xl bg-green-50 text-green-600 flex items-center justify-center hover:scale-110 transition-transform"><MessageCircle className="w-5 h-5" /></button>
+                  </div>
+                </div>
+
+                <div className="space-y-4 pt-6 border-t border-stone-100">
+                  <p className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Comments & Rating</p>
+                  <div className="flex items-center gap-1 text-gold mb-2">
+                    {[1, 2, 3, 4, 5].map(star => (
+                      <Star key={star} className={`w-4 h-4 ${star <= Math.floor(selectedProduct.rating) ? 'fill-gold' : 'text-stone-200'}`} />
+                    ))}
+                    <span className="text-xs font-bold ml-2 text-stone-900">{selectedProduct.rating} / 5</span>
+                  </div>
+                  <div className="bg-stone-50 p-4 rounded-2xl">
+                    <p className="text-xs text-stone-600 italic">"قطعة رائعة جداً، التفاصيل مذهلة والتغليف كان راقياً. شكراً دار لالاهم."</p>
+                    <p className="text-[9px] text-stone-400 mt-2 font-bold">— زبائن موثقون</p>
+                  </div>
+                </div>
 
                 <div className="flex flex-col gap-3">
                   <button 
@@ -1107,46 +1413,101 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white w-full max-w-sm rounded-[3.5rem] overflow-hidden shadow-2xl"
+              className="relative bg-white w-full max-w-md rounded-[3.5rem] overflow-hidden shadow-2xl"
             >
-              <div className="bg-gold p-12 text-center text-white relative">
+              <div className="bg-gold p-8 text-center text-white relative">
                 <h3 className="font-serif text-3xl font-bold uppercase">{t.auth.title}</h3>
                 <p className="text-white/70 text-[10px] font-black uppercase tracking-widest mt-2">{t.auth.subtitle}</p>
-              </div>
-              <div className="p-10 space-y-6">
-                <div className="space-y-4">
-                  <input 
-                    type="text" 
-                    placeholder="USERNAME"
-                    className="w-full px-6 py-4 bg-stone-50 border border-stone-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gold font-bold text-center uppercase text-sm"
-                    value={loginCreds.username}
-                    onChange={(e) => setLoginCreds({ ...loginCreds, username: e.target.value })}
-                  />
-                  <input 
-                    type="password" 
-                    placeholder="PASSWORD"
-                    className="w-full px-6 py-4 bg-stone-50 border border-stone-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gold font-bold text-center uppercase text-sm"
-                    value={loginCreds.password}
-                    onChange={(e) => setLoginCreds({ ...loginCreds, password: e.target.value })}
-                  />
-                  {loginError && <p className="text-red-500 text-[10px] font-black text-center uppercase">{loginError}</p>}
-                </div>
                 
-                <button 
-                  onClick={handleLogin}
-                  className="w-full py-5 bg-stone-900 text-white rounded-2xl font-bold shadow-xl hover:bg-stone-800 transition-all uppercase tracking-widest"
-                >
-                  Confirm & Access
-                </button>
-
-                <div className="pt-6 border-t border-stone-100 text-center">
-                  <p className="text-[10px] text-stone-300 font-black uppercase mb-4 italic">Quick Hints:</p>
-                  <div className="flex justify-center gap-6">
-                    <button onClick={() => setLoginCreds({ username: 'NOUR', password: 'NOUR' })} className="text-[10px] font-bold text-gold underline">{t.auth.client}</button>
-                    <button onClick={() => setLoginCreds({ username: 'ADMIN', password: 'ADMIN' })} className="text-[10px] font-bold text-gold underline">{t.auth.artisan}</button>
-                  </div>
+                <div className="flex gap-2 mt-6 bg-black/10 p-1 rounded-full overflow-hidden">
+                  <button 
+                    onClick={() => setAuthMode('register-client')}
+                    className={`flex-1 py-2 rounded-full text-xs font-bold transition-all ${authMode === 'register-client' ? 'bg-white text-gold' : 'text-white/60 hover:text-white'}`}
+                  >
+                    {t.auth.client}
+                  </button>
+                  <button 
+                    onClick={() => setAuthMode('register-artisan')}
+                    className={`flex-1 py-2 rounded-full text-xs font-bold transition-all ${authMode === 'register-artisan' ? 'bg-white text-gold' : 'text-white/60 hover:text-white'}`}
+                  >
+                    {t.auth.artisan}
+                  </button>
                 </div>
+              </div>
 
+              <div className="p-8 space-y-6">
+                {authMode === 'register-client' ? (
+                  <div className="space-y-4">
+                    <button 
+                      onClick={() => handleLogin()}
+                      className="w-full py-4 bg-white border-2 border-stone-100 rounded-2xl flex items-center justify-center gap-4 hover:border-gold transition-all group"
+                    >
+                      <div className="w-6 h-6 flex items-center justify-center"><Globe className="w-5 h-5 text-red-500" /></div>
+                      <span className="font-bold text-stone-600">{t.auth.google}</span>
+                    </button>
+                    <button 
+                      onClick={() => handleLogin()}
+                      className="w-full py-4 bg-[#1877F2] text-white rounded-2xl flex items-center justify-center gap-4 hover:bg-[#166fe5] transition-all"
+                    >
+                      <Facebook className="w-6 h-6" />
+                      <span className="font-bold">{t.auth.facebook}</span>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-3">
+                      <input 
+                        type="text" 
+                        placeholder={t.auth.artisanForm.firstName}
+                        className="w-full px-5 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-sm"
+                        value={artisanForm.firstName}
+                        onChange={(e) => setArtisanForm({...artisanForm, firstName: e.target.value})}
+                      />
+                      <input 
+                        type="text" 
+                        placeholder={t.auth.artisanForm.lastName}
+                        className="w-full px-5 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-sm"
+                        value={artisanForm.lastName}
+                        onChange={(e) => setArtisanForm({...artisanForm, lastName: e.target.value})}
+                      />
+                    </div>
+                    <input 
+                      type="tel" 
+                      placeholder={t.auth.artisanForm.phone}
+                      className="w-full px-5 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-sm"
+                      value={artisanForm.phone}
+                      onChange={(e) => setArtisanForm({...artisanForm, phone: e.target.value})}
+                    />
+                    <select 
+                      className="w-full px-5 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-sm appearance-none"
+                      value={artisanForm.wilaya}
+                      onChange={(e) => setArtisanForm({...artisanForm, wilaya: e.target.value})}
+                    >
+                      <option value="">{t.auth.artisanForm.wilaya}</option>
+                      {['Alger', 'Oran', 'Constantine', 'Tizi Ouzou'].map(w => <option key={w} value={w}>{w}</option>)}
+                    </select>
+                    <input 
+                      type="text" 
+                      placeholder={t.auth.artisanForm.craft}
+                      className="w-full px-5 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-sm"
+                      value={artisanForm.craft}
+                      onChange={(e) => setArtisanForm({...artisanForm, craft: e.target.value})}
+                    />
+                    <div className="p-4 bg-stone-50 border-2 border-dashed border-stone-100 rounded-xl flex flex-col items-center gap-2 cursor-pointer hover:border-gold group transition-all">
+                      <FileText className="w-6 h-6 text-stone-300 group-hover:text-gold" />
+                      <span className="text-[10px] font-black text-stone-400 uppercase text-center">{t.auth.artisanForm.documents}</span>
+                    </div>
+
+                    <button 
+                      onClick={handleLogin}
+                      className="w-full py-4 bg-stone-900 text-white rounded-2xl font-bold shadow-xl hover:bg-stone-800 transition-all uppercase tracking-widest text-sm"
+                    >
+                      {t.auth.artisanForm.submit}
+                    </button>
+                    {loginError && <p className="text-red-500 text-[10px] font-black text-center uppercase">{loginError}</p>}
+                  </div>
+                )}
+                
                 <p className="text-[10px] text-stone-400 mt-6 leading-relaxed italic px-4 text-center">
                   {t.auth.footer}
                 </p>

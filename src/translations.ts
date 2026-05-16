@@ -14,6 +14,7 @@ export interface Translation {
     dashboard: string;
     addProduct: string;
     login: string;
+    services: string;
   };
   sections: {
     selected: string;
@@ -35,12 +36,27 @@ export interface Translation {
     search: string;
     buy: string;
     rent: string;
-    categories: {
+    mainCategories: {
+      all: string;
+      jewelry: string;
+      clothing: string;
+      copper: string;
+      homeDecor: string;
+      hennaSetup: string;
+      hennaInk: string;
+    };
+    jewelryFilters: {
       all: string;
       constantinois: string;
       kabyle: string;
       chaoui: string;
       sahraoui: string;
+    };
+    subFilters: {
+      all: string;
+      offers: string;
+      bestSellers: string;
+      rated5: string;
     };
   };
   cart: {
@@ -89,11 +105,28 @@ export interface Translation {
     fillAll: string;
     inquirySent: string;
   };
+  services: {
+    title: string;
+    photography: string;
+    marketing: string;
+    audience: string;
+  };
   auth: {
     title: string;
     subtitle: string;
     client: string;
     artisan: string;
+    google: string;
+    facebook: string;
+    artisanForm: {
+      firstName: string;
+      lastName: string;
+      phone: string;
+      wilaya: string;
+      craft: string;
+      documents: string;
+      submit: string;
+    };
     footer: string;
     invalid: string;
   };
@@ -113,7 +146,8 @@ export const translations: Record<Language, Translation> = {
       cart: "السلة",
       dashboard: "إحصائيات نور",
       addProduct: "نشر منتج جديد",
-      login: "تسجيل الدخول"
+      login: "تسجيل الدخول",
+      services: "الخدمات"
     },
     sections: {
       selected: "قطع مختارة لك",
@@ -135,12 +169,27 @@ export const translations: Record<Language, Translation> = {
       search: "البحث عن حلي...",
       buy: "شراء",
       rent: "كراء",
-      categories: {
+      mainCategories: {
+        all: "الكل",
+        jewelry: "حلي",
+        clothing: "ألبسة",
+        copper: "نحاس",
+        homeDecor: "ديكور المنزل",
+        hennaSetup: "قعدة الحنة",
+        hennaInk: "حرقوس حنة"
+      },
+      jewelryFilters: {
         all: "الكل",
         constantinois: "قسنطيني",
         kabyle: "قبائلي",
         chaoui: "شاوي",
         sahraoui: "صحراوي"
+      },
+      subFilters: {
+        all: "الكل",
+        offers: "عروض",
+        bestSellers: "الأكثر مبيعاً",
+        rated5: "تقييم 5 نجوم"
       }
     },
     cart: {
@@ -189,11 +238,28 @@ export const translations: Record<Language, Translation> = {
       fillAll: "يرجى ملء جميع البيانات",
       inquirySent: "سيتم التواصل مع الحرفي فوراً"
     },
+    services: {
+      title: "الخدمات",
+      photography: "تصوير احترافي",
+      marketing: "تسويق رقمي",
+      audience: "دراسة الجمهور"
+    },
     auth: {
-      title: "تسجيل الدخول",
-      subtitle: "اختر حسابك للمتابعة",
-      client: "أنا زبون (نور)",
-      artisan: "أنا حرفي (ADMIN)",
+      title: "حساب جديد",
+      subtitle: "انضم إلى عالم دار لالاهم",
+      client: "تسجيل كزبون",
+      artisan: "تسجيل كحرفي",
+      google: "التسجيل عبر جوجل",
+      facebook: "التسجيل عبر فيسبوك",
+      artisanForm: {
+        firstName: "الاسم",
+        lastName: "اللقب",
+        phone: "رقم الهاتف",
+        wilaya: "الولاية",
+        craft: "الحرفة",
+        documents: "سجل تجاري / بطاقة حرفي (اختياري)",
+        submit: "فتح متجر"
+      },
       footer: "منصة دار لالاهم تضمن حقوق البائع والمشتري بالكامل.",
       invalid: "بيانات الدخول غير صحيحة"
     }
@@ -211,7 +277,8 @@ export const translations: Record<Language, Translation> = {
       cart: "Cart",
       dashboard: "Stats Panel",
       addProduct: "New Product",
-      login: "Login"
+      login: "Login",
+      services: "Services"
     },
     sections: {
       selected: "Selected for You",
@@ -233,12 +300,27 @@ export const translations: Record<Language, Translation> = {
       search: "Search for jewelry...",
       buy: "Buy",
       rent: "Rent",
-      categories: {
+      mainCategories: {
+        all: "All",
+        jewelry: "Jewelry",
+        clothing: "Clothing",
+        copper: "Copper",
+        homeDecor: "Home Decor",
+        hennaSetup: "Henna Setup",
+        hennaInk: "Henna Ink"
+      },
+      jewelryFilters: {
         all: "All",
         constantinois: "Constantinois",
         kabyle: "Kabyle",
         chaoui: "Chaoui",
         sahraoui: "Sahraoui"
+      },
+      subFilters: {
+        all: "All",
+        offers: "Offers",
+        bestSellers: "Best Sellers",
+        rated5: "Top Rated"
       }
     },
     cart: {
@@ -287,11 +369,28 @@ export const translations: Record<Language, Translation> = {
       fillAll: "Please fill all required fields",
       inquirySent: "Inquiry sent to artisan"
     },
+    services: {
+      title: "Services",
+      photography: "Professional Photo",
+      marketing: "Digital Marketing",
+      audience: "Audience Analysis"
+    },
     auth: {
       title: "Authentication",
-      subtitle: "Sign in to continue",
-      client: "Customer (Nour)",
-      artisan: "Artisan (Admin)",
+      subtitle: "Join Dar Lalahom",
+      client: "Register as Client",
+      artisan: "Register as Artisan",
+      google: "Continue with Google",
+      facebook: "Continue with Facebook",
+      artisanForm: {
+        firstName: "First Name",
+        lastName: "Last Name",
+        phone: "Phone Number",
+        wilaya: "Wilaya",
+        craft: "Craft",
+        documents: "Business License / Artisan Card (Optional)",
+        submit: "Open Shop"
+      },
       footer: "Protected by Dar Lalahom buyer guarantee.",
       invalid: "Incorrect username or password"
     }
@@ -309,7 +408,8 @@ export const translations: Record<Language, Translation> = {
       cart: "Panier",
       dashboard: "Tableau de Bord",
       addProduct: "Ajouter Produit",
-      login: "Connexion"
+      login: "Connexion",
+      services: "Services"
     },
     sections: {
       selected: "Sélectionné pour vous",
@@ -331,12 +431,27 @@ export const translations: Record<Language, Translation> = {
       search: "Rechercher un bijou...",
       buy: "Acheter",
       rent: "Louer",
-      categories: {
+      mainCategories: {
+        all: "Tout",
+        jewelry: "Bijoux",
+        clothing: "Vêtements",
+        copper: "Cuivre",
+        homeDecor: "Décoration maison",
+        hennaSetup: "Qâada Henna",
+        hennaInk: "Harqous"
+      },
+      jewelryFilters: {
         all: "Tout",
         constantinois: "Constantinois",
         kabyle: "Kabyle",
         chaoui: "Chaoui",
         sahraoui: "Sahraoui"
+      },
+      subFilters: {
+        all: "Tout",
+        offers: "Offres",
+        bestSellers: "Meilleures ventes",
+        rated5: "Noté 5 étoiles"
       }
     },
     cart: {
@@ -385,11 +500,28 @@ export const translations: Record<Language, Translation> = {
       fillAll: "Veuillez remplir tous les champs",
       inquirySent: "Demande envoyée à l'artisan"
     },
+    services: {
+      title: "Services",
+      photography: "Photographie",
+      marketing: "Marketing",
+      audience: "Étude d'Audience"
+    },
     auth: {
       title: "Connexion",
-      subtitle: "Identifiez-vous pour continuer",
-      client: "Client (Nour)",
-      artisan: "Artisan (Admin)",
+      subtitle: "Rejoignez Dar Lalahom",
+      client: "S'inscrire comme Client",
+      artisan: "S'inscrire comme Artisan",
+      google: "Continuer avec Google",
+      facebook: "Continuer avec Facebook",
+      artisanForm: {
+        firstName: "Prénom",
+        lastName: "Nom",
+        phone: "Téléphone",
+        wilaya: "Wilaya",
+        craft: "Métier",
+        documents: "Registre / Carte Artisan (Facultatif)",
+        submit: "Ouvrir ma boutique"
+      },
       footer: "Garantie acheteur Dar Lalahom incluse.",
       invalid: "Identifiants incorrects"
     }
