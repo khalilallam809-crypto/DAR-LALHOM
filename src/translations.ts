@@ -13,6 +13,8 @@ export interface Translation {
     cart: string;
     dashboard: string;
     addProduct: string;
+    profile: string;
+    explore: string;
     login: string;
     services: string;
   };
@@ -64,6 +66,10 @@ export interface Translation {
     empty: string;
     total: string;
     confirm: string;
+    confirmation: string;
+    methodTitle: string;
+    cod: string;
+    edahabia: string;
     paymentTitle: string;
     cardNumber: string;
     expiryDate: string;
@@ -115,6 +121,15 @@ export interface Translation {
     fillAll: string;
     inquirySent: string;
   };
+  profile: {
+    title: string;
+    edit: string;
+    save: string;
+    personalInfo: string;
+    myProducts: string;
+    myOrders: string;
+    logout: string;
+  };
   services: {
     title: string;
     photography: string;
@@ -156,6 +171,8 @@ export const translations: Record<Language, Translation> = {
       cart: "السلة",
       dashboard: "إحصائيات نور",
       addProduct: "نشر منتج جديد",
+      profile: "حسابي",
+      explore: "استكشاف",
       login: "تسجيل الدخول",
       services: "الخدمات"
     },
@@ -206,7 +223,11 @@ export const translations: Record<Language, Translation> = {
       title: "حقيبة المشتريات",
       empty: "سلة مشترياتك خالية",
       total: "الإجمالي",
-      confirm: "تأكيد الطلبية والدفع",
+      confirm: "تأكيد الطلب",
+      confirmation: "تأكيد الطلبية والدفع",
+      methodTitle: "اختر طريقة الدفع",
+      cod: "الدفع عند الاستلام",
+      edahabia: "البطاقة الذهبية (إلكتروني)",
       paymentTitle: "الدفع الإلكتروني (البطاقة الذهبية)",
       cardNumber: "رقم البطاقة",
       expiryDate: "تاريخ الانتهاء",
@@ -258,6 +279,15 @@ export const translations: Record<Language, Translation> = {
       fillAll: "يرجى ملء جميع البيانات",
       inquirySent: "سيتم التواصل مع الحرفي فوراً"
     },
+    profile: {
+      title: "الملف الشخصي",
+      edit: "تعديل البيانات",
+      save: "حفظ التغييرات",
+      personalInfo: "المعلومات الشخصية",
+      myProducts: "منتجاتي المنشورة",
+      myOrders: "طلبياتي",
+      logout: "تسجيل الخروج"
+    },
     services: {
       title: "الخدمات",
       photography: "تصوير احترافي",
@@ -297,6 +327,8 @@ export const translations: Record<Language, Translation> = {
       cart: "Cart",
       dashboard: "Stats Panel",
       addProduct: "New Product",
+      profile: "Profile",
+      explore: "Explore",
       login: "Login",
       services: "Services"
     },
@@ -347,7 +379,11 @@ export const translations: Record<Language, Translation> = {
       title: "Shopping Bag",
       empty: "Your cart is empty",
       total: "Total",
-      confirm: "Confirm Order & Pay",
+      confirm: "Confirm Order",
+      confirmation: "Confirm Order & Payment",
+      methodTitle: "Choose Payment Method",
+      cod: "Cash on Delivery",
+      edahabia: "Edahabia Card (Online)",
       paymentTitle: "Electronic Payment (Edahabia)",
       cardNumber: "Card Number",
       expiryDate: "Expiry Date",
@@ -399,6 +435,15 @@ export const translations: Record<Language, Translation> = {
       fillAll: "Please fill all required fields",
       inquirySent: "Inquiry sent to artisan"
     },
+    profile: {
+      title: "My Profile",
+      edit: "Edit Profile",
+      save: "Save Changes",
+      personalInfo: "Personal Information",
+      myProducts: "My Listed Products",
+      myOrders: "My Orders",
+      logout: "Logout"
+    },
     services: {
       title: "Services",
       photography: "Professional Photo",
@@ -438,6 +483,8 @@ export const translations: Record<Language, Translation> = {
       cart: "Panier",
       dashboard: "Tableau de Bord",
       addProduct: "Ajouter Produit",
+      profile: "Profil",
+      explore: "Explorer",
       login: "Connexion",
       services: "Services"
     },
@@ -465,7 +512,7 @@ export const translations: Record<Language, Translation> = {
         all: "Tout",
         jewelry: "Bijoux",
         clothing: "Vêtements",
-        copper: "Cuivre",
+        copper: "Nحاس",
         homeDecor: "Décoration maison",
         hennaSetup: "Qâada Henna",
         hennaInk: "Harqous"
@@ -489,6 +536,10 @@ export const translations: Record<Language, Translation> = {
       empty: "Votre panier est vide",
       total: "Total",
       confirm: "Confirmer la commande",
+      confirmation: "Confirmation de Commande",
+      methodTitle: "Choisir le mode de paiement",
+      cod: "Paiement à la livraison",
+      edahabia: "Carte Edahabia (En ligne)",
       paymentTitle: "Paiement Électronique (Edahabia)",
       cardNumber: "Numéro de Carte",
       expiryDate: "Date d'Expiration",
@@ -539,6 +590,15 @@ export const translations: Record<Language, Translation> = {
       limitReached: "Limite plan gratuit atteinte (3 produits)",
       fillAll: "Veuillez remplir tous les champs",
       inquirySent: "Demande envoyée à l'artisan"
+    },
+    profile: {
+      title: "Mon Profil",
+      edit: "Modifier Profil",
+      save: "Enregistrer",
+      personalInfo: "Infos Personnelles",
+      myProducts: "Mes Produits",
+      myOrders: "Mes Commandes",
+      logout: "Déconnexion"
     },
     services: {
       title: "Services",

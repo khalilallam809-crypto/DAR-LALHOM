@@ -254,7 +254,8 @@ const products: Product[] = [
     rating: 4.7
   }
 ];
-type Tab = 'home' | 'shop' | 'cart' | 'dash' | 'add' | 'services';
+
+type Tab = 'home' | 'shop' | 'cart' | 'dash' | 'add' | 'services' | 'profile' | 'explore';
 
 interface Order {
   id: string;
@@ -288,6 +289,7 @@ export default function App() {
   const [notifications, setNotifications] = useState<string[]>([]);
   const [newProduct, setNewProduct] = useState({ name: '', nameEn: '', nameFr: '', description: '', wilaya: '', price: '', img: '', category: 'jewelry' as Product['category'] });
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<'online' | 'cod'>('online');
   const [paymentData, setPaymentData] = useState({ cardNumber: '', expiry: '', cvv: '', holder: '' });
   const [isPaying, setIsPaying] = useState(false);
   const [loginCreds, setLoginCreds] = useState({ username: '', password: '' });
@@ -570,29 +572,31 @@ export default function App() {
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-[100] bg-white/80 backdrop-blur-xl border-b border-stone-200 px-4 py-3 flex items-center justify-between">
-        <button 
-          onClick={() => setIsSidebarOpen(true)}
-          className="p-2 hover:bg-stone-100 rounded-xl transition-colors"
-        >
-          <Menu className="w-6 h-6" />
-        </button>
+        <div className="flex items-center gap-2">
+          <button 
+            onClick={() => setIsSidebarOpen(true)}
+            className="p-2 hover:bg-stone-100 rounded-xl transition-colors"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+          <div className="hidden sm:flex w-10 h-10 bg-transparent items-center justify-center">
+            <img src="/logo.png" className="w-full h-full object-contain" alt="Logo" />
+          </div>
+        </div>
 
-        <h1 className="font-serif text-xl font-bold text-gold tracking-tighter">
+        <h1 className="font-serif text-lg md:text-xl font-bold text-gold tracking-tighter text-center line-clamp-1 px-4">
           {t.brand}
         </h1>
 
         <div className="flex items-center gap-2">
-          <div className="w-12 h-12 bg-transparent flex items-center justify-center">
-            <img src="/logo.png" className="w-full h-full object-contain" alt="Logo" />
-          </div>
-          <div className="hidden md:flex items-center gap-1 bg-stone-100 p-1 rounded-full px-2 ml-2">
+          <div className="hidden md:flex items-center gap-1 bg-stone-100 p-1 rounded-full px-2">
             <button onClick={() => setLang('ar')} className={`text-[10px] font-bold px-2 py-1 rounded-full transition-all ${lang === 'ar' ? 'bg-gold text-white' : 'text-stone-400'}`}>AR</button>
             <button onClick={() => setLang('en')} className={`text-[10px] font-bold px-2 py-1 rounded-full transition-all ${lang === 'en' ? 'bg-gold text-white' : 'text-stone-400'}`}>EN</button>
             <button onClick={() => setLang('fr')} className={`text-[10px] font-bold px-2 py-1 rounded-full transition-all ${lang === 'fr' ? 'bg-gold text-white' : 'text-stone-400'}`}>FR</button>
           </div>
           <button 
             onClick={() => setCurrentTab('cart')}
-            className="relative p-2 hover:bg-stone-100 rounded-xl transition-colors"
+            className={`relative p-2 hover:bg-stone-100 rounded-xl transition-colors ${currentUser?.role === 'artisan' ? 'hidden' : 'block'}`}
           >
             <ShoppingCart className="w-6 h-6" />
             {cart.length > 0 && (
@@ -601,6 +605,14 @@ export default function App() {
               </span>
             )}
           </button>
+          {currentUser?.role === 'artisan' && (
+            <button 
+              onClick={() => setCurrentTab('dash')}
+              className="p-2 bg-gold/10 text-gold rounded-xl hover:bg-gold hover:text-white transition-all"
+            >
+              <LayoutDashboard className="w-6 h-6" />
+            </button>
+          )}
         </div>
       </nav>
 
@@ -655,6 +667,16 @@ export default function App() {
                   <span>{t.navigation.services}</span>
                 </button>
 
+                {currentUser && (
+                   <button 
+                    onClick={() => { setCurrentTab('profile'); setIsSidebarOpen(false); }}
+                    className={`w-full flex items-center gap-4 p-4 rounded-2xl font-bold transition-all ${currentTab === 'profile' ? 'bg-gold text-white shadow-lg shadow-gold/20' : 'text-stone-500 hover:bg-stone-50'}`}
+                  >
+                    <User className="w-5 h-5" />
+                    <span>{t.navigation.profile}</span>
+                  </button>
+                )}
+
                 {currentUser?.role === 'artisan' && (
                   <div className="mt-8 pt-6 border-t border-stone-100 space-y-2">
                     <p className="text-[10px] font-black text-stone-400 px-4 mb-2 uppercase tracking-widest leading-none">Control Panel</p>
@@ -689,7 +711,7 @@ export default function App() {
                   <div className="bg-stone-50 p-4 rounded-2xl flex items-center justify-between border border-stone-100">
                     <div className="flex items-center gap-3">
                       <div className="relative">
-                        <img src={currentUser.role === 'artisan' ? "https://i.pravatar.cc/" : "https://i.pravatar.cc/"} className="w-10 h-10 rounded-full border-2 border-gold object-cover" alt="User" />
+                        <img src={currentUser.role === 'artisan' ? "https://i.pravatar.cc/150?u=nour" : "https://i.pravatar.cc/150?u=khalil"} className="w-10 h-10 rounded-full border-2 border-gold object-cover" alt="User" />
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
                       </div>
                       <div>
@@ -852,6 +874,89 @@ export default function App() {
               ))}
             </div>
           </div>
+        )}
+
+        {currentTab === 'profile' && currentUser && (
+          <motion.section 
+            key="profile"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="max-w-4xl mx-auto space-y-8"
+          >
+            <div className="bg-white p-8 md:p-12 rounded-[3.5rem] border border-stone-100 shadow-sm">
+              <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
+                <div className="relative">
+                  <img 
+                    src={currentUser.role === 'artisan' ? "https://i.pravatar.cc/150?u=nour" : "https://i.pravatar.cc/150?u=khalil"} 
+                    className="w-32 h-32 rounded-full border-4 border-gold/20 object-cover shadow-2xl" 
+                    alt="User" 
+                  />
+                  <div className="absolute bottom-1 right-1 bg-gold text-white p-2 rounded-full border-4 border-white">
+                    <Star className="w-4 h-4 fill-white" />
+                  </div>
+                </div>
+                <div className="text-center md:text-start flex-grow">
+                  <h2 className="text-3xl font-serif font-bold text-stone-900">{currentUser.name}</h2>
+                  <p className="text-stone-400 font-bold uppercase tracking-widest text-xs mt-2">{currentUser.role === 'artisan' ? t.auth.artisan : t.auth.client}</p>
+                  <button className="mt-4 px-6 py-2 border border-stone-100 rounded-full text-stone-400 text-xs font-bold hover:bg-stone-50 transition-all">
+                    {t.profile.edit}
+                  </button>
+                </div>
+                <button 
+                  onClick={() => setCurrentUser(null)}
+                  className="px-6 py-3 bg-red-50 text-red-500 rounded-2xl font-bold text-sm hover:bg-red-100 transition-all flex items-center gap-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  {t.profile.logout}
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-100">
+                  <h3 className="font-bold text-lg mb-6 flex items-center gap-2">
+                    <User className="w-5 h-5 text-gold" />
+                    {t.profile.personalInfo}
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex justify-between border-b border-stone-100 pb-2">
+                      <span className="text-stone-400 text-xs font-bold uppercase">{isRtl ? 'البريد الإلكتروني' : 'Email'}</span>
+                      <span className="text-sm font-bold text-stone-800">{currentUser.role === 'artisan' ? 'nour@artisan.dz' : 'nour@client.dz'}</span>
+                    </div>
+                    <div className="flex justify-between border-b border-stone-100 pb-2">
+                      <span className="text-stone-400 text-xs font-bold uppercase">{t.auth.artisanForm.wilaya}</span>
+                      <span className="text-sm font-bold text-stone-800">Alger</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-100">
+                  <h3 className="font-bold text-lg mb-6 flex items-center gap-2">
+                    {currentUser.role === 'artisan' ? <Package className="w-5 h-5 text-gold" /> : <ShoppingCart className="w-5 h-5 text-gold" />}
+                    {currentUser.role === 'artisan' ? t.profile.myProducts : t.profile.myOrders}
+                  </h3>
+                  <div className="text-center py-10 opacity-30">
+                    {currentUser.role === 'artisan' ? (
+                      <p className="text-sm font-bold">{allProducts.filter(p => (p.artisan === currentUser.name || p.artisan.includes('Admin'))).length} {isRtl ? 'منتج' : 'Products'}</p>
+                    ) : (
+                      <p className="text-sm font-bold">{orders.length} {isRtl ? 'طلب' : 'Orders'}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {currentUser.role === 'artisan' && (
+              <div className="space-y-6">
+                <h3 className="text-2xl font-serif font-bold px-6">{t.profile.myProducts}</h3>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                  {allProducts.filter(p => (p.artisan === currentUser.name || p.artisan.includes('Admin'))).map(p => (
+                    <ProductCard key={p.id} p={p} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </motion.section>
         )}
 
         {currentTab === 'cart' && (
@@ -1026,6 +1131,21 @@ export default function App() {
                       <p className="text-center text-stone-300 py-20 text-sm italic">{t.sections.noOrders}</p>
                     )}
                   </div>
+                </div>
+              </div>
+
+              {/* Artisan's Products in Dashboard */}
+              <div className="space-y-6">
+                <div className="flex items-center justify-between px-6">
+                   <h3 className="font-serif text-2xl font-bold">{t.profile.myProducts}</h3>
+                   <button onClick={() => setCurrentTab('add')} className="p-2 bg-gold/10 text-gold rounded-full hover:bg-gold hover:text-white transition-all">
+                      <Plus className="w-5 h-5" />
+                   </button>
+                </div>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                  {allProducts.filter(p => (p.artisan === currentUser.name || p.artisan.includes('Admin'))).map(p => (
+                    <ProductCard key={p.id} p={p} />
+                  ))}
                 </div>
               </div>
 
@@ -1228,7 +1348,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="py-20 border-t border-stone-100 bg-white/50 backdrop-blur-sm">
+      <footer className="hidden md:block py-20 border-t border-stone-100 bg-white/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="space-y-6">
             <div className="w-32 mb-4">
@@ -1552,59 +1672,85 @@ export default function App() {
                     <X className="w-6 h-6" />
                   </button>
                 </div>
-                <h3 className="text-xl font-bold">{t.cart.paymentTitle}</h3>
-                <div className="mt-4 flex justify-center">
-                  <div className="bg-gold/20 text-gold text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-widest">
-                    Algérie Poste (Edahabia)
-                  </div>
-                </div>
+                <h3 className="text-xl font-bold">{t.cart.confirmation}</h3>
+                <p className="text-stone-400 text-sm mt-2">{t.cart.methodTitle}</p>
               </div>
 
               <div className="p-8 space-y-6">
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.cart.cardNumber}</label>
-                    <input 
-                      type="text" 
-                      placeholder="**** **** **** ****"
-                      className="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-center tracking-[0.2em]"
-                      value={paymentData.cardNumber}
-                      onChange={(e) => setPaymentData({...paymentData, cardNumber: e.target.value.replace(/\D/g, '').slice(0, 16)})}
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4">
+                  <button 
+                    onClick={() => setPaymentMethod('cod')}
+                    className={`p-6 rounded-2xl border-2 transition-all flex items-center justify-between group ${paymentMethod === 'cod' ? 'border-gold bg-gold/5' : 'border-stone-100 hover:border-gold/30'}`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${paymentMethod === 'cod' ? 'bg-gold text-white' : 'bg-stone-50 text-stone-400'}`}>
+                        <Package className="w-6 h-6" />
+                      </div>
+                      <div className="text-start">
+                        <p className="font-bold text-stone-900">{t.cart.cod}</p>
+                        <p className="text-xs text-stone-400 font-medium">{isRtl ? 'الدفع عند باب منزلك' : 'Pay at your door'}</p>
+                      </div>
+                    </div>
+                    {paymentMethod === 'cod' && <CheckCircle2 className="w-6 h-6 text-gold" />}
+                  </button>
+
+                  <button 
+                    onClick={() => setPaymentMethod('online')}
+                    className={`p-6 rounded-2xl border-2 transition-all flex items-center justify-between group ${paymentMethod === 'online' ? 'border-gold bg-gold/5' : 'border-stone-100 hover:border-gold/30'}`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${paymentMethod === 'online' ? 'bg-gold text-white' : 'bg-stone-50 text-stone-400'}`}>
+                        <Trophy className="w-6 h-6" />
+                      </div>
+                      <div className="text-start">
+                        <p className="font-bold text-stone-900">{t.cart.edahabia}</p>
+                        <p className="text-xs text-stone-400 font-medium">{isRtl ? 'آمن وسريع' : 'Secure and fast'}</p>
+                      </div>
+                    </div>
+                    {paymentMethod === 'online' && <CheckCircle2 className="w-6 h-6 text-gold" />}
+                  </button>
+                </div>
+
+                {paymentMethod === 'online' && (
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    className="space-y-4 pt-4 border-t border-stone-100"
+                  >
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.cart.expiryDate}</label>
+                      <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.cart.cardNumber}</label>
                       <input 
                         type="text" 
-                        placeholder="MM/YY"
-                        className="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-center"
-                        value={paymentData.expiry}
-                        onChange={(e) => setPaymentData({...paymentData, expiry: e.target.value})}
+                        placeholder="**** **** **** ****"
+                        className="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-center tracking-[0.2em]"
+                        value={paymentData.cardNumber}
+                        onChange={(e) => setPaymentData({...paymentData, cardNumber: e.target.value.replace(/\D/g, '').slice(0, 16)})}
                       />
                     </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.cart.cvv}</label>
-                      <input 
-                        type="password" 
-                        placeholder="***"
-                        className="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-center"
-                        value={paymentData.cvv}
-                        onChange={(e) => setPaymentData({...paymentData, cvv: e.target.value.replace(/\D/g, '').slice(0, 3)})}
-                      />
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.cart.expiryDate}</label>
+                        <input 
+                          type="text" 
+                          placeholder="MM/YY"
+                          className="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-center"
+                          value={paymentData.expiry}
+                          onChange={(e) => setPaymentData({...paymentData, expiry: e.target.value})}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.cart.cvv}</label>
+                        <input 
+                          type="password" 
+                          placeholder="***"
+                          className="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-center"
+                          value={paymentData.cvv}
+                          onChange={(e) => setPaymentData({...paymentData, cvv: e.target.value.replace(/\D/g, '').slice(0, 3)})}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.cart.cardHolder}</label>
-                    <input 
-                      type="text" 
-                      placeholder="NOUR LALAHOM"
-                      className="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold uppercase"
-                      value={paymentData.holder}
-                      onChange={(e) => setPaymentData({...paymentData, holder: e.target.value})}
-                    />
-                  </div>
-                </div>
+                  </motion.div>
+                )}
 
                 <div className="pt-4">
                   <button 
@@ -1617,19 +1763,73 @@ export default function App() {
                     ) : (
                       <CheckCircle2 className="w-5 h-5" />
                     )}
-                    {t.cart.payNow}
+                    {paymentMethod === 'online' ? t.cart.payNow : t.cart.confirm}
                   </button>
                 </div>
+
+                {paymentMethod === 'online' && (
+                  <div className="space-y-4 pt-4 border-t border-stone-100">
+                     <div className="space-y-2">
+                      <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.cart.cardHolder}</label>
+                      <input 
+                        type="text" 
+                        placeholder="NOUR LALAHOM"
+                        className="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold uppercase transition-all"
+                        value={paymentData.holder}
+                        onChange={(e) => setPaymentData({...paymentData, holder: e.target.value})}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
                 
-                <div className="flex items-center justify-center gap-2 opacity-30 grayscale saturate-0">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" className="h-4" alt="Visa" />
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png" className="h-6" alt="Mastercard" />
-                </div>
+              <div className="flex items-center justify-center gap-2 opacity-30 grayscale saturate-0 pb-8">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" className="h-4" alt="Visa" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png" className="h-6" alt="Mastercard" />
               </div>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
+
+      {/* Mobile Bottom Navigation */}
+      <div className="md:hidden fixed bottom-6 left-6 right-6 z-[900]">
+        <div className="bg-white/80 backdrop-blur-2xl border border-stone-200/50 rounded-[2.5rem] shadow-2xl flex items-center justify-around p-2">
+          { (currentUser?.role === 'artisan' ? [
+            { id: 'home', icon: Home, label: isRtl ? 'الرئيسية' : 'Home' },
+            { id: 'add', icon: Plus, label: t.navigation.addProduct },
+            { id: 'dash', icon: LayoutDashboard, label: t.navigation.dashboard },
+            { id: 'profile', icon: User, label: t.navigation.profile }
+          ] : [
+            { id: 'home', icon: Home, label: isRtl ? 'الرئيسية' : 'Home' },
+            { id: 'shop', icon: Search, label: t.navigation.explore },
+            { id: 'cart', icon: ShoppingCart, label: t.navigation.cart, count: cart.length },
+            { id: 'profile', icon: User, label: t.navigation.profile }
+          ]).map((item) => (
+            <button
+              key={item.id}
+              onClick={() => {
+                if (item.id === 'profile' && !currentUser) setIsAuthModalOpen(true);
+                else setCurrentTab(item.id as Tab);
+              }}
+              className={`relative flex flex-col items-center gap-1 p-2 rounded-2xl transition-all ${currentTab === item.id ? 'text-gold scale-110' : 'text-stone-400 hover:text-stone-600'}`}
+            >
+              <div className={`p-2 rounded-xl transition-colors ${currentTab === item.id ? 'bg-gold/10' : ''}`}>
+                <item.icon className="w-5 h-5 md:w-6 md:h-6" />
+                {item.count ? item.count > 0 && (
+                  <span className="absolute top-1 right-1 bg-red-500 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center border border-white font-bold">
+                    {item.count}
+                  </span>
+                ) : null}
+              </div>
+              <span className="text-[10px] font-black uppercase tracking-widest leading-none hidden sm:block">{item.label as string}</span>
+              {currentTab === item.id && (
+                <motion.div layoutId="bottom-indicator" className="absolute -bottom-1 w-1 h-1 bg-gold rounded-full" />
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
