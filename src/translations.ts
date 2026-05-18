@@ -64,6 +64,14 @@ export interface Translation {
     empty: string;
     total: string;
     confirm: string;
+    paymentTitle: string;
+    cardNumber: string;
+    expiryDate: string;
+    cvv: string;
+    cardHolder: string;
+    payNow: string;
+    paymentSuccess: string;
+    artisanNotified: string;
   };
   dashboard: {
     welcome: string;
@@ -99,6 +107,8 @@ export interface Translation {
     image: string;
     upload: string;
     name: string;
+    description: string;
+    wilaya: string;
     price: string;
     save: string;
     limitReached: string;
@@ -196,7 +206,15 @@ export const translations: Record<Language, Translation> = {
       title: "حقيبة المشتريات",
       empty: "سلة مشترياتك خالية",
       total: "الإجمالي",
-      confirm: "تأكيد الطلبية والدفع"
+      confirm: "تأكيد الطلبية والدفع",
+      paymentTitle: "الدفع الإلكتروني (البطاقة الذهبية)",
+      cardNumber: "رقم البطاقة",
+      expiryDate: "تاريخ الانتهاء",
+      cvv: "الرمز السري (CVV)",
+      cardHolder: "اسم صاحب البطاقة",
+      payNow: "دفع الآن",
+      paymentSuccess: "تم الدفع بنجاح! سيتم إخطار الحرفي بالعملية.",
+      artisanNotified: "تم إخطار الحرفي بنجاح"
     },
     dashboard: {
       welcome: "مرحباً بكِ، نور",
@@ -232,6 +250,8 @@ export const translations: Record<Language, Translation> = {
       image: "صورة المنتج",
       upload: "رفع من الجهاز",
       name: "اسم المنتج",
+      description: "وصف المنتج",
+      wilaya: "الولاية",
       price: "السعر (دج)",
       save: "حفظ المنتج",
       limitReached: "لقد وصلت للحد الأقصى للباقة المجانية (3 منتجات)",
@@ -327,7 +347,15 @@ export const translations: Record<Language, Translation> = {
       title: "Shopping Bag",
       empty: "Your cart is empty",
       total: "Total",
-      confirm: "Confirm Order & Pay"
+      confirm: "Confirm Order & Pay",
+      paymentTitle: "Electronic Payment (Edahabia)",
+      cardNumber: "Card Number",
+      expiryDate: "Expiry Date",
+      cvv: "CVV",
+      cardHolder: "Card Holder Name",
+      payNow: "Pay Now",
+      paymentSuccess: "Payment successful! The artisan will be notified.",
+      artisanNotified: "Artisan notified successfully"
     },
     dashboard: {
       welcome: "Welcome, Nour",
@@ -363,6 +391,8 @@ export const translations: Record<Language, Translation> = {
       image: "Product Image",
       upload: "Upload Photo",
       name: "Product Name",
+      description: "Description",
+      wilaya: "Wilaya",
       price: "Price (DZD)",
       save: "Save Item",
       limitReached: "Free plan limit reached (3 pieces)",
@@ -458,7 +488,15 @@ export const translations: Record<Language, Translation> = {
       title: "Sac d'Achat",
       empty: "Votre panier est vide",
       total: "Total",
-      confirm: "Confirmer la commande"
+      confirm: "Confirmer la commande",
+      paymentTitle: "Paiement Électronique (Edahabia)",
+      cardNumber: "Numéro de Carte",
+      expiryDate: "Date d'Expiration",
+      cvv: "CVV",
+      cardHolder: "Nom du Titulaire",
+      payNow: "Payer Maintenant",
+      paymentSuccess: "Paiement réussi ! L'artisan sera notifié.",
+      artisanNotified: "Artisan notifié avec succès"
     },
     dashboard: {
       welcome: "Bienvenue, Nour",
@@ -494,6 +532,8 @@ export const translations: Record<Language, Translation> = {
       image: "Image Produit",
       upload: "Charger Photo",
       name: "Nom du Produit",
+      description: "Description",
+      wilaya: "Wilaya",
       price: "Prix (DZD)",
       save: "Enregistrer",
       limitReached: "Limite plan gratuit atteinte (3 produits)",

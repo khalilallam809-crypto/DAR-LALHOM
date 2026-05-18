@@ -78,7 +78,7 @@ const products: Product[] = [
     rentPrice: 1500, 
     img: "https://media.zid.store/thumbs/c330bdf6-d372-43c3-99d3-a72da9e4ad63/bbefc431-cadb-4005-a06b-e750f15f5d81-thumbnail-500x500.png", 
     artisan: "نور (Admin)", 
-    artisanImg: "https://i.pravatar.cc/150?u=nour", 
+    artisanImg: "https://https://i.pravatar.cc/", 
     category: 'jewelry',
     jewelryType: 'chaoui',
     wilaya: 'Batna',
@@ -111,7 +111,7 @@ const products: Product[] = [
     rentPrice: 8000,
     img: "https://auroyaumeducaftan.com/cdn/shop/products/image_3c706e02-5315-4c1d-a964-a42145756504.jpg?v=1672681960&width=1445",
     artisan: "نور (Admin)",
-    artisanImg: "https://i.pravatar.cc/150?u=nour",
+    artisanImg: "https://https://i.pravatar.cc/",
     category: 'clothing',
     wilaya: 'Alger',
     rating: 5,
@@ -157,7 +157,7 @@ const products: Product[] = [
     price: 12000,
     img: "https://m.media-amazon.com/images/I/81OHi2zIB0L._AC_UF1000,1000_QL80_.jpg",
     artisan: "نور (Admin)",
-    artisanImg: "https://i.pravatar.cc/150?u=nour",
+    artisanImg: "https://https://i.pravatar.cc/",
     category: 'copper',
     wilaya: 'Tlemcen',
     rating: 4.6
@@ -187,7 +187,7 @@ const products: Product[] = [
     price: 18000,
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxHNC2UPBgT1w0DmlndhN8H24iDyyp4IDGnA&s",
     artisan: "نور (Admin)",
-    artisanImg: "https://i.pravatar.cc/150?u=nour",
+    artisanImg: "https://https://i.pravatar.cc/",
     category: 'homeDecor',
     wilaya: 'Tizi Ouzou',
     rating: 4.8
@@ -218,7 +218,7 @@ const products: Product[] = [
     price: 4500,
     img: "https://orientalart.fr/cdn/shop/files/BougieHenneFessi-styleAmazigh-bougieberbere-bougieChleuh-bougieTarz45_1200x.webp?v=1719951791",
     artisan: "نور (Admin)",
-    artisanImg: "https://i.pravatar.cc/150?u=nour",
+    artisanImg: "https://https://i.pravatar.cc/",
     category: 'hennaSetup',
     wilaya: 'Constantine',
     rating: 5
@@ -248,13 +248,12 @@ const products: Product[] = [
     price: 900,
     img: "https://media.zid.store/thumbs/8217e26b-c978-493f-97a8-ad4030e58a9b/9301550b-87f0-464f-9d29-e35757998e1c-thumbnail-1000x1000-70.jpg",
     artisan: "نور (Admin)",
-    artisanImg: "https://i.pravatar.cc/150?u=nour",
+    artisanImg: "https://https://i.pravatar.cc/",
     category: 'hennaInk',
     wilaya: 'Adrar',
     rating: 4.7
   }
 ];
-
 type Tab = 'home' | 'shop' | 'cart' | 'dash' | 'add' | 'services';
 
 interface Order {
@@ -287,7 +286,10 @@ export default function App() {
   const [priceRange, setPriceRange] = useState<number>(500000);
   const [orders, setOrders] = useState<Order[]>([]);
   const [notifications, setNotifications] = useState<string[]>([]);
-  const [newProduct, setNewProduct] = useState({ name: '', nameEn: '', nameFr: '', price: '', img: '', category: 'jewelry' as Product['category'] });
+  const [newProduct, setNewProduct] = useState({ name: '', nameEn: '', nameFr: '', description: '', wilaya: '', price: '', img: '', category: 'jewelry' as Product['category'] });
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [paymentData, setPaymentData] = useState({ cardNumber: '', expiry: '', cvv: '', holder: '' });
+  const [isPaying, setIsPaying] = useState(false);
   const [loginCreds, setLoginCreds] = useState({ username: '', password: '' });
   const [loginError, setLoginError] = useState<string | null>(null);
   const [authMode, setAuthMode] = useState<'login' | 'register-client' | 'register-artisan'>('login');
@@ -422,15 +424,13 @@ export default function App() {
     const matchesSearch = getName(p).toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || p.category === selectedCategory;
     const matchesJewelryType = selectedJewelryType === 'all' || p.jewelryType === selectedJewelryType;
-    const matchesWilaya = selectedWilaya === 'all' || p.wilaya === selectedWilaya;
-    const matchesPrice = p.price <= priceRange;
     
     let matchesSubFilter = true;
     if (selectedSubFilter === 'offers') matchesSubFilter = !!p.isOffer;
     if (selectedSubFilter === 'bestSellers') matchesSubFilter = !!p.isBestSeller;
     if (selectedSubFilter === 'rated5') matchesSubFilter = p.rating >= 5;
 
-    return matchesSearch && matchesCategory && matchesJewelryType && matchesWilaya && matchesPrice && matchesSubFilter;
+    return matchesSearch && matchesCategory && matchesJewelryType && matchesSubFilter;
   });
 
   const handleConfirmOrder = () => {
@@ -438,22 +438,43 @@ export default function App() {
       setIsAuthModalOpen(true);
       return;
     }
+    setIsPaymentModalOpen(true);
+  };
 
-    const newOrder: Order = {
-      id: Math.random().toString(36).substr(2, 9).toUpperCase(),
-      customerName: currentUser.name,
-      items: [...cart],
-      total: cart.reduce((sum: number, item: Product) => sum + item.price, 0),
-      date: new Date().toLocaleDateString(lang === 'ar' ? 'ar-DZ' : 'en-US'),
-      status: 'pending'
-    };
+  const processPayment = () => {
+    if (!paymentData.cardNumber || !paymentData.expiry || !paymentData.cvv) {
+      showToast(t.product.fillAll);
+      return;
+    }
 
-    setOrders([newOrder, ...orders]);
-    setNotifications([`${t.navigation.cart}: ${newOrder.total} DZD`, ...notifications]);
+    setIsPaying(true);
     
-    showToast(t.sections.orderConfirmed);
-    setCart([]);
-    setCurrentTab('home');
+    // Simulate payment processing
+    setTimeout(() => {
+      const newOrder: Order = {
+        id: Math.random().toString(36).substr(2, 9).toUpperCase(),
+        customerName: currentUser?.name || 'Guest',
+        items: [...cart],
+        total: cart.reduce((sum: number, item: Product) => sum + item.price, 0),
+        date: new Date().toLocaleDateString(lang === 'ar' ? 'ar-DZ' : 'en-US'),
+        status: 'pending'
+      };
+
+      setOrders([newOrder, ...orders]);
+      setNotifications([`${t.navigation.cart}: ${newOrder.total} DZD`, ...notifications]);
+      
+      showToast(t.cart.paymentSuccess);
+      // Simulate notifying the artisan
+      setTimeout(() => {
+        showToast(t.cart.artisanNotified);
+      }, 1500);
+
+      setCart([]);
+      setIsPaying(false);
+      setIsPaymentModalOpen(false);
+      setPaymentData({ cardNumber: '', expiry: '', cvv: '', holder: '' });
+      setCurrentTab('home');
+    }, 2000);
   };
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -484,18 +505,18 @@ export default function App() {
       name: newProduct.name,
       nameEn: newProduct.nameEn || newProduct.name,
       nameFr: newProduct.nameFr || newProduct.name,
-      description: isRtl ? "منتج جديد تم إضافته للحساب" : "New product added to account",
+      description: newProduct.description || (isRtl ? "منتج جديد تم إضافته للحساب" : "New product added to account"),
       price: parseInt(newProduct.price),
       img: newProduct.img,
       artisan: currentUser?.name || "نور (Admin)",
       artisanImg: "https://i.pravatar.cc/150?u=nour",
       category: newProduct.category,
       rating: 5,
-      wilaya: 'Alger'
+      wilaya: newProduct.wilaya || 'Alger'
     };
 
     setAllProducts([product, ...allProducts]);
-    setNewProduct({ name: '', nameEn: '', nameFr: '', price: '', img: '', category: 'jewelry' });
+    setNewProduct({ name: '', nameEn: '', nameFr: '', description: '', wilaya: '', price: '', img: '', category: 'jewelry' });
     setCurrentTab('home');
     showToast(t.sections.successAdd);
   };
@@ -668,7 +689,7 @@ export default function App() {
                   <div className="bg-stone-50 p-4 rounded-2xl flex items-center justify-between border border-stone-100">
                     <div className="flex items-center gap-3">
                       <div className="relative">
-                        <img src={currentUser.role === 'artisan' ? "https://i.pravatar.cc/150?u=nour" : "https://i.pravatar.cc/150?u=khalil"} className="w-10 h-10 rounded-full border-2 border-gold object-cover" alt="User" />
+                        <img src={currentUser.role === 'artisan' ? "https://i.pravatar.cc/" : "https://i.pravatar.cc/"} className="w-10 h-10 rounded-full border-2 border-gold object-cover" alt="User" />
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
                       </div>
                       <div>
@@ -709,37 +730,6 @@ export default function App() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className={`w-full ${isRtl ? 'pr-14 pl-6' : 'pl-14 pr-6'} py-5 bg-white border border-stone-100 rounded-[2rem] shadow-sm focus:outline-none focus:ring-2 focus:ring-gold/20 font-bold transition-all`}
                   />
-                </div>
-
-                {/* Dropdown Filters (Wilaya & Price) */}
-                <div className="flex flex-wrap gap-4 justify-center">
-                  <div className="relative">
-                    <select 
-                      value={selectedWilaya}
-                      onChange={(e) => setSelectedWilaya(e.target.value)}
-                      className="appearance-none bg-white border border-stone-100 rounded-xl px-4 py-2 pr-10 font-bold text-stone-600 focus:ring-2 focus:ring-gold/20 outline-none cursor-pointer shadow-sm"
-                    >
-                      <option value="all">{isRtl ? 'كل الولايات' : 'All Wilayas'}</option>
-                      {['Alger', 'Tizi Ouzou', 'Batna', 'Tlemcen', 'Oran', 'Constantine', 'Sétif'].map(w => (
-                        <option key={w} value={w}>{w}</option>
-                      ))}
-                    </select>
-                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" />
-                  </div>
-
-                  <div className="flex items-center gap-3 bg-white border border-stone-100 rounded-xl px-4 py-2 shadow-sm">
-                    <span className="text-stone-400 font-bold text-xs uppercase">{isRtl ? 'السعر' : 'Price'}</span>
-                    <input 
-                      type="range" 
-                      min="0" 
-                      max="1000000" 
-                      step="5000"
-                      value={priceRange}
-                      onChange={(e) => setPriceRange(parseInt(e.target.value))}
-                      className="accent-gold w-32"
-                    />
-                    <span className="text-gold font-bold text-xs">{priceRange.toLocaleString()}</span>
-                  </div>
                 </div>
 
                 <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2 px-1">
@@ -1182,6 +1172,25 @@ export default function App() {
                         <span className={`absolute ${isRtl ? 'left-6' : 'right-6'} top-1/2 -translate-y-1/2 font-black text-gold`}>دج</span>
                        </div>
                     </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.product.wilaya}</label>
+                      <input 
+                        type="text" 
+                        value={newProduct.wilaya}
+                        onChange={(e) => setNewProduct({ ...newProduct, wilaya: e.target.value })}
+                        className="w-full px-6 py-4 bg-stone-50 border border-stone-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gold/50 font-bold"
+                        placeholder={isRtl ? "الولاية (مثال: الجزائر)" : "Wilaya (e.g., Alger)"}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.product.description}</label>
+                      <textarea 
+                        value={newProduct.description}
+                        onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
+                        className="w-full px-6 py-4 bg-stone-50 border border-stone-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gold/50 font-bold min-h-[100px]"
+                        placeholder={isRtl ? "وصف تفصيلي للقطعة..." : "Detailed description of the piece..."}
+                      />
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
@@ -1511,6 +1520,111 @@ export default function App() {
                 <p className="text-[10px] text-stone-400 mt-6 leading-relaxed italic px-4 text-center">
                   {t.auth.footer}
                 </p>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Electronic Payment Modal (Edahabia) */}
+      <AnimatePresence>
+        {isPaymentModalOpen && (
+          <div className="fixed inset-0 z-[800] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-stone-900/80 backdrop-blur-md" 
+              onClick={() => !isPaying && setIsPaymentModalOpen(false)} 
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative bg-white w-full max-w-md rounded-[3rem] overflow-hidden shadow-2xl"
+            >
+              <div className="bg-stone-900 p-8 text-center text-white relative">
+                <div className="flex justify-between items-center mb-4">
+                  <div className="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center text-gold">
+                    <Trophy className="w-6 h-6" />
+                  </div>
+                  <button onClick={() => setIsPaymentModalOpen(false)} className="text-white/50 hover:text-white transition-colors">
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+                <h3 className="text-xl font-bold">{t.cart.paymentTitle}</h3>
+                <div className="mt-4 flex justify-center">
+                  <div className="bg-gold/20 text-gold text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-widest">
+                    Algérie Poste (Edahabia)
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-8 space-y-6">
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.cart.cardNumber}</label>
+                    <input 
+                      type="text" 
+                      placeholder="**** **** **** ****"
+                      className="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-center tracking-[0.2em]"
+                      value={paymentData.cardNumber}
+                      onChange={(e) => setPaymentData({...paymentData, cardNumber: e.target.value.replace(/\D/g, '').slice(0, 16)})}
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.cart.expiryDate}</label>
+                      <input 
+                        type="text" 
+                        placeholder="MM/YY"
+                        className="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-center"
+                        value={paymentData.expiry}
+                        onChange={(e) => setPaymentData({...paymentData, expiry: e.target.value})}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.cart.cvv}</label>
+                      <input 
+                        type="password" 
+                        placeholder="***"
+                        className="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-center"
+                        value={paymentData.cvv}
+                        onChange={(e) => setPaymentData({...paymentData, cvv: e.target.value.replace(/\D/g, '').slice(0, 3)})}
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{t.cart.cardHolder}</label>
+                    <input 
+                      type="text" 
+                      placeholder="NOUR LALAHOM"
+                      className="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold uppercase"
+                      value={paymentData.holder}
+                      onChange={(e) => setPaymentData({...paymentData, holder: e.target.value})}
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <button 
+                    onClick={processPayment}
+                    disabled={isPaying}
+                    className="w-full py-5 bg-gold text-white rounded-2xl font-bold shadow-xl shadow-gold/20 flex items-center justify-center gap-3 active:scale-95 transition-all disabled:opacity-50"
+                  >
+                    {isPaying ? (
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <CheckCircle2 className="w-5 h-5" />
+                    )}
+                    {t.cart.payNow}
+                  </button>
+                </div>
+                
+                <div className="flex items-center justify-center gap-2 opacity-30 grayscale saturate-0">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" className="h-4" alt="Visa" />
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png" className="h-6" alt="Mastercard" />
+                </div>
               </div>
             </motion.div>
           </div>
