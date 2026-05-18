@@ -667,6 +667,15 @@ export default function App() {
                   <span>{t.navigation.services}</span>
                 </button>
 
+                <div className="mt-4 pt-4 border-t border-stone-100 flex items-center justify-between px-4">
+                  <span className="text-[10px] font-black text-stone-400 uppercase tracking-widest leading-none">{isRtl ? 'اللغة' : 'Language'}</span>
+                  <div className="flex items-center gap-1 bg-stone-100 p-1 rounded-full px-2">
+                    <button onClick={() => setLang('ar')} className={`text-[10px] font-bold px-2 py-1 rounded-full transition-all ${lang === 'ar' ? 'bg-gold text-white' : 'text-stone-400'}`}>AR</button>
+                    <button onClick={() => setLang('en')} className={`text-[10px] font-bold px-2 py-1 rounded-full transition-all ${lang === 'en' ? 'bg-gold text-white' : 'text-stone-400'}`}>EN</button>
+                    <button onClick={() => setLang('fr')} className={`text-[10px] font-bold px-2 py-1 rounded-full transition-all ${lang === 'fr' ? 'bg-gold text-white' : 'text-stone-400'}`}>FR</button>
+                  </div>
+                </div>
+
                 {currentUser && (
                    <button 
                     onClick={() => { setCurrentTab('profile'); setIsSidebarOpen(false); }}
