@@ -9,7 +9,8 @@ import {
   Menu, X, ShoppingCart, Home, LayoutDashboard, Plus, 
   ChevronRight, Star, Zap, Share2, Heart, User, 
   Globe, LogOut, CheckCircle2, TrendingUp, Eye, Package, Search,
-  Facebook, Instagram, MessageCircle, Briefcase, Camera, Trophy, ChevronDown, FileText
+  Facebook, Instagram, MessageCircle, Briefcase, Camera, Trophy, ChevronDown, FileText,
+  ArrowLeft, ArrowRight
 } from 'lucide-react';
 import { translations, Language, Translation } from './translations';
 
@@ -573,12 +574,22 @@ export default function App() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-[100] bg-white/80 backdrop-blur-xl border-b border-stone-200 px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <button 
-            onClick={() => setIsSidebarOpen(true)}
-            className="p-2 hover:bg-stone-100 rounded-xl transition-colors"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
+          {currentTab !== 'home' ? (
+            <button 
+              onClick={() => setCurrentTab('home')}
+              className="p-2 hover:bg-stone-100 rounded-xl transition-colors flex items-center justify-center text-gold"
+              title={isRtl ? 'العودة للرئيسية' : 'Back to Home'}
+            >
+              {isRtl ? <ArrowRight className="w-6 h-6" /> : <ArrowLeft className="w-6 h-6" />}
+            </button>
+          ) : (
+            <button 
+              onClick={() => setIsSidebarOpen(true)}
+              className="p-2 hover:bg-stone-100 rounded-xl transition-colors"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+          )}
           <div className="hidden sm:flex w-10 h-10 bg-transparent items-center justify-center">
             <img src="/logo.png" className="w-full h-full object-contain" alt="Logo" />
           </div>
@@ -1500,26 +1511,26 @@ export default function App() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsShareOpen(false)}
-              className="fixed inset-0 z-[600] bg-black/40"
+              className="fixed inset-0 z-[1200] bg-black/40"
             />
             <motion.div
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed bottom-0 left-0 right-0 z-[610] bg-white rounded-t-[4rem] p-12 shadow-2xl text-center"
+              className="fixed bottom-0 left-0 right-0 z-[1210] bg-white rounded-t-[4rem] p-12 shadow-2xl text-center"
             >
               <div className="w-12 h-1.5 bg-stone-100 rounded-full mx-auto mb-10" />
-              <h3 className="font-bold text-2xl mb-12">{t.sections.shareVia}</h3>
+              <h3 className="font-serif text-2xl font-bold mb-12 uppercase">{t.sections.shareVia}</h3>
               <div className="grid grid-cols-4 gap-8 max-w-xl mx-auto">
                 {['WhatsApp', 'Facebook', 'Telegram', 'Copy Link'].map((platform, i) => (
-                   <button 
+                  <button 
                     key={i} 
                     onClick={() => { showToast(`${t.sections.sharedVia} ${platform}`); setIsShareOpen(false); }}
                     className="flex flex-col items-center gap-4 group"
                   >
-                    <div className="w-20 h-20 bg-stone-50 rounded-[2rem] flex items-center justify-center text-stone-600 shadow-inner group-hover:bg-gold/10 group-hover:text-gold transition-all">
-                      {i === 3 ? <Globe className="w-8 h-8" /> : <Share2 className="w-8 h-8" />}
+                    <div className="w-16 h-16 bg-stone-50 rounded-[1.5rem] flex items-center justify-center text-stone-600 shadow-inner group-hover:bg-gold/10 group-hover:text-gold transition-all">
+                      {i === 3 ? <Globe className="w-6 h-6" /> : <Share2 className="w-6 h-6" />}
                     </div>
                     <span className="text-[10px] font-black text-stone-400 uppercase tracking-widest group-hover:text-gold">{platform}</span>
                   </button>
@@ -1539,7 +1550,7 @@ export default function App() {
       {/* Auth Modal */}
       <AnimatePresence>
         {isAuthModalOpen && (
-          <div className="fixed inset-0 z-[700] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[1500] flex items-center justify-center p-4">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -1551,30 +1562,87 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white w-full max-w-md rounded-[3.5rem] overflow-hidden shadow-2xl"
+              className="relative bg-white w-full max-w-md rounded-[3rem] overflow-hidden shadow-2xl z-[1510]"
             >
               <div className="bg-gold p-8 text-center text-white relative">
+                <button 
+                  onClick={() => setIsAuthModalOpen(false)}
+                  className={`absolute top-4 ${isRtl ? 'left-4' : 'right-4'} w-8 h-8 bg-white/20 hover:bg-white/40 text-white rounded-full flex items-center justify-center font-bold transition-all z-50`}
+                >
+                  <X className="w-4 h-4" />
+                </button>
+
                 <h3 className="font-serif text-3xl font-bold uppercase">{t.auth.title}</h3>
                 <p className="text-white/70 text-[10px] font-black uppercase tracking-widest mt-2">{t.auth.subtitle}</p>
                 
-                <div className="flex gap-2 mt-6 bg-black/10 p-1 rounded-full overflow-hidden">
+                <div className="flex gap-1 mt-6 bg-black/10 p-1 rounded-full overflow-hidden">
                   <button 
-                    onClick={() => setAuthMode('register-client')}
-                    className={`flex-1 py-2 rounded-full text-xs font-bold transition-all ${authMode === 'register-client' ? 'bg-white text-gold' : 'text-white/60 hover:text-white'}`}
+                    onClick={() => { setAuthMode('login'); setLoginError(null); }}
+                    className={`flex-1 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all ${authMode === 'login' ? 'bg-white text-gold' : 'text-white/60 hover:text-white'}`}
                   >
-                    {t.auth.client}
+                    {isRtl ? 'دخول' : 'Connexion'}
                   </button>
                   <button 
-                    onClick={() => setAuthMode('register-artisan')}
-                    className={`flex-1 py-2 rounded-full text-xs font-bold transition-all ${authMode === 'register-artisan' ? 'bg-white text-gold' : 'text-white/60 hover:text-white'}`}
+                    onClick={() => { setAuthMode('register-client'); setLoginError(null); }}
+                    className={`flex-1 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all ${authMode === 'register-client' ? 'bg-white text-gold' : 'text-white/60 hover:text-white'}`}
                   >
-                    {t.auth.artisan}
+                    {isRtl ? 'زبون' : 'Client'}
+                  </button>
+                  <button 
+                    onClick={() => { setAuthMode('register-artisan'); setLoginError(null); }}
+                    className={`flex-1 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all ${authMode === 'register-artisan' ? 'bg-white text-gold' : 'text-white/60 hover:text-white'}`}
+                  >
+                    {isRtl ? 'حرفي' : 'Artisan'}
                   </button>
                 </div>
               </div>
 
               <div className="p-8 space-y-6">
-                {authMode === 'register-client' ? (
+                {authMode === 'login' && (
+                  <div className="space-y-4">
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{isRtl ? 'اسم المستخدم' : 'Username'}</label>
+                        <input 
+                          type="text" 
+                          placeholder="e.g. ADMIN or NOUR"
+                          className="w-full px-5 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-sm"
+                          value={loginCreds.username}
+                          onChange={(e) => setLoginCreds({...loginCreds, username: e.target.value})}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{isRtl ? 'كلمة المرور' : 'Password'}</label>
+                        <input 
+                          type="password" 
+                          placeholder="••••••••"
+                          className="w-full px-5 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-sm"
+                          value={loginCreds.password}
+                          onChange={(e) => setLoginCreds({...loginCreds, password: e.target.value})}
+                        />
+                      </div>
+                    </div>
+
+                    <button 
+                      onClick={handleLogin}
+                      className="w-full py-4 bg-stone-900 text-white rounded-2xl font-bold shadow-xl hover:bg-stone-800 transition-all uppercase tracking-widest text-sm"
+                    >
+                      {isRtl ? 'تسجيل الدخول' : 'Connexion'}
+                    </button>
+
+                    {loginError && <p className="text-red-500 text-[10px] font-black text-center uppercase">{loginError}</p>}
+
+                    <div className="p-4 bg-stone-50 rounded-2xl border border-stone-100/50 space-y-2 text-[11px]">
+                      <p className="font-bold text-stone-500 uppercase tracking-wider">{isRtl ? 'حسابات التجربة آمنة:' : 'Secure Demo Accounts:'}</p>
+                      <ul className="list-disc list-inside text-stone-400 font-medium space-y-1">
+                        <li><strong className="text-stone-600">ADMIN / ADMIN</strong> — {isRtl ? 'لوحة تحكم الحرفي (نور)' : 'Artisan Dashboard (Nour)'}</li>
+                        <li><strong className="text-stone-600">NOUR / NOUR</strong> — {isRtl ? 'حساب زبون للتجربة' : 'Client Demo Account'}</li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
+
+                {authMode === 'register-client' && (
                   <div className="space-y-4">
                     <button 
                       onClick={() => handleLogin()}
@@ -1591,7 +1659,9 @@ export default function App() {
                       <span className="font-bold">{t.auth.facebook}</span>
                     </button>
                   </div>
-                ) : (
+                )}
+
+                {authMode === 'register-artisan' && (
                   <div className="space-y-4">
                     <div className="grid grid-cols-2 gap-3">
                       <input 
@@ -1802,7 +1872,7 @@ export default function App() {
       </AnimatePresence>
 
       {/* Mobile Bottom Navigation */}
-      <div className="md:hidden fixed bottom-6 left-6 right-6 z-[900]">
+      <div className="md:hidden fixed bottom-6 left-6 right-6 z-[90]">
         <div className="bg-white/80 backdrop-blur-2xl border border-stone-200/50 rounded-[2.5rem] shadow-2xl flex items-center justify-around p-2">
           { (currentUser?.role === 'artisan' ? [
             { id: 'home', icon: Home, label: isRtl ? 'الرئيسية' : 'Home' },
