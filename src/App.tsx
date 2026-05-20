@@ -1872,8 +1872,8 @@ export default function App() {
       </AnimatePresence>
 
       {/* Mobile Bottom Navigation */}
-      <div className="md:hidden fixed bottom-6 left-6 right-6 z-[90]">
-        <div className="bg-white/80 backdrop-blur-2xl border border-stone-200/50 rounded-[2.5rem] shadow-2xl flex items-center justify-around p-2">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[90] bg-white/95 backdrop-blur-3xl border-t border-stone-200/60 shadow-[0_-8px_30px_rgba(0,0,0,0.05)] pb-[env(safe-area-inset-bottom,16px)] pt-2 px-6">
+        <div className="flex items-center justify-around">
           { (currentUser?.role === 'artisan' ? [
             { id: 'home', icon: Home, label: isRtl ? 'الرئيسية' : 'Home' },
             { id: 'add', icon: Plus, label: t.navigation.addProduct },
