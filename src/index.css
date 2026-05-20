@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Arabic:wght@400;700&family=Noto+Sans+Arabic:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif+Arabic:wght@400;700&family=Noto+Sans+Arabic:wght@300;400;700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: 'Noto Sans Arabic', ui-sans-serif, system-ui, sans-serif;
   --font-serif: 'Noto Serif Arabic', serif;
+  --font-arabic-brand: 'Aref Ruqaa', serif;
   
   --color-gold: #D4AF37;
   --color-stone-50: #FDFCF8;

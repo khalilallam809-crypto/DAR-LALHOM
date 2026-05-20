@@ -595,7 +595,11 @@ export default function App() {
           </div>
         </div>
 
-        <h1 className="font-serif text-lg md:text-xl font-bold text-gold tracking-tighter text-center line-clamp-1 px-4">
+        <h1 className={`text-gold tracking-tighter text-center line-clamp-1 px-4 ${
+          lang === 'ar' 
+            ? 'font-arabic-brand text-2xl md:text-3xl font-bold' 
+            : 'font-serif text-lg md:text-xl font-bold'
+        }`}>
           {t.brand}
         </h1>
 
@@ -649,7 +653,11 @@ export default function App() {
                 <div className="w-20 h-20 bg-gold/5 rounded-3xl flex items-center justify-center mx-auto mb-4 p-2">
                   <img src="/logo.png" className="w-full h-full object-contain" alt="Logo" />
                 </div>
-                <h2 className="font-serif text-2xl font-bold text-stone-900 uppercase">
+                <h2 className={`text-stone-900 uppercase ${
+                  lang === 'ar' 
+                    ? 'font-arabic-brand text-3xl font-bold' 
+                    : 'font-serif text-2xl font-bold'
+                }`}>
                   {t.brand}
                 </h2>
               </div>
@@ -1374,7 +1382,11 @@ export default function App() {
             <div className="w-32 mb-4">
               <img src="/logo.png" className="w-full object-contain" alt="Logo" />
             </div>
-             <h4 className="font-serif text-2xl font-bold text-gold tracking-tighter">
+             <h4 className={`text-gold tracking-tighter ${
+               lang === 'ar' 
+                 ? 'font-arabic-brand text-3xl font-bold' 
+                 : 'font-serif text-2xl font-bold'
+             }`}>
               {t.brand}
             </h4>
             <p className="text-stone-400 text-sm leading-relaxed max-w-xs">{t.sections.about}</p>
