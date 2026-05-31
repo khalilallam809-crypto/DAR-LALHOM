@@ -77,9 +77,9 @@ const products: Product[] = [
     description: "خلخال تقليدي شاوي مصنوع من الفضة المنقوشة بزخارف أمازيغية أصيلة من منطقة الأوراس.",
     price: 32000, 
     rentPrice: 1500, 
-    img: "https://media.zid.store/thumbs/c330bdf6-d372-43c3-99d3-a72da9e4ad63/bbefc431-cadb-4005-a06b-e750f15f5d81-thumbnail-500x500.png", 
+    img: "https://images.unsplash.com/photo-1596944229583-df81ba66029d?q=80&w=600", 
     artisan: "نور (Admin)", 
-    artisanImg: "https://https://i.pravatar.cc/", 
+    artisanImg: "https://i.pravatar.cc/150?u=nour", 
     category: 'jewelry',
     jewelryType: 'chaoui',
     wilaya: 'Batna',
@@ -93,7 +93,7 @@ const products: Product[] = [
     description: "عقد السكاب التقليدي التلمساني، يتميز برائحته الزكية المرتبطة بالعنبر والمسك والذهب.",
     price: 28000, 
     rentPrice: 2000, 
-    img: "https://pbs.twimg.com/media/GNjxiz1XMAAw8CZ.jpg", 
+    img: "https://images.unsplash.com/photo-1626784215021-2e39cac36d9d?q=80&w=600", 
     artisan: "لالة تلمسان", 
     artisanImg: "https://i.pravatar.cc/150?u=tlem", 
     category: 'jewelry',
@@ -110,9 +110,9 @@ const products: Product[] = [
     description: "سترة مخملية مطرزة يدوياً بخيوط الفتلة الذهبية، مع سروال مدور حريري. قمة الأناقة العاصمية.",
     price: 85000,
     rentPrice: 8000,
-    img: "https://auroyaumeducaftan.com/cdn/shop/products/image_3c706e02-5315-4c1d-a964-a42145756504.jpg?v=1672681960&width=1445",
+    img: "https://images.unsplash.com/photo-1585487000160-a0accf07a62e?q=80&w=600",
     artisan: "نور (Admin)",
-    artisanImg: "https://https://i.pravatar.cc/",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
     category: 'clothing',
     wilaya: 'Alger',
     rating: 5,
@@ -126,7 +126,7 @@ const products: Product[] = [
     description: "فستان قبائلي مزين بالزيغزغ الملون التقليدي مع لمسة عصرية تناسب المناسبات الكبرى.",
     price: 25000,
     rentPrice: 3000,
-    img: "https://i.etsystatic.com/50756637/r/il/54a874/7807049017/il_340x270.7807049017_iymi.jpg",
+    img: "https://images.unsplash.com/photo-1589156280159-27698a70f29e?q=80&w=600",
     artisan: "دار الحراير",
     artisanImg: "https://i.pravatar.cc/150?u=harayer",
     category: 'clothing',
@@ -141,7 +141,7 @@ const products: Product[] = [
     nameFr: "Plateau Cuivre Gravé",
     description: "صينية نحاس حمراء كبيرة منقوشة باليد بزخارف إسلامية معقدة. قطعة ديكور فاخرة.",
     price: 35000,
-    img: "https://zazahomes.co.uk/wp-content/uploads/2020/01/P1019714.jpg",
+    img: "https://images.unsplash.com/photo-1614035650171-bc015f8a0050?q=80&w=600",
     artisan: "محترف النحاس",
     artisanImg: "https://i.pravatar.cc/150?u=copper",
     category: 'copper',
@@ -156,9 +156,9 @@ const products: Product[] = [
     nameFr: "Cafetière en Cuivre",
     description: "إبريق قهوة تقليدي مصنوع من النحاس الخالص، يحافظ على نكهة القهوة الجزائرية الأصيلة.",
     price: 12000,
-    img: "https://m.media-amazon.com/images/I/81OHi2zIB0L._AC_UF1000,1000_QL80_.jpg",
+    img: "https://images.unsplash.com/photo-1577935586450-3dce6321f52d?q=80&w=600",
     artisan: "نور (Admin)",
-    artisanImg: "https://https://i.pravatar.cc/",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
     category: 'copper',
     wilaya: 'Tlemcen',
     rating: 4.6
@@ -171,7 +171,7 @@ const products: Product[] = [
     nameFr: "Tapis Babar Berbère",
     description: "سجاد يدوي أصلي من منطقة الأوراس، منسوج بصوف طبيعي يحمل رموز الهوية الشاوية.",
     price: 65000,
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDm5dVCrtBiYki8vjEGNDx4Ycyi48aHodcAA&s",
+    img: "https://images.unsplash.com/photo-1540331547168-382d6ca0435b?q=80&w=600",
     artisan: "نساجات الأوراس",
     artisanImg: "https://i.pravatar.cc/150?u=auras",
     category: 'homeDecor',
@@ -186,9 +186,9 @@ const products: Product[] = [
     nameFr: "Poterie Kabyle Vernissée",
     description: "مجموعة فخارية لتزيين المنزل مكونة من جرة وصحن كبير، مزينة بالألوان الطبيعية لمنطقة القبائل.",
     price: 18000,
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxHNC2UPBgT1w0DmlndhN8H24iDyyp4IDGnA&s",
+    img: "https://images.unsplash.com/photo-1595303526913-c7037797ebe7?q=80&w=600",
     artisan: "نور (Admin)",
-    artisanImg: "https://https://i.pravatar.cc/",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
     category: 'homeDecor',
     wilaya: 'Tizi Ouzou',
     rating: 4.8
@@ -202,7 +202,7 @@ const products: Product[] = [
     description: "تشمل وسائد كبيرة، غطاء صينية، وستائر صغيرة مطرزة بنفس النمط للعروس الجزائرية.",
     price: 48000,
     rentPrice: 6000,
-    img: "https://www.fatizaweddings.com/1367-large_default/coffret-henna-creme-mariage.jpg",
+    img: "https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=600",
     artisan: "دار العرس",
     artisanImg: "https://i.pravatar.cc/150?u=wedding",
     category: 'hennaSetup',
@@ -217,9 +217,9 @@ const products: Product[] = [
     nameFr: "Bougies de Henna Décorées",
     description: "زوج من الشموع الكبيرة المخصصة لطقوس الحنة، مزينة بالدانتيل واللؤلؤ والورود.",
     price: 4500,
-    img: "https://orientalart.fr/cdn/shop/files/BougieHenneFessi-styleAmazigh-bougieberbere-bougieChleuh-bougieTarz45_1200x.webp?v=1719951791",
+    img: "https://images.unsplash.com/photo-1534190239940-9ba8944ea261?q=80&w=600",
     artisan: "نور (Admin)",
-    artisanImg: "https://https://i.pravatar.cc/",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
     category: 'hennaSetup',
     wilaya: 'Constantine',
     rating: 5
@@ -232,7 +232,7 @@ const products: Product[] = [
     nameFr: "Harqous Authentique",
     description: "قارورة حرقوس تقليدي أسود فاحم يدوم طويلاً، مخصص للنقوش الدقيقة على اليدين والرقبة.",
     price: 1500,
-    img: "https://hraier.com/wp-content/uploads/2023/07/FB_IMG_1688611031900.jpg",
+    img: "https://images.unsplash.com/photo-1456339731639-592b667d0286?q=80&w=600",
     artisan: "خبير الحنة",
     artisanImg: "https://i.pravatar.cc/150?u=henna",
     category: 'hennaInk',
@@ -247,9 +247,9 @@ const products: Product[] = [
     nameFr: "Henné Naturel Pur",
     description: "حنة طبيعية مطحونة ومصفاة بعناية للحصول على لون أحمر داكن مثالي للعروس.",
     price: 900,
-    img: "https://media.zid.store/thumbs/8217e26b-c978-493f-97a8-ad4030e58a9b/9301550b-87f0-464f-9d29-e35757998e1c-thumbnail-1000x1000-70.jpg",
+    img: "https://images.unsplash.com/photo-1600721391776-b5cd0e008bb0?q=80&w=600",
     artisan: "نور (Admin)",
-    artisanImg: "https://https://i.pravatar.cc/",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
     category: 'hennaInk',
     wilaya: 'Adrar',
     rating: 4.7
@@ -267,6 +267,133 @@ interface Order {
   status: 'pending' | 'completed';
 }
 
+const getNameOuter = (p: Product, lang: Language) => {
+  if (lang === 'en') return p.nameEn;
+  if (lang === 'fr') return p.nameFr;
+  return p.name;
+};
+
+const ProductCard = ({ 
+  p, 
+  lang, 
+  t, 
+  isRtl, 
+  currentUser, 
+  setIsAuthModalOpen, 
+  setSelectedProduct, 
+  setIsShareOpen, 
+  showToast 
+}: { 
+  p: Product; 
+  lang: Language; 
+  t: any; 
+  isRtl: boolean; 
+  currentUser: any; 
+  setIsAuthModalOpen: (o: boolean) => void; 
+  setSelectedProduct: (p: Product | null) => void; 
+  setIsShareOpen: (o: boolean) => void; 
+  showToast: (msg: string) => void; 
+}) => {
+  return (
+    <motion.div 
+      layoutId={`product-${p.id}`}
+      className="bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-stone-100 overflow-hidden group shadow-sm hover:shadow-xl transition-all cursor-pointer flex flex-col h-full"
+      onClick={() => setSelectedProduct(p)}
+    >
+      <div className="relative aspect-[4/5] overflow-hidden">
+        <img src={p.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={getNameOuter(p, lang)} />
+        <div className="absolute top-2 right-2 md:top-4 md:right-4 flex flex-col gap-1 md:gap-2">
+          {p.isOffer && (
+            <div className="bg-gold text-white text-[8px] md:text-[10px] font-black px-2 py-1 md:px-3 md:py-1 rounded-full uppercase tracking-widest shadow-lg">
+              Offre
+            </div>
+          )}
+          <button 
+            onClick={(e) => { 
+              e.stopPropagation(); 
+              if (!currentUser) setIsAuthModalOpen(true);
+              else showToast(t.sections.successAdd); 
+            }}
+            className="w-8 h-8 md:w-12 md:h-12 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-stone-600 hover:text-gold transition-colors shadow-lg"
+          >
+            <ShoppingCart className="w-4 h-4 md:w-6 md:h-6" />
+          </button>
+        </div>
+        <div className="absolute top-2 left-2 md:top-4 md:left-4">
+          <div className="flex gap-1 md:gap-2">
+            <span className="bg-white/90 backdrop-blur-md text-stone-800 text-[8px] md:text-[10px] font-black px-2 py-1 rounded-full uppercase">
+              {p.rentPrice ? t.sections.rent : t.sections.buy}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="p-3 md:p-6 flex-grow flex flex-col">
+        <div className="flex justify-between items-start mb-1 md:mb-2">
+          <h4 className="font-bold text-xs md:text-sm text-stone-800 leading-tight flex-grow line-clamp-1">{getNameOuter(p, lang)}</h4>
+          <div className="flex items-center gap-0.5 text-gold ml-1">
+            <Star className="w-3 h-3 fill-gold" />
+            <span className="text-[10px] font-black">{p.rating}</span>
+          </div>
+        </div>
+        <p className="text-stone-400 text-[10px] mb-2 md:mb-4 line-clamp-2 leading-relaxed">
+          {p.description}
+        </p>
+        <div className="flex justify-between items-center mt-auto">
+          <p className="text-gold font-black text-sm md:text-lg">{p.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
+          <div className="flex gap-1">
+            <button 
+              onClick={(e) => { e.stopPropagation(); setIsShareOpen(true); }}
+              className="p-1 px-2 border border-stone-100 rounded-lg text-stone-400 hover:text-gold transition-colors"
+            >
+              <Share2 className="w-3 h-3" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const ArtisanSignature = ({ 
+  artisan, 
+  artisanImg, 
+  t, 
+  variant = 'compact' 
+}: { 
+  artisan: string; 
+  artisanImg: string; 
+  t: any; 
+  variant?: 'compact' | 'full'; 
+}) => (
+  <div className={`flex items-center gap-4 ${variant === 'full' ? 'p-6 bg-stone-50 rounded-[2.5rem] border border-stone-100' : ''}`}>
+    <div className="relative">
+      <img src={artisanImg} className={`${variant === 'full' ? 'w-16 h-16' : 'w-10 h-10'} rounded-full border-2 border-gold object-cover shadow-sm`} alt={artisan} />
+      <div className="absolute -bottom-1 -right-1 bg-gold text-white p-1 rounded-full border-2 border-white">
+        <Star className="w-2 h-2 fill-white" />
+      </div>
+    </div>
+    <div>
+      <p className="text-[10px] font-black text-gold uppercase tracking-widest mb-1 leading-none">
+        {t.product.artisan}
+      </p>
+      <p className={`${variant === 'full' ? 'text-lg' : 'text-sm'} font-bold text-stone-900`}>{artisan}</p>
+      {variant === 'full' && (
+        <div className="flex items-center gap-1 mt-1">
+          <CheckCircle2 className="w-3 h-3 text-green-500" />
+          <span className="text-[10px] text-stone-400 font-bold uppercase">{t.sections.verified}</span>
+        </div>
+      )}
+    </div>
+    {variant === 'full' && (
+      <div className="mr-auto">
+        <button className="px-4 py-2 border border-gold/20 text-gold text-xs font-bold rounded-full hover:bg-gold hover:text-white transition-all">
+          {t.sections.follow}
+        </button>
+      </div>
+    )}
+  </div>
+);
+
 export default function App() {
   const [lang, setLang] = useState<Language>('fr');
   const [currentTab, setCurrentTab] = useState<Tab>('home');
@@ -280,6 +407,28 @@ export default function App() {
   
   // New States
   const [allProducts, setAllProducts] = useState<Product[]>(products);
+  const [productReviews, setProductReviews] = useState<Record<number, { userName: string; rating: number; comment: string; date: string }[]>>({
+    1: [
+      {
+        userName: 'مريم بن علي',
+        rating: 5,
+        comment: 'قطعة رائعة جداً، التفاصيل مذهلة والتغليف كان راقياً. شكراً دار لالاهم.',
+        date: '2026-05-30'
+      }
+    ],
+    2: [
+      {
+        userName: 'سامي ياحي',
+        rating: 5,
+        comment: 'طقم ممتاز جداً وجودة الفضة رائعة. أنصح به بشدة.',
+        date: '2026-05-28'
+      }
+    ]
+  });
+  const [newReviewComment, setNewReviewComment] = useState('');
+  const [newReviewRating, setNewReviewRating] = useState(5);
+  const [newReviewName, setNewReviewName] = useState('');
+  const [activePackage, setActivePackage] = useState<string>('silver');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('jewelry');
   const [selectedJewelryType, setSelectedJewelryType] = useState<string>('all');
@@ -327,6 +476,51 @@ export default function App() {
     setCart(newCart);
   };
 
+  const handleAddReview = (productId: number) => {
+    if (!newReviewComment.trim()) {
+      showToast(isRtl ? 'الرجاء كتابة تعليق' : 'Please write a comment');
+      return;
+    }
+    const nameToUse = currentUser?.name || newReviewName.trim() || (isRtl ? 'زبون زائر' : 'Guest Client');
+    const newRev = {
+      userName: nameToUse,
+      rating: newReviewRating,
+      comment: newReviewComment.trim(),
+      date: new Date().toISOString().split('T')[0]
+    };
+    
+    const existing = productReviews[productId] || [];
+    const updated = [...existing, newRev];
+    
+    setProductReviews({
+      ...productReviews,
+      [productId]: updated
+    });
+    
+    // Calculate new average
+    const sum = updated.reduce((acc, r) => acc + r.rating, 0);
+    const avg = parseFloat((sum / updated.length).toFixed(1));
+    
+    // Update products state
+    setAllProducts(prev => prev.map(p => {
+      if (p.id === productId) {
+        return { ...p, rating: avg };
+      }
+      return p;
+    }));
+    
+    // Update selected product modal if open
+    if (selectedProduct && selectedProduct.id === productId) {
+      setSelectedProduct(prev => prev ? { ...prev, rating: avg } : null);
+    }
+    
+    // Reset form states
+    setNewReviewComment('');
+    setNewReviewName('');
+    setNewReviewRating(5);
+    showToast(isRtl ? 'شكراً لتقييمك؛ تم نشر تعليقك!' : 'Thank you for your rating; your comment has been published!');
+  };
+
   const handleLogin = () => {
     if (authMode === 'login') {
       const { username, password } = loginCreds;
@@ -358,70 +552,7 @@ export default function App() {
     }
   };
 
-  const ProductCard = ({ p }: { p: Product }) => (
-    <motion.div 
-      layoutId={`product-${p.id}`}
-      className="bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-stone-100 overflow-hidden group shadow-sm hover:shadow-xl transition-all cursor-pointer flex flex-col h-full"
-      onClick={() => setSelectedProduct(p)}
-    >
-      <div className="relative aspect-[4/5] overflow-hidden">
-        <img src={p.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={getName(p)} />
-        <div className="absolute top-2 right-2 md:top-4 md:right-4 flex flex-col gap-1 md:gap-2">
-          {p.isOffer && (
-            <div className="bg-gold text-white text-[8px] md:text-[10px] font-black px-2 py-1 md:px-3 md:py-1 rounded-full uppercase tracking-widest shadow-lg">
-              Offre
-            </div>
-          )}
-          <button 
-            onClick={(e) => { 
-              e.stopPropagation(); 
-              if (!currentUser) setIsAuthModalOpen(true);
-              else showToast(t.sections.successAdd); 
-            }}
-            className="w-8 h-8 md:w-12 md:h-12 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-stone-600 hover:text-gold transition-colors shadow-lg"
-          >
-            <ShoppingCart className="w-4 h-4 md:w-6 md:h-6" />
-          </button>
-        </div>
-        <div className="absolute top-2 left-2 md:top-4 md:left-4">
-          <div className="flex gap-1 md:gap-2">
-            <span className="bg-white/90 backdrop-blur-md text-stone-800 text-[8px] md:text-[10px] font-black px-2 py-1 rounded-full uppercase">
-              {p.rentPrice ? t.sections.rent : t.sections.buy}
-            </span>
-          </div>
-        </div>
-      </div>
-      <div className="p-3 md:p-6 flex-grow flex flex-col">
-        <div className="flex justify-between items-start mb-1 md:mb-2">
-          <h4 className="font-bold text-xs md:text-sm text-stone-800 leading-tight flex-grow line-clamp-1">{getName(p)}</h4>
-          <div className="flex items-center gap-0.5 text-gold ml-1">
-            <Star className="w-3 h-3 fill-gold" />
-            <span className="text-[10px] font-black">{p.rating}</span>
-          </div>
-        </div>
-        <p className="text-stone-400 text-[10px] mb-2 md:mb-4 line-clamp-2 leading-relaxed">
-          {p.description}
-        </p>
-        <div className="flex justify-between items-center mt-auto">
-          <p className="text-gold font-black text-sm md:text-lg">{p.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
-          <div className="flex gap-1">
-            <button 
-              onClick={(e) => { e.stopPropagation(); setIsShareOpen(true); }}
-              className="p-1 px-2 border border-stone-100 rounded-lg text-stone-400 hover:text-gold transition-colors"
-            >
-              <Share2 className="w-3 h-3" />
-            </button>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-
-  const getName = (p: Product) => {
-    if (lang === 'en') return p.nameEn;
-    if (lang === 'fr') return p.nameFr;
-    return p.name;
-  };
+  const getName = (p: Product) => getNameOuter(p, lang);
 
   const filteredProducts = allProducts.filter(p => {
     const matchesSearch = getName(p).toLowerCase().includes(searchQuery.toLowerCase());
@@ -523,36 +654,6 @@ export default function App() {
     setCurrentTab('home');
     showToast(t.sections.successAdd);
   };
-
-  const ArtisanSignature = ({ artisan, artisanImg, variant = 'compact' }: { artisan: string, artisanImg: string, variant?: 'compact' | 'full' }) => (
-    <div className={`flex items-center gap-4 ${variant === 'full' ? 'p-6 bg-stone-50 rounded-[2.5rem] border border-stone-100' : ''}`}>
-      <div className="relative">
-        <img src={artisanImg} className={`${variant === 'full' ? 'w-16 h-16' : 'w-10 h-10'} rounded-full border-2 border-gold object-cover shadow-sm`} alt={artisan} />
-        <div className="absolute -bottom-1 -right-1 bg-gold text-white p-1 rounded-full border-2 border-white">
-          <Star className="w-2 h-2 fill-white" />
-        </div>
-      </div>
-      <div>
-        <p className="text-[10px] font-black text-gold uppercase tracking-widest mb-1 leading-none">
-          {t.product.artisan}
-        </p>
-        <p className={`${variant === 'full' ? 'text-lg' : 'text-sm'} font-bold text-stone-900`}>{artisan}</p>
-        {variant === 'full' && (
-          <div className="flex items-center gap-1 mt-1">
-            <CheckCircle2 className="w-3 h-3 text-green-500" />
-            <span className="text-[10px] text-stone-400 font-bold uppercase">{t.sections.verified}</span>
-          </div>
-        )}
-      </div>
-      {variant === 'full' && (
-        <div className="mr-auto">
-          <button className="px-4 py-2 border border-gold/20 text-gold text-xs font-bold rounded-full hover:bg-gold hover:text-white transition-all">
-            {t.sections.follow}
-          </button>
-        </div>
-      )}
-    </div>
-  );
 
   return (
     <div className="min-h-screen font-sans selection:bg-gold/30 selection:text-gold">
@@ -845,7 +946,18 @@ export default function App() {
 
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-6">
                 {filteredProducts.map((p) => (
-                  <ProductCard key={p.id} p={p} />
+                  <ProductCard 
+                    key={p.id} 
+                    p={p} 
+                    lang={lang} 
+                    t={t} 
+                    isRtl={isRtl} 
+                    currentUser={currentUser} 
+                    setIsAuthModalOpen={setIsAuthModalOpen} 
+                    setSelectedProduct={setSelectedProduct} 
+                    setIsShareOpen={setIsShareOpen} 
+                    showToast={showToast} 
+                  />
                 ))}
               </div>
             </motion.section>
@@ -879,7 +991,18 @@ export default function App() {
 
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-1 md:gap-8">
                 {filteredProducts.map((p) => (
-                  <ProductCard key={p.id} p={p} />
+                  <ProductCard 
+                    key={p.id} 
+                    p={p} 
+                    lang={lang} 
+                    t={t} 
+                    isRtl={isRtl} 
+                    currentUser={currentUser} 
+                    setIsAuthModalOpen={setIsAuthModalOpen} 
+                    setSelectedProduct={setSelectedProduct} 
+                    setIsShareOpen={setIsShareOpen} 
+                    showToast={showToast} 
+                  />
                 ))}
               </div>
             </motion.section>
@@ -900,6 +1023,130 @@ export default function App() {
                   <p className="text-stone-500 text-sm leading-relaxed">{s.desc as string}</p>
                 </div>
               ))}
+            </div>
+
+            {/* Packages Section inside Services Tab */}
+            <div className="mt-20 space-y-12">
+              <div className="text-center space-y-4">
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900">
+                  {isRtl ? 'باقات الاشتراك للحرفيين وأصحاب العلامات' : 'Subscription Plans for Artisans & Brands'}
+                </h2>
+                <p className="text-stone-400 max-w-xl mx-auto text-sm">
+                  {isRtl 
+                    ? 'اختر الباقة المناسبة لعرض إبداعاتك للزبائن والنمو بهويتك التجارية والصناعة التقليدية الجزائرية.' 
+                    : 'Choose the right plan to showcase your creations, grow your brand, and reach Algerian heritage lovers.'}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                  { 
+                    id: 'silver',
+                    tag: 'Silver',
+                    title: isRtl ? 'الباقة الفضية' : 'Silver Plan', 
+                    price: '1,000',
+                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
+                    limit: isRtl ? 'باقة عرض المنتجات الأساسية' : 'Key product display tier', 
+                    icon: Package, 
+                    features: [
+                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app'
+                    ],
+                    accent: false
+                  },
+                  { 
+                    id: 'gold',
+                    tag: 'Gold',
+                    title: isRtl ? 'الباقة الذهبية' : 'Gold Plan', 
+                    price: '2,000',
+                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
+                    limit: isRtl ? 'الظهور المميز للزبائن' : 'Premium view tier', 
+                    icon: Zap, 
+                    features: [
+                      isRtl ? 'خدمة عرض المنتجات في الصفحة الأولى' : 'Featured display on the home page'
+                    ],
+                    accent: true
+                  },
+                  { 
+                    id: 'platinum',
+                    tag: 'Platinum',
+                    title: isRtl ? 'الباقة البلاتينية' : 'Platinum Plan', 
+                    price: '8,500',
+                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
+                    limit: isRtl ? 'حرق الإحصائيات وبناء الهوية' : 'Pro brand builder tier', 
+                    icon: Star, 
+                    features: [
+                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app',
+                      isRtl ? 'التصوير الاحترافي للمنتجات' : 'Professional product photography',
+                      isRtl ? 'التسويق الفعال عبر قنوات التواصل' : 'Active social media marketing'
+                    ],
+                    accent: false
+                  },
+                  { 
+                    id: 'diamond',
+                    tag: 'Diamond',
+                    title: isRtl ? 'الباقة الماسّية' : 'Diamond Plan', 
+                    price: '10,500',
+                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
+                    limit: isRtl ? 'الريادة والتحليل الشامل' : 'Supreme analytics tier', 
+                    icon: Trophy, 
+                    features: [
+                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app',
+                      isRtl ? 'التصوير الاحترافي للمنتجات' : 'Professional product photography',
+                      isRtl ? 'دراسات جمهور وسلوك شاملة' : 'Complete audience studies & search',
+                      isRtl ? 'تسويق احترافي عبر وسائل التواصل الاجتماعي' : 'Full social media marketing campaigns'
+                    ],
+                    accent: false
+                  }
+                ].map((pkg, i) => (
+                  <div key={i} className={`p-8 rounded-[3rem] border flex flex-col ${pkg.accent ? 'bg-stone-900 text-white border-stone-800 ring-4 ring-gold/30' : 'bg-white border-stone-100'} shadow-sm relative transition-all hover:scale-[1.02] hover:shadow-xl`}>
+                    {pkg.accent && (
+                      <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-stone-900 font-extrabold text-[9px] uppercase tracking-wider px-4 py-1.5 rounded-full shadow-lg">
+                        {isRtl ? 'الأكثر طلباً' : 'Most Popular'}
+                      </span>
+                    )}
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 shrink-0 ${pkg.accent ? 'bg-gold text-stone-900' : 'bg-gold/10 text-gold'}`}>
+                      <pkg.icon className="w-6 h-6" />
+                    </div>
+                    <h4 className="text-xl font-bold mb-1">{pkg.title}</h4>
+                    <p className={`text-[10px] mb-4 font-bold tracking-wider uppercase ${pkg.accent ? 'text-stone-400' : 'text-stone-500'}`}>{pkg.limit}</p>
+                    
+                    {/* Price Tag */}
+                    <div className="mb-6 flex items-baseline gap-1">
+                      <span className="text-3xl font-serif font-black text-gold">{pkg.price}</span>
+                      <span className={`text-[10px] font-bold ${pkg.accent ? 'text-stone-400' : 'text-stone-500'}`}>{pkg.period}</span>
+                    </div>
+
+                    <div className="space-y-3 mb-8 flex-grow">
+                      {pkg.features.map((f, j) => (
+                        <div key={j} className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+                          <span className="text-xs shrink-1 leading-tight font-medium">{f}</span>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <button 
+                      onClick={() => {
+                        if (!currentUser) {
+                          setIsAuthModalOpen(true);
+                          showToast(isRtl ? 'الرجاء تسجيل الدخول أولاً لاختيار باقة' : 'Please login first to choose a plan');
+                        } else {
+                          setActivePackage(pkg.id);
+                          showToast(isRtl ? `تم تفعيل الباقة ${pkg.title} بنجاح!` : `Plan ${pkg.title} activated successfully!`);
+                        }
+                      }}
+                      className={`w-full py-4 rounded-xl font-bold text-xs transition-all ${
+                        activePackage === pkg.id 
+                          ? 'bg-stone-100 text-stone-400 cursor-not-allowed border-2 border-stone-100' 
+                          : (pkg.accent ? 'bg-gold text-stone-900 hover:bg-gold/90' : 'bg-stone-900 text-white hover:bg-stone-800')
+                      }`}
+                      disabled={activePackage === pkg.id}
+                    >
+                      {activePackage === pkg.id ? (isRtl ? 'مفعلة' : 'Active') : (isRtl ? 'اختيار الباقة' : 'Choose Plan')}
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
@@ -979,7 +1226,18 @@ export default function App() {
                 <h3 className="text-2xl font-serif font-bold px-6">{t.profile.myProducts}</h3>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                   {allProducts.filter(p => (p.artisan === currentUser.name || p.artisan.includes('Admin'))).map(p => (
-                    <ProductCard key={p.id} p={p} />
+                    <ProductCard 
+                      key={p.id} 
+                      p={p} 
+                      lang={lang} 
+                      t={t} 
+                      isRtl={isRtl} 
+                      currentUser={currentUser} 
+                      setIsAuthModalOpen={setIsAuthModalOpen} 
+                      setSelectedProduct={setSelectedProduct} 
+                      setIsShareOpen={setIsShareOpen} 
+                      showToast={showToast} 
+                    />
                   ))}
                 </div>
               </div>
@@ -1172,56 +1430,123 @@ export default function App() {
                 </div>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                   {allProducts.filter(p => (p.artisan === currentUser.name || p.artisan.includes('Admin'))).map(p => (
-                    <ProductCard key={p.id} p={p} />
+                    <ProductCard 
+                      key={p.id} 
+                      p={p} 
+                      lang={lang} 
+                      t={t} 
+                      isRtl={isRtl} 
+                      currentUser={currentUser} 
+                      setIsAuthModalOpen={setIsAuthModalOpen} 
+                      setSelectedProduct={setSelectedProduct} 
+                      setIsShareOpen={setIsShareOpen} 
+                      showToast={showToast} 
+                    />
                   ))}
                 </div>
               </div>
 
               {/* Packages Section */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
                 {[
                   { 
-                    tag: 'Free',
-                    title: t.dashboard.packages.free, 
-                    limit: t.dashboard.packages.limit, 
+                    id: 'silver',
+                    tag: 'Silver',
+                    title: isRtl ? 'الباقة الفضية' : 'Silver Plan', 
+                    price: '1,000',
+                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
+                    limit: isRtl ? 'باقة عرض المنتجات الأساسية' : 'Key product display tier', 
                     icon: Package, 
-                    features: [isRtl ? '3 منتجات فقط' : '3 products only'],
-                    active: true
+                    features: [
+                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app'
+                    ],
+                    accent: false
                   },
                   { 
-                    tag: 'PRO',
-                    title: t.dashboard.packages.pro, 
-                    limit: t.dashboard.packages.unlimited, 
+                    id: 'gold',
+                    tag: 'Gold',
+                    title: isRtl ? 'الباقة الذهبية' : 'Gold Plan', 
+                    price: '2,000',
+                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
+                    limit: isRtl ? 'الظهور المميز للزبائن' : 'Premium view tier', 
                     icon: Zap, 
-                    features: [isRtl ? 'منتجات غير محدودة' : 'Unlimited products', isRtl ? 'تسويق رقمي' : 'Digital marketing'],
-                    active: false,
+                    features: [
+                      isRtl ? 'خدمة عرض المنتجات في الصفحة الأولى' : 'Featured display on the home page'
+                    ],
                     accent: true
                   },
                   { 
-                    tag: 'PREMIUM',
-                    title: t.dashboard.packages.premium, 
-                    limit: t.dashboard.packages.full, 
+                    id: 'platinum',
+                    tag: 'Platinum',
+                    title: isRtl ? 'الباقة البلاتينية' : 'Platinum Plan', 
+                    price: '8,500',
+                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
+                    limit: isRtl ? 'حرق الإحصائيات وبناء الهوية' : 'Pro brand builder tier', 
                     icon: Star, 
-                    features: [isRtl ? 'دعم فني' : 'Technical support', isRtl ? 'الظهور مع الأوائل' : 'Top results', isRtl ? 'تصوير محترف' : 'Pro photography'],
-                    active: false
+                    features: [
+                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app',
+                      isRtl ? 'التصوير الاحترافي للمنتجات' : 'Professional product photography',
+                      isRtl ? 'التسويق الفعال عبر قنوات التواصل' : 'Active social media marketing'
+                    ],
+                    accent: false
+                  },
+                  { 
+                    id: 'diamond',
+                    tag: 'Diamond',
+                    title: isRtl ? 'الباقة الماسّية' : 'Diamond Plan', 
+                    price: '10,500',
+                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
+                    limit: isRtl ? 'الريادة والتحليل الشامل' : 'Supreme analytics tier', 
+                    icon: Trophy, 
+                    features: [
+                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app',
+                      isRtl ? 'التصوير الاحترافي للمنتجات' : 'Professional product photography',
+                      isRtl ? 'دراسات جمهور وسلوك شاملة' : 'Complete audience studies & search',
+                      isRtl ? 'تسويق احترافي عبر وسائل التواصل الاجتماعي' : 'Full social media marketing campaigns'
+                    ],
+                    accent: false
                   }
                 ].map((pkg, i) => (
-                  <div key={i} className={`p-10 rounded-[3.5rem] border ${pkg.accent ? 'bg-stone-900 text-white border-stone-800' : 'bg-white border-stone-100'} shadow-sm flex flex-col`}>
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 ${pkg.accent ? 'bg-gold text-white' : 'bg-gold/10 text-gold'}`}>
+                  <div key={i} className={`p-8 rounded-[3rem] border flex flex-col ${pkg.accent ? 'bg-stone-900 text-white border-stone-800 ring-4 ring-gold/30' : 'bg-white border-stone-100'} shadow-sm relative transition-all hover:scale-[1.02] hover:shadow-xl`}>
+                    {pkg.accent && (
+                      <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-stone-900 font-extrabold text-[9px] uppercase tracking-wider px-4 py-1.5 rounded-full shadow-lg">
+                        {isRtl ? 'الأكثر طلباً' : 'Most Popular'}
+                      </span>
+                    )}
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 shrink-0 ${pkg.accent ? 'bg-gold text-stone-900' : 'bg-gold/10 text-gold'}`}>
                       <pkg.icon className="w-6 h-6" />
                     </div>
-                    <h4 className="text-xl font-bold mb-2">{pkg.title}</h4>
-                    <p className={`text-sm mb-8 ${pkg.accent ? 'text-stone-400 font-light' : 'text-stone-500 font-bold'}`}>{pkg.limit}</p>
-                    <div className="space-y-3 mb-10 flex-grow">
+                    <h4 className="text-xl font-bold mb-1">{pkg.title}</h4>
+                    <p className={`text-[10px] mb-4 font-bold tracking-wider uppercase ${pkg.accent ? 'text-stone-400' : 'text-stone-500'}`}>{pkg.limit}</p>
+                    
+                    {/* Price Tag */}
+                    <div className="mb-6 flex items-baseline gap-1">
+                      <span className="text-3xl font-serif font-black text-gold">{pkg.price}</span>
+                      <span className={`text-[10px] font-bold ${pkg.accent ? 'text-stone-400' : 'text-stone-500'}`}>{pkg.period}</span>
+                    </div>
+
+                    <div className="space-y-3 mb-8 flex-grow">
                       {pkg.features.map((f, j) => (
-                        <div key={j} className="flex items-center gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-gold" />
-                          <span className="text-sm">{f}</span>
+                        <div key={j} className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+                          <span className="text-xs shrink-1 leading-tight font-medium">{f}</span>
                         </div>
                       ))}
                     </div>
-                    <button className={`w-full py-4 rounded-2xl font-bold transition-all ${pkg.active ? 'bg-stone-100 text-stone-400 cursor-not-allowed' : (pkg.accent ? 'bg-gold text-white' : 'bg-stone-900 text-white')}`}>
-                      {pkg.active ? (isRtl ? 'مفعلة' : 'Active') : (isRtl ? 'اختيار الباقة' : 'Choose Plan')}
+                    
+                    <button 
+                      onClick={() => {
+                        setActivePackage(pkg.id);
+                        showToast(isRtl ? `تم تفعيل الباقة ${pkg.title} بنجاح!` : `Plan ${pkg.title} activated successfully!`);
+                      }}
+                      className={`w-full py-4 rounded-xl font-bold text-xs transition-all ${
+                        activePackage === pkg.id 
+                          ? 'bg-stone-100 text-stone-400 cursor-not-allowed border-2 border-stone-100' 
+                          : (pkg.accent ? 'bg-gold text-stone-900 hover:bg-gold/90' : 'bg-stone-900 text-white hover:bg-stone-800')
+                      }`}
+                      disabled={activePackage === pkg.id}
+                    >
+                      {activePackage === pkg.id ? (isRtl ? 'مفعلة' : 'Active') : (isRtl ? 'اختيار الباقة' : 'Choose Plan')}
                     </button>
                   </div>
                 ))}
@@ -1434,7 +1759,7 @@ export default function App() {
               </div>
 
               <div className="md:w-1/2 p-10 md:p-12 overflow-y-auto no-scrollbar space-y-8 flex flex-col justify-center">
-                <ArtisanSignature artisan={selectedProduct.artisan} artisanImg={selectedProduct.artisanImg} variant="full" />
+                <ArtisanSignature artisan={selectedProduct.artisan} artisanImg={selectedProduct.artisanImg} t={t} variant="full" />
 
                 <div className="flex flex-col gap-1">
                   <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900 mb-2">{getName(selectedProduct)}</h2>
@@ -1463,16 +1788,96 @@ export default function App() {
                 </div>
 
                 <div className="space-y-4 pt-6 border-t border-stone-100">
-                  <p className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Comments & Rating</p>
-                  <div className="flex items-center gap-1 text-gold mb-2">
-                    {[1, 2, 3, 4, 5].map(star => (
-                      <Star key={star} className={`w-4 h-4 ${star <= Math.floor(selectedProduct.rating) ? 'fill-gold' : 'text-stone-200'}`} />
-                    ))}
-                    <span className="text-xs font-bold ml-2 text-stone-900">{selectedProduct.rating} / 5</span>
+                  <div className="flex justify-between items-center">
+                    <p className="text-[10px] font-black text-stone-400 uppercase tracking-widest">
+                      {isRtl ? 'الآراء والتقييمات' : 'Reviews & Comments'}
+                    </p>
+                    <div className="flex items-center gap-1 text-gold">
+                      {[1, 2, 3, 4, 5].map(star => (
+                        <Star key={star} className={`w-3.5 h-3.5 ${star <= Math.floor(selectedProduct.rating) ? 'fill-gold text-gold' : 'text-stone-200'}`} />
+                      ))}
+                      <span className="text-xs font-black ml-1 text-stone-800 bg-gold/10 px-2 py-0.5 rounded-full">{selectedProduct.rating} / 5</span>
+                    </div>
                   </div>
-                  <div className="bg-stone-50 p-4 rounded-2xl">
-                    <p className="text-xs text-stone-600 italic">"قطعة رائعة جداً، التفاصيل مذهلة والتغليف كان راقياً. شكراً دار لالاهم."</p>
-                    <p className="text-[9px] text-stone-400 mt-2 font-bold">— زبائن موثقون</p>
+
+                  {/* List of active reviews */}
+                  <div className="space-y-3 max-h-48 overflow-y-auto pr-1">
+                    {(productReviews[selectedProduct.id] || []).length === 0 ? (
+                      <p className="text-xs text-stone-400 italic text-center py-4">
+                        {isRtl ? 'لا توجد تقييمات بعد. كن أول من يشارك رأيه!' : 'No reviews yet. Be the first to share your opinion!'}
+                      </p>
+                    ) : (
+                      (productReviews[selectedProduct.id] || []).map((rev, idx) => (
+                        <div key={idx} className="bg-stone-50/70 p-4 rounded-2xl border border-stone-100/30 space-y-1.5">
+                          <div className="flex justify-between items-center">
+                            <span className="text-xs font-extrabold text-stone-700">{rev.userName}</span>
+                            <span className="text-[9px] text-stone-400 font-bold">{rev.date}</span>
+                          </div>
+                          <div className="flex gap-0.5 text-gold">
+                            {[1, 2, 3, 4, 5].map(star => (
+                              <Star 
+                                key={star} 
+                                className={`w-3 h-3 ${star <= rev.rating ? 'fill-gold text-gold' : 'text-stone-200'}`} 
+                              />
+                            ))}
+                          </div>
+                          <p className="text-xs text-stone-600 leading-relaxed font-semibold">{rev.comment}</p>
+                        </div>
+                      ))
+                    )}
+                  </div>
+
+                  {/* Add review form */}
+                  <div className="bg-stone-50/50 border border-stone-100/50 p-4 rounded-[2rem] space-y-3 mt-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[9px] font-black text-stone-400 uppercase tracking-widest">
+                        {isRtl ? 'أضف تقييمك والتعليق' : 'Add your rating & comment'}
+                      </span>
+                      {/* Star Rating selector */}
+                      <div className="flex items-center">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <button
+                            key={star}
+                            type="button"
+                            onClick={() => setNewReviewRating(star)}
+                            className="p-1 hover:scale-125 transition-transform"
+                            title={`${star} stars`}
+                          >
+                            <Star
+                              className={`w-5 h-5 transition-colors ${
+                                star <= newReviewRating ? 'fill-gold text-gold' : 'text-stone-200'
+                              }`}
+                            />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {!currentUser && (
+                      <input
+                        type="text"
+                        placeholder={isRtl ? 'اسمك الكريم (اختياري)' : 'Your name (optional)'}
+                        value={newReviewName}
+                        onChange={(e) => setNewReviewName(e.target.value)}
+                        className="w-full px-4 py-2 bg-white border border-stone-100 rounded-xl outline-none focus:ring-2 focus:ring-gold font-bold text-xs"
+                      />
+                    )}
+
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        placeholder={isRtl ? 'اكتب تعليقك هنا...' : 'Write your comment here...'}
+                        value={newReviewComment}
+                        onChange={(e) => setNewReviewComment(e.target.value)}
+                        className="flex-grow px-4 py-2.5 bg-white border border-stone-100 rounded-xl outline-none focus:ring-2 focus:ring-gold text-xs font-medium"
+                      />
+                      <button
+                        onClick={() => handleAddReview(selectedProduct.id)}
+                        className="px-5 py-2.5 bg-stone-900 text-white rounded-xl font-bold text-xs hover:bg-stone-800 active:scale-95 transition-all shadow-md shrink-0"
+                      >
+                        {isRtl ? 'نشر' : 'Post'}
+                      </button>
+                    </div>
                   </div>
                 </div>
 
