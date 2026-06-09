@@ -10,7 +10,7 @@ import {
   ChevronRight, Star, Zap, Share2, Heart, User, 
   Globe, LogOut, CheckCircle2, TrendingUp, Eye, Package, Search,
   Facebook, Instagram, MessageCircle, Briefcase, Camera, Trophy, ChevronDown, FileText,
-  ArrowLeft, ArrowRight
+  ArrowLeft, ArrowRight, Calendar
 } from 'lucide-react';
 import { translations, Language, Translation } from './translations';
 
@@ -20,6 +20,8 @@ interface Product {
   nameEn: string;
   nameFr: string;
   description: string;
+  descriptionEn?: string;
+  descriptionFr?: string;
   price: number;
   rentPrice?: number;
   img: string;
@@ -41,6 +43,8 @@ const products: Product[] = [
     nameEn: "Khait El Rouh Pure Gold", 
     nameFr: "Khait El Rouh Or Pur", 
     description: "حلي تقليدي عاصمي مصنوع من الذهب الخالص عيار 18 قيراط، قطعة فنية تلبس في الجبين تعبر عن عمق التراث العاصمي.",
+    descriptionEn: "Traditional headpiece from Algiers crafted from pure 18k gold, reflecting the deep majesty of Ottoman-Algerian heritage.",
+    descriptionFr: "Bijou frontal traditionnel d'Alger en or pur 18 carats, exprimant l'élégance de l'héritage algérois.",
     price: 125000, 
     rentPrice: 5000, 
     img: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?q=80&w=600", 
@@ -58,6 +62,8 @@ const products: Product[] = [
     nameEn: "Original Red Coral Set", 
     nameFr: "Parure Corail Rouge", 
     description: "طقم فضة مزين بالمرجان الأحمر الطبيعي من منطقة القبائل، يضم قلادة وأقراط بتصميم 'آث يني' العريق.",
+    descriptionEn: "Sterling silver set adorned with natural red coral from the Kabylie region, including a necklace and earrings in the timeless Ath Yenni style.",
+    descriptionFr: "Ensemble en argent orné de corail rouge naturel de Kabylie, comprenant un collier et des boucles d'oreilles au design Ath Yenni ancestral.",
     price: 45000, 
     rentPrice: 2500, 
     img: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?q=80&w=600", 
@@ -75,11 +81,13 @@ const products: Product[] = [
     nameEn: "Engraved Silver Anklet", 
     nameFr: "Chevillère en Argent", 
     description: "خلخال تقليدي شاوي مصنوع من الفضة المنقوشة بزخارف أمازيغية أصيلة من منطقة الأوراس.",
+    descriptionEn: "Traditional Chaoui anklet made from premium engraved silver featuring authentic Amazigh geometry from the Aurès region.",
+    descriptionFr: "Chevillère traditionnelle Chaoui en argent finement gravé d'authentiques motifs berbères de l'Aurès.",
     price: 32000, 
     rentPrice: 1500, 
     img: "https://media.zid.store/thumbs/c330bdf6-d372-43c3-99d3-a72da9e4ad63/bbefc431-cadb-4005-a06b-e750f15f5d81-thumbnail-500x500.png", 
     artisan: "نور (Admin)", 
-    artisanImg: "https://https://i.pravatar.cc/", 
+    artisanImg: "https://i.pravatar.cc/150?u=nour", 
     category: 'jewelry',
     jewelryType: 'chaoui',
     wilaya: 'Batna',
@@ -91,6 +99,8 @@ const products: Product[] = [
     nameEn: "Authentic Tlemcen Skab", 
     nameFr: "Skab Tlemcen Authentique", 
     description: "عقد السكاب التقليدي التلمساني، يتميز برائحته الزكية المرتبطة بالعنبر والمسك والذهب.",
+    descriptionEn: "Classic Tlemcen ceremonial necklace, famously scented with premium amber, musk, and adorned with golden details.",
+    descriptionFr: "Collier traditionnel de Tlemcen, réputé pour sa fragrance envoûtante de musc et d'ambre et ses perles dorées.",
     price: 28000, 
     rentPrice: 2000, 
     img: "https://pbs.twimg.com/media/GNjxiz1XMAAw8CZ.jpg", 
@@ -108,11 +118,13 @@ const products: Product[] = [
     nameEn: "Royal Karakou",
     nameFr: "Karakou Royal Algerois",
     description: "سترة مخملية مطرزة يدوياً بخيوط الفتلة الذهبية، مع سروال مدور حريري. قمة الأناقة العاصمية.",
+    descriptionEn: "Hand-embroidered velvet jacket in golden Fettla thread accompanied by a silk Sarouel. The peak of Algiers haute couture.",
+    descriptionFr: "Veste en velours brodée main de fil d'or Fettla, accompagnée d'un pantalon bouffant en soie. L'apogée de l'élégance algéroise.",
     price: 85000,
     rentPrice: 8000,
     img: "https://auroyaumeducaftan.com/cdn/shop/products/image_3c706e02-5315-4c1d-a964-a42145756504.jpg?v=1672681960&width=1445",
     artisan: "نور (Admin)",
-    artisanImg: "https://https://i.pravatar.cc/",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
     category: 'clothing',
     wilaya: 'Alger',
     rating: 5,
@@ -124,6 +136,8 @@ const products: Product[] = [
     nameEn: "Modern Kabyle Dress",
     nameFr: "Robe Kabyle Moderne",
     description: "فستان قبائلي مزين بالزيغزغ الملون التقليدي مع لمسة عصرية تناسب المناسبات الكبرى.",
+    descriptionEn: "Kabyle dress adorned with colorful geometric patterns and decorative zigzag ribbons, with a modern cut for special occasions.",
+    descriptionFr: "Robe kabyle ornée de galons colorés et d'un zigzag traditionnel, revisitée avec une coupe moderne.",
     price: 25000,
     rentPrice: 3000,
     img: "https://i.etsystatic.com/50756637/r/il/54a874/7807049017/il_340x270.7807049017_iymi.jpg",
@@ -140,6 +154,8 @@ const products: Product[] = [
     nameEn: "Hand-Engraved Copper Tray",
     nameFr: "Plateau Cuivre Gravé",
     description: "صينية نحاس حمراء كبيرة منقوشة باليد بزخارف إسلامية معقدة. قطعة ديكور فاخرة.",
+    descriptionEn: "Large red copper tray meticulously hand-engraved with intricate geometric Islamic patterns. A superb decorative piece.",
+    descriptionFr: "Grand plateau en cuivre rouge ciselé à la main aux motifs géométriques islamiques. Un objet de décoration somptueux.",
     price: 35000,
     img: "https://zazahomes.co.uk/wp-content/uploads/2020/01/P1019714.jpg",
     artisan: "محترف النحاس",
@@ -155,10 +171,12 @@ const products: Product[] = [
     nameEn: "Traditional Copper Pot",
     nameFr: "Cafetière en Cuivre",
     description: "إبريق قهوة تقليدي مصنوع من النحاس الخالص، يحافظ على نكهة القهوة الجزائرية الأصيلة.",
+    descriptionEn: "Traditional coffee server crafted in pure copper, fully preserves the deep classic aroma of Algerian coffee.",
+    descriptionFr: "Cafetière traditionnelle en cuivre rouge pur, idéale pour préserver le goût authentique du café algérien.",
     price: 12000,
     img: "https://m.media-amazon.com/images/I/81OHi2zIB0L._AC_UF1000,1000_QL80_.jpg",
     artisan: "نور (Admin)",
-    artisanImg: "https://https://i.pravatar.cc/",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
     category: 'copper',
     wilaya: 'Tlemcen',
     rating: 4.6
@@ -170,6 +188,8 @@ const products: Product[] = [
     nameEn: "Babar Berber Rug",
     nameFr: "Tapis Babar Berbère",
     description: "سجاد يدوي أصلي من منطقة الأوراس، منسوج بصوف طبيعي يحمل رموز الهوية الشاوية.",
+    descriptionEn: "Authentic Babar handwoven rug from the Aurès region, crafted with organic wool and displaying traditional Chaoui symbols.",
+    descriptionFr: "Tapis berbère authentique de Babar fait main dans les Aurès, tissé en laine naturelle aux motifs Chaouis traditionnels.",
     price: 65000,
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDm5dVCrtBiYki8vjEGNDx4Ycyi48aHodcAA&s",
     artisan: "نساجات الأوراس",
@@ -185,10 +205,12 @@ const products: Product[] = [
     nameEn: "Kabyle Glazed Pottery",
     nameFr: "Poterie Kabyle Vernissée",
     description: "مجموعة فخارية لتزيين المنزل مكونة من جرة وصحن كبير، مزينة بالألوان الطبيعية لمنطقة القبائل.",
+    descriptionEn: "Decorative clay pottery set including a water jar and a large serving dish, painted with beautiful organic colors of Kabylie.",
+    descriptionFr: "Service décoratif en poterie comprenant une jarre et un grand plat, peint avec les couleurs naturelles de Kabylie.",
     price: 18000,
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxHNC2UPBgT1w0DmlndhN8H24iDyyp4IDGnA&s",
     artisan: "نور (Admin)",
-    artisanImg: "https://https://i.pravatar.cc/",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
     category: 'homeDecor',
     wilaya: 'Tizi Ouzou',
     rating: 4.8
@@ -200,6 +222,8 @@ const products: Product[] = [
     nameEn: "Full Henna Ceremony Set",
     nameFr: "Set Complet Qâada Henna",
     description: "تشمل وسائد كبيرة، غطاء صينية، وستائر صغيرة مطرزة بنفس النمط للعروس الجزائرية.",
+    descriptionEn: "Includes large ceremonial cushions, a traditional tray cover, and matching embroidered curtains for the Algerian bride's henna.",
+    descriptionFr: "Ensemble comprenant de grands coussins, un couvre-plateau et des rideaux brodés assortis pour le henné de la mariée.",
     price: 48000,
     rentPrice: 6000,
     img: "https://www.fatizaweddings.com/1367-large_default/coffret-henna-creme-mariage.jpg",
@@ -215,11 +239,13 @@ const products: Product[] = [
     name: "شموع الحنة المزينة يدوياً",
     nameEn: "Decorated Henna Candles",
     nameFr: "Bougies de Henna Décorées",
-    description: "زوج من الشموع الكبيرة المخصصة لطقوس الحنة، مزينة بالدانتيل واللؤلؤ والورود.",
+    description: "زوج من الصموع الكبيرة المخصصة لطقوس الحنة، مزينة بالدانتيل واللؤلؤ والورود.",
+    descriptionEn: "Pair of premium decorated large ritual candles for the Henna night, adorned with lace, pearls, and matching details.",
+    descriptionFr: "Paire de grandes bougies ornées de dentelle et de perles pour la cérémonie traditionnelle du henné.",
     price: 4500,
     img: "https://orientalart.fr/cdn/shop/files/BougieHenneFessi-styleAmazigh-bougieberbere-bougieChleuh-bougieTarz45_1200x.webp?v=1719951791",
     artisan: "نور (Admin)",
-    artisanImg: "https://https://i.pravatar.cc/",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
     category: 'hennaSetup',
     wilaya: 'Constantine',
     rating: 5
@@ -231,6 +257,8 @@ const products: Product[] = [
     nameEn: "Authentic Harqous Ink",
     nameFr: "Harqous Authentique",
     description: "قارورة حرقوس تقليدي أسود فاحم يدوم طويلاً، مخصص للنقوش الدقيقة على اليدين والرقبة.",
+    descriptionEn: "Long-lasting deep black organic Harqous ink, designed for fine body art and traditional temporary tattoos.",
+    descriptionFr: "Encre traditionnelle de Harqous noire intense de longue durée, idéale pour le tatouage éphémère raffiné.",
     price: 1500,
     img: "https://hraier.com/wp-content/uploads/2023/07/FB_IMG_1688611031900.jpg",
     artisan: "خبير الحنة",
@@ -246,12 +274,184 @@ const products: Product[] = [
     nameEn: "Organic Pure Henna",
     nameFr: "Henné Naturel Pur",
     description: "حنة طبيعية مطحونة ومصفاة بعناية للحصول على لون أحمر داكن مثالي للعروس.",
+    descriptionEn: "Premium organic ground henna powder, carefully sieved to yield a brilliant deep reddish-brown bridal color.",
+    descriptionFr: "Poudre de henné naturel de qualité supérieure, finement tamisée pour une coloration riche et éclatante de la mariée.",
     price: 900,
     img: "https://media.zid.store/thumbs/8217e26b-c978-493f-97a8-ad4030e58a9b/9301550b-87f0-464f-9d29-e35757998e1c-thumbnail-1000x1000-70.jpg",
     artisan: "نور (Admin)",
-    artisanImg: "https://https://i.pravatar.cc/",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
     category: 'hennaInk',
     wilaya: 'Adrar',
+    rating: 4.7
+  },
+  {
+    id: 15,
+    name: "محرمة عاصمية",
+    nameEn: "Aâssimia Mahrama",
+    nameFr: "mahrama Algéroise",
+    description: "محرمة عاصمية انيقة مزينة بالكريستال و الخرز اللامع ’ تجمع بين الاصالة و الفخامة لتكمل اطلالتك التقليدية مع لباس الكاراكو العاصمي بكل رقي متوفرة باللون الاسود ’الذهبي ’ و الابيض",
+    descriptionEn: "El mahrama-algiers bridal headpiece with Crystal fringes available in black gold white",
+    descriptionFr: "El mahrama Algéroise à franges disponible trois couleur noir, blanc doré cristal",
+    price: 3500,
+    img: "15.jpg",
+    artisan: "لالة الباي",
+    artisanImg: "https://i.pravatar.cc/150?u=pay",
+    category: 'clothing',
+    wilaya: 'alger',
+    rating: 5,
+    isBestSeller: true
+  },
+  {
+    id: 16,
+    name: "مقياس قبائلي تقليدي",
+    nameEn: "Traditional Kabyle Cuff Bracelet",
+    nameFr: "Manchette kabyle traditionnelle",
+    description:"مقياس قبائلي تقليدي مصنوع من النحاس الاصلي مستوحى من التراث الامازيغي العريق ’ يتميز بزخارف هندسية دقيقة و الوان زاهية تعكس الهوية الثقافية لمنطقة القبائل "
+    ,
+    descriptionEn: "Traditional Kabyle cuff bracelet adorned with colorful Amazigh-inspired motifs. A handcrafted piece that combines authenticity and elegance.",
+    descriptionFr: "Manchette kabyle traditionnel en cuivre, orné de motifs colorés inspirés du patrimoine amazigh. Une pièce artisanale alliant authenticité et élégance.",
+    price: 5000,
+    img: "16.jpg",
+    artisan: "أولاد نائل",
+    artisanImg: "https://i.pravatar.cc/150?u=nail",
+    category: 'jewelry',
+    wilaya: 'kabyle',
+    rating: 4.9
+  },
+  {
+    id: 17,
+    name: "حلق نجود الشاوي",
+    nameEn: "Earrings Ndjoude chaoui",
+    nameFr: "Boucle d’oreille Ndjoude",
+    description: "حلق نجود الطويل مطلي بالذهب ،تتميز بتفاصيلها المنقوشة بعناية وعناصرها المتدلية التي تعكس براعة الصياغة التقليدية ليزين العروس في أجمل إطلالاتها بالشاوي او النايلي الجزائري",
+    descriptionEn: "Majestic Annaba traditional dress with gold embroidery and beads, perfect for weddings.",
+    descriptionFr: "Robe traditionnelle d'Annaba avec magnifique broderie artisanale en fil d'or.",
+    price: 3500,
+    img: "17.jpg",
+    artisan: "حرائر عنابة",
+    artisanImg: "https://i.pravatar.cc/150?u=annaba",
+    category: 'jewelry',
+    wilaya: 'Batna',
+    rating: 4.8
+  },
+  {
+    id: 18,
+    name: "سخاب العنبر",
+    nameEn: "Skhab El Anbar",
+    nameFr: "Skhab El Anbar",
+    description: " سخاب العنبر هو نوع من الحلي التقليدية العطرية على شكل قلادة، يُعرف أساسًا في الجزائر . خاصة لدى قبيلة أولاد نائل في المناطق الوسطى والجنوبية مثل الجلفة وبوسعادة حتى قسنطينة، يُصنع يدويًا من عجينة طبيعية تتكون أساسًا من العنبر والمسك والقرنفل",
+    descriptionEn: "Sakhab El Anbar is a traditional Algerian aromatic necklace, especially known among the Ouled Naïl. It is handmade from amber, musk, cloves, and natural spices, giving a long-lasting fragrance as a natural alternative to perfume.",
+    descriptionFr: "Le Sakhab El Anbar est un collier traditionnel algérien parfumé, connu chez les Ouled Naïl. Il est fabriqué à base d’ambre, de musc et d’épices naturelles, offrant un parfum durable comme alternative au parfum classique.",
+    price: 18000,
+    rentPrice: 1500,
+    img: "18.jpg",
+    artisan: "نور (Admin)",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
+    category: 'jewelry',
+    wilaya: 'Alger',
+    rating: 4.6
+  },
+  {
+    id: 19,
+    name: "سخاب الجوهر الابيض",
+    nameEn: "white skhab jawhar",
+    nameFr: " skhab djawhar blan",
+    description: "سخاب جوهر أبيض حر يتوسطه عنبر معجون وعطور، مزين بتعليقة -المسكية-الفضية يلبس مع اللباس التقليدي الكراكو او البلوزة ",
+    descriptionEn: "Sakhab Jawhar is a white silk-based traditional piece with a center of amber paste and perfumes, decorated with a silver “Meskia” pendant. It is worn with traditional outfits such as the Karakou or the Blouza.",
+    descriptionFr: "Le Sakhab Jawhar est un bijou traditionnel en soie blanche, avec un centre en pâte d’ambre et de parfums, orné d’un pendentif en argent appelé “Meskia”. Il se porte avec des tenues traditionnelles comme le Karakou ou la Blouza.",
+    price: 32000,
+    rentPrice: 3000,
+    img: "19.jpg",
+    artisan: "محترف النحاس",
+    artisanImg: "https://i.pravatar.cc/150?u=copper",
+    category: 'jewelry',
+    wilaya: 'Constantine',
+    rating: 4.9,
+    isOffer: true
+  },
+  {
+    id: 20,
+    name: "أقراط (حلق) أذن أمازيغية",
+    nameEn: "Earrings amazigh kabyle ",
+    nameFr: "Boucle d’oreille kabyle",
+    description:"أقراط -حلق- أذن أمازيغية تقليدية شهيرة تنتمي إلى الزينة القبائلية في منطقة القبائل مصنوعة من الفضة الخالصة تتوسطها قطع من المرجان الأحمر حلق أمازيغي",
+    descriptionEn: "Traditional Amazigh Kabyle earrings, made of pure silver and decorated with natural red coral pieces.",
+    descriptionFr: "Boucles d’oreilles traditionnelles kabyles amazighes, en argent pur, ornées de corail rouge naturel.",
+    price: 3500,
+    img: "20.jpg",
+    artisan: "نور (Admin)",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
+    category: 'jewelry',
+    wilaya: 'Kabyle',
+    rating: 4.7
+  },
+  {
+    id: 21,
+    name: "حقيبة يد",
+    nameEn: "clutch",
+    nameFr: "pochette",
+    description: "حقيبة يد مصممة خصيصاً لتتماشى بشكل مثالي مع الكاراكو العاصمي مصنوعة من المخمل الملكي (القطيفة) باللون الأزرق النيلي (الداكن) الفاخر مزينة بتطريز يدوي متقن بخيوط ذهبية ناعمة تشكل التواءات هندسية رشيقة ومنحنيات تشبه أجنحة الفراشة."
+    
+    ,
+    descriptionEn: "The clutch is made of midnight blue velvet to match the karakou. It features a vintage gold metal frame and gold thread embroidery. The center is decorated with white flowers and turquoise blue stones.",
+    descriptionFr: "La pochette est en velours bleu nuit assorti au karakou. Elle possède un cadre métallique doré vintage et des broderies de fils d'or. Le centre est orné de fleurs blanches et de pierres bleu turquoise.",
+    price: 4000,
+    img: "21.jpg",
+    artisan: "نساجات الأوراس",
+    artisanImg: "https://i.pravatar.cc/150?u=auras",
+    category: 'clothing',
+    wilaya: 'Alger',
+    rating: 5,
+    isBestSeller: true
+  },
+  {
+    id: 22,
+    name: "سخاب العنبر ",
+    nameEn: "Skhab El Anbar ",
+    nameFr: "Skhab El Anbar ",
+    description: "سخاب العنبر هو نوع من الحلي التقليدية العطرية على شكل قلادة، يُعرف أساسًا في الجزائر وخاصة لدى قبيلة أولاد نائل في المناطق الوسطى والجنوبية مثل الجلفة وبوسعادة حتى قسنطينة، يُصنع يدويًا من عجينة طبيعية تتكون أساسًا من العنبر والمسك والقرنفل والتوابل الأخرى، مثل نوى التمر المحروق أو دقيق القمح والمحلب، مما يمنحه رائحة زكية دائمة تجعله بديلاً طبيعيًا عن العطور التقليدية",
+    descriptionEn: "Sakhab El Anbar is a traditional Algerian aromatic necklace, especially known among the Ouled Naïl. It is handmade from amber, musk, cloves, and natural spices, giving a long-lasting fragrance as a natural alternative to perfume.",
+    descriptionFr: "Le Sakhab El Anbar est un collier traditionnel algérien parfumé, connu chez les Ouled Naïl. Il est fabriqué à base d’ambre, de musc et d’épices naturelles, offrant un parfum durable comme alternative au parfum classique.",
+    price: 18000,
+    rentPrice: 1500,
+    img: "22.jpg",
+    artisan: "نور (Admin)",
+    artisanImg: "https://i.pravatar.cc/150?u=nour",
+    category: 'jewelry',
+    wilaya: 'Tizi Ouzou',
+    rating: 4.5
+  },
+  {
+    id: 23,
+    name: "محرمة الفتول العاصمية ",
+    nameEn: "Meharma El Ftoul",
+    nameFr: "Meharma El Ftoul",
+    description: "محرمة (محرمة الفتول) مصنوعة من المخمل (القطيفة) الفاخر باللون الأزرق النيلي الداكن المتناسق مع اللباس مرصعة ببروش (مشبك) من الكريستال الذهبي البراق على شكل زهرة خماسية البتلات مع فص متدلي تنتهي من الأسفل بشراشيب (فتول) طويلة ومغزولة يدويًا من خيوط الذهب الصفراء اللامعة.",
+    descriptionEn: "The Meharma is a traditional handkerchief made of midnight blue velvet to match the karakou. It is adorned with a gold crystal flower brooch and finished with long, hand-braided gold thread fringes (ftoul).",
+    descriptionFr: "La Meharma est un mouchoir traditionnel en velours bleu nuit assorti au karakou. Elle est ornée d'une broche en cristaux dorés en forme de fleur et finie par de longues franges de fils d'or (ftoul) tressées à la main.",
+    price: 2000,
+    img: "23.jpg",
+    artisan: "دار العرس",
+    artisanImg: "https://i.pravatar.cc/150?u=wedding",
+    category: 'clothing',
+    wilaya: 'Alger',
+    rating: 4.8
+  },
+  {
+    id: 24,
+    name: "السخاب الجزائري التقليدي",
+    nameEn: "Algerian Skhab",
+    nameFr: "Skhab algerie",
+    description: "مصنوع منحبات من المسك الأسود مغلفة ومزينة بحبيبات اللؤلؤ الأبيض الصغيرة مزين بفواصلواسطوانات من الذهب الأصفر المشغّل بدقة تفصل بين ثناياه.",
+    descriptionEn: "The Skhab is a traditional scented necklace. It combines black musk beads encased in white pearls, gold spacers, and a large teardrop golden pendant.",
+    descriptionFr: "Le Skhab est un collier traditionnel parfumé. Il associe des billes de musc noir enveloppées de perles blanches, des intercalaires en or, et un grand pendentif doré en forme de goutte.",
+    price: 20000,
+    rentPrice: 1800,
+    img: "24.jpg",
+    artisan: "خبير الحنة",
+    artisanImg: "https://i.pravatar.cc/150?u=henna",
+    category: 'jewelry',
+    wilaya: 'alger',
     rating: 4.7
   }
 ];
@@ -336,7 +536,7 @@ const ProductCard = ({
           </div>
         </div>
         <p className="text-stone-400 text-[10px] mb-2 md:mb-4 line-clamp-2 leading-relaxed">
-          {p.description}
+          {lang === 'en' && p.descriptionEn ? p.descriptionEn : lang === 'fr' && p.descriptionFr ? p.descriptionFr : p.description}
         </p>
         <div className="flex justify-between items-center mt-auto">
           <p className="text-gold font-black text-sm md:text-lg">{p.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
@@ -412,7 +612,7 @@ export default function App() {
       {
         userName: 'مريم بن علي',
         rating: 5,
-        comment: 'قطعة رائعة جداً، التفاصيل مذهلة والتغليف كان راقياً. شكراً دار لالاهم.',
+        comment: 'قطعة رائعة جداً، التفاصيل مذهلة والتغليف كان راقياً. شكراً لِدَارِ لَالَّاهُمْ.',
         date: '2026-05-30'
       }
     ],
@@ -428,7 +628,20 @@ export default function App() {
   const [newReviewComment, setNewReviewComment] = useState('');
   const [newReviewRating, setNewReviewRating] = useState(5);
   const [newReviewName, setNewReviewName] = useState('');
-  const [activePackage, setActivePackage] = useState<string>('silver');
+  const [activePackage, setActivePackage] = useState<string>('free');
+  const [isRentalModalOpen, setIsRentalModalOpen] = useState(false);
+  const [rentingProduct, setRentingProduct] = useState<Product | null>(null);
+  const [rentalDetails, setRentalDetails] = useState({
+    duration: 3,
+    startDate: '',
+    returnDate: '',
+    notes: ''
+  });
+  const [deliveryDetails, setDeliveryDetails] = useState({
+    address: '',
+    wilaya: '',
+    type: 'home' as 'home' | 'office'
+  });
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('jewelry');
   const [selectedJewelryType, setSelectedJewelryType] = useState<string>('all');
@@ -437,7 +650,7 @@ export default function App() {
   const [priceRange, setPriceRange] = useState<number>(500000);
   const [orders, setOrders] = useState<Order[]>([]);
   const [notifications, setNotifications] = useState<string[]>([]);
-  const [newProduct, setNewProduct] = useState({ name: '', nameEn: '', nameFr: '', description: '', wilaya: '', price: '', img: '', category: 'jewelry' as Product['category'] });
+  const [newProduct, setNewProduct] = useState({ name: '', nameEn: '', nameFr: '', description: '', descriptionEn: '', descriptionFr: '', wilaya: '', price: '', img: '', category: 'jewelry' as Product['category'] });
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<'online' | 'cod'>('online');
   const [paymentData, setPaymentData] = useState({ cardNumber: '', expiry: '', cvv: '', holder: '' });
@@ -576,14 +789,21 @@ export default function App() {
   };
 
   const processPayment = () => {
-    if (!paymentData.cardNumber || !paymentData.expiry || !paymentData.cvv) {
+    // Validate delivery details first
+    if (!deliveryDetails.wilaya || !deliveryDetails.address) {
+      showToast(isRtl ? 'يرجى إدخال تفاصيل العنوان والولاية للتوصيل' : 'Please provide delivery address and wilaya');
+      return;
+    }
+
+    // Only validate card data if online payment is chosen
+    if (paymentMethod === 'online' && (!paymentData.cardNumber || !paymentData.expiry || !paymentData.cvv)) {
       showToast(t.product.fillAll);
       return;
     }
 
     setIsPaying(true);
     
-    // Simulate payment processing
+    // Simulate payment / order processing
     setTimeout(() => {
       const newOrder: Order = {
         id: Math.random().toString(36).substr(2, 9).toUpperCase(),
@@ -595,9 +815,13 @@ export default function App() {
       };
 
       setOrders([newOrder, ...orders]);
-      setNotifications([`${t.navigation.cart}: ${newOrder.total} DZD`, ...notifications]);
+      setNotifications([
+        `${t.navigation.cart}: ${newOrder.total} DZD (${deliveryDetails.type === 'home' ? (isRtl ? 'توصيل للمنزل' : 'Home Delivery') : (isRtl ? 'استلام من المكتب' : 'Office Pick')})`, 
+        ...notifications
+      ]);
       
-      showToast(t.cart.paymentSuccess);
+      showToast(paymentMethod === 'cod' ? (isRtl ? 'تم تسجيل طلبك بالدفع عند الاستلام بنجاح!' : 'Cash on delivery order placed successfully!') : t.cart.paymentSuccess);
+      
       // Simulate notifying the artisan
       setTimeout(() => {
         showToast(t.cart.artisanNotified);
@@ -607,6 +831,7 @@ export default function App() {
       setIsPaying(false);
       setIsPaymentModalOpen(false);
       setPaymentData({ cardNumber: '', expiry: '', cvv: '', holder: '' });
+      setDeliveryDetails({ address: '', wilaya: '', type: 'home' });
       setCurrentTab('home');
     }, 2000);
   };
@@ -628,9 +853,18 @@ export default function App() {
       return;
     }
 
-    // Free plan check
-    if (allProducts.filter(p => p.artisan.includes('Nour')).length >= 3) {
-      showToast(t.product.limitReached);
+    // Dynamic package upload limits check
+    const currentArtisanProductsCount = allProducts.filter(p => p.artisan === (currentUser?.name || "نور (Admin)")).length;
+    let productLimit = 3;
+    if (activePackage === 'silver') productLimit = 20;
+    else if (activePackage === 'gold') productLimit = 50;
+    else if (activePackage === 'platinum') productLimit = 999999;
+
+    if (activePackage !== 'platinum' && currentArtisanProductsCount >= productLimit) {
+      showToast(isRtl 
+        ? `لقد وصلت للحد الأقصى المسموح به لهذه الباقة (${productLimit} منتجات). يرجى ترقيتها من قسم الخدمات.` 
+        : `You have reached the maximum product limit for this plan (${productLimit} products). Please upgrade from Services.`
+      );
       return;
     }
 
@@ -640,6 +874,8 @@ export default function App() {
       nameEn: newProduct.nameEn || newProduct.name,
       nameFr: newProduct.nameFr || newProduct.name,
       description: newProduct.description || (isRtl ? "منتج جديد تم إضافته للحساب" : "New product added to account"),
+      descriptionEn: newProduct.descriptionEn || newProduct.description,
+      descriptionFr: newProduct.descriptionFr || newProduct.description,
       price: parseInt(newProduct.price),
       img: newProduct.img,
       artisan: currentUser?.name || "نور (Admin)",
@@ -650,7 +886,7 @@ export default function App() {
     };
 
     setAllProducts([product, ...allProducts]);
-    setNewProduct({ name: '', nameEn: '', nameFr: '', description: '', wilaya: '', price: '', img: '', category: 'jewelry' });
+    setNewProduct({ name: '', nameEn: '', nameFr: '', description: '', descriptionEn: '', descriptionFr: '', wilaya: '', price: '', img: '', category: 'jewelry' });
     setCurrentTab('home');
     showToast(t.sections.successAdd);
   };
@@ -1041,15 +1277,30 @@ export default function App() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
                   { 
+                    id: 'free',
+                    tag: 'Free',
+                    title: isRtl ? 'الباقة المجانية' : 'Free Plan', 
+                    price: '0',
+                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
+                    limit: isRtl ? 'إضافة من 3 إلى 5 منتجات' : 'Upload 3 to 5 products', 
+                    icon: Package, 
+                    features: [
+                      isRtl ? 'خدمة عرض المنتجات الأساسية' : 'Basic product display',
+                      isRtl ? 'الحد الأقصى للتنزيل: 3 منتجات' : 'Upload limit: 3 products'
+                    ],
+                    accent: false
+                  },
+                  { 
                     id: 'silver',
                     tag: 'Silver',
                     title: isRtl ? 'الباقة الفضية' : 'Silver Plan', 
                     price: '1,000',
                     period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
                     limit: isRtl ? 'باقة عرض المنتجات الأساسية' : 'Key product display tier', 
-                    icon: Package, 
+                    icon: Briefcase, 
                     features: [
-                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app'
+                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app',
+                      isRtl ? 'الحد الأقصى للتنزيل: 20 منتج' : 'Upload limit: 20 products'
                     ],
                     accent: false
                   },
@@ -1062,7 +1313,8 @@ export default function App() {
                     limit: isRtl ? 'الظهور المميز للزبائن' : 'Premium view tier', 
                     icon: Zap, 
                     features: [
-                      isRtl ? 'خدمة عرض المنتجات في الصفحة الأولى' : 'Featured display on the home page'
+                      isRtl ? 'خدمة عرض المنتجات في الصفحة الأولى' : 'Featured display on the home page',
+                      isRtl ? 'الحد الأقصى للتنزيل: 50 منتج' : 'Upload limit: 50 products'
                     ],
                     accent: true
                   },
@@ -1075,25 +1327,9 @@ export default function App() {
                     limit: isRtl ? 'حرق الإحصائيات وبناء الهوية' : 'Pro brand builder tier', 
                     icon: Star, 
                     features: [
-                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app',
+                      isRtl ? 'خدمة عرض منتجات غير محدودة' : 'Unlimited products display',
                       isRtl ? 'التصوير الاحترافي للمنتجات' : 'Professional product photography',
                       isRtl ? 'التسويق الفعال عبر قنوات التواصل' : 'Active social media marketing'
-                    ],
-                    accent: false
-                  },
-                  { 
-                    id: 'diamond',
-                    tag: 'Diamond',
-                    title: isRtl ? 'الباقة الماسّية' : 'Diamond Plan', 
-                    price: '10,500',
-                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
-                    limit: isRtl ? 'الريادة والتحليل الشامل' : 'Supreme analytics tier', 
-                    icon: Trophy, 
-                    features: [
-                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app',
-                      isRtl ? 'التصوير الاحترافي للمنتجات' : 'Professional product photography',
-                      isRtl ? 'دراسات جمهور وسلوك شاملة' : 'Complete audience studies & search',
-                      isRtl ? 'تسويق احترافي عبر وسائل التواصل الاجتماعي' : 'Full social media marketing campaigns'
                     ],
                     accent: false
                   }
@@ -1450,15 +1686,30 @@ export default function App() {
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
                 {[
                   { 
+                    id: 'free',
+                    tag: 'Free',
+                    title: isRtl ? 'الباقة المجانية' : 'Free Plan', 
+                    price: '0',
+                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
+                    limit: isRtl ? 'إضافة من 3 إلى 5 منتجات' : 'Upload 3 to 5 products', 
+                    icon: Package, 
+                    features: [
+                      isRtl ? 'خدمة عرض المنتجات الأساسية' : 'Basic product display',
+                      isRtl ? 'الحد الأقصى للتنزيل: 3 منتجات' : 'Upload limit: 3 products'
+                    ],
+                    accent: false
+                  },
+                  { 
                     id: 'silver',
                     tag: 'Silver',
                     title: isRtl ? 'الباقة الفضية' : 'Silver Plan', 
                     price: '1,000',
                     period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
                     limit: isRtl ? 'باقة عرض المنتجات الأساسية' : 'Key product display tier', 
-                    icon: Package, 
+                    icon: Briefcase, 
                     features: [
-                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app'
+                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app',
+                      isRtl ? 'الحد الأقصى للتنزيل: 20 منتج' : 'Upload limit: 20 products'
                     ],
                     accent: false
                   },
@@ -1471,7 +1722,8 @@ export default function App() {
                     limit: isRtl ? 'الظهور المميز للزبائن' : 'Premium view tier', 
                     icon: Zap, 
                     features: [
-                      isRtl ? 'خدمة عرض المنتجات في الصفحة الأولى' : 'Featured display on the home page'
+                      isRtl ? 'خدمة عرض المنتجات في الصفحة الأولى' : 'Featured display on the home page',
+                      isRtl ? 'الحد الأقصى للتنزيل: 50 منتج' : 'Upload limit: 50 products'
                     ],
                     accent: true
                   },
@@ -1484,25 +1736,9 @@ export default function App() {
                     limit: isRtl ? 'حرق الإحصائيات وبناء الهوية' : 'Pro brand builder tier', 
                     icon: Star, 
                     features: [
-                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app',
+                      isRtl ? 'خدمة عرض منتجات غير محدودة' : 'Unlimited products display',
                       isRtl ? 'التصوير الاحترافي للمنتجات' : 'Professional product photography',
                       isRtl ? 'التسويق الفعال عبر قنوات التواصل' : 'Active social media marketing'
-                    ],
-                    accent: false
-                  },
-                  { 
-                    id: 'diamond',
-                    tag: 'Diamond',
-                    title: isRtl ? 'الباقة الماسّية' : 'Diamond Plan', 
-                    price: '10,500',
-                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
-                    limit: isRtl ? 'الريادة والتحليل الشامل' : 'Supreme analytics tier', 
-                    icon: Trophy, 
-                    features: [
-                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app',
-                      isRtl ? 'التصوير الاحترافي للمنتجات' : 'Professional product photography',
-                      isRtl ? 'دراسات جمهور وسلوك شاملة' : 'Complete audience studies & search',
-                      isRtl ? 'تسويق احترافي عبر وسائل التواصل الاجتماعي' : 'Full social media marketing campaigns'
                     ],
                     accent: false
                   }
@@ -1666,14 +1902,15 @@ export default function App() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                      <div className="space-y-2">
                         <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Name (EN)</label>
                         <input 
                           type="text" 
                           value={newProduct.nameEn}
                           onChange={(e) => setNewProduct({ ...newProduct, nameEn: e.target.value })}
-                          className="w-full px-6 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:outline-none text-sm"
+                          className="w-full px-6 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:outline-none text-sm font-bold"
+                          placeholder="e.g. Royal Karakou"
                         />
                      </div>
                      <div className="space-y-2">
@@ -1682,7 +1919,29 @@ export default function App() {
                           type="text" 
                           value={newProduct.nameFr}
                           onChange={(e) => setNewProduct({ ...newProduct, nameFr: e.target.value })}
-                          className="w-full px-6 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:outline-none text-sm"
+                          className="w-full px-6 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:outline-none text-sm font-bold"
+                          placeholder="ex: Karakou Royal"
+                        />
+                     </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                     <div className="space-y-2">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Description (EN)</label>
+                        <textarea 
+                          value={newProduct.descriptionEn}
+                          onChange={(e) => setNewProduct({ ...newProduct, descriptionEn: e.target.value })}
+                          className="w-full px-6 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:outline-none text-sm font-bold min-h-[80px]"
+                          placeholder="English description..."
+                        />
+                     </div>
+                     <div className="space-y-2">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Description (FR)</label>
+                        <textarea 
+                          value={newProduct.descriptionFr}
+                          onChange={(e) => setNewProduct({ ...newProduct, descriptionFr: e.target.value })}
+                          className="w-full px-6 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:outline-none text-sm font-bold min-h-[80px]"
+                          placeholder="Description en français..."
                         />
                      </div>
                   </div>
@@ -1775,7 +2034,7 @@ export default function App() {
                 </div>
 
                 <p className="text-stone-500 text-sm leading-relaxed">
-                  {selectedProduct.description}
+                  {lang === 'en' && selectedProduct.descriptionEn ? selectedProduct.descriptionEn : lang === 'fr' && selectedProduct.descriptionFr ? selectedProduct.descriptionFr : selectedProduct.description}
                 </p>
 
                 <div className="flex flex-col gap-4">
@@ -1893,8 +2152,24 @@ export default function App() {
                   {selectedProduct.rentPrice && (
                     <button 
                       onClick={() => {
-                        if (!currentUser) setIsAuthModalOpen(true);
-                        else showToast(isRtl ? 'تم إرسال طلب الكراء' : 'Rent inquiry sent');
+                        if (!currentUser) {
+                          setIsAuthModalOpen(true);
+                        } else {
+                          const today = new Date().toISOString().split('T')[0];
+                          const returnD = new Date();
+                          returnD.setDate(returnD.getDate() + 3);
+                          const returnStr = returnD.toISOString().split('T')[0];
+                          
+                          setRentalDetails({
+                            duration: 3,
+                            startDate: today,
+                            returnDate: returnStr,
+                            notes: ''
+                          });
+                          setRentingProduct(selectedProduct);
+                          setIsRentalModalOpen(true);
+                          setSelectedProduct(null);
+                        }
                       }}
                       className="w-full bg-stone-900 text-white py-5 rounded-[1.5rem] font-bold active:scale-95 transition-all flex items-center justify-center gap-2"
                     >
@@ -2142,6 +2417,144 @@ export default function App() {
         )}
       </AnimatePresence>
 
+      {/* Rental Booking Modal */}
+      <AnimatePresence>
+        {isRentalModalOpen && rentingProduct && (
+          <div className="fixed inset-0 z-[800] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-stone-900/80 backdrop-blur-md" 
+              onClick={() => setIsRentalModalOpen(false)} 
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative bg-white w-full max-w-md rounded-[3rem] overflow-hidden shadow-2xl z-10"
+            >
+              <div className="bg-stone-900 p-8 text-center text-white relative">
+                <button onClick={() => setIsRentalModalOpen(false)} className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors">
+                  <X className="w-5 h-5" />
+                </button>
+                <div className="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center text-gold mx-auto mb-4">
+                  <Star className="w-6 h-6 fill-gold" />
+                </div>
+                <h3 className="text-xl font-bold">{isRtl ? 'تفاصيل حجز الكراء' : 'Rental Booking Details'}</h3>
+                <p className="text-stone-400 text-sm mt-2">{isRtl ? rentingProduct.name : rentingProduct.nameEn}</p>
+              </div>
+
+              <div className="p-8 space-y-6">
+                {/* Rental Duration Input */}
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest flex justify-between">
+                    <span>{isRtl ? 'المدة (بالأيام)' : 'Duration (Days)'}</span>
+                    <span className="text-gold font-bold">{rentalDetails.duration * (rentingProduct.rentPrice || 0)} {isRtl ? 'دج إجمالي' : 'DZD Total'}</span>
+                  </label>
+                  <div className="flex items-center justify-between bg-stone-50 p-2 rounded-2xl border border-stone-100">
+                    <button 
+                      type="button"
+                      onClick={() => {
+                        const newDur = Math.max(1, rentalDetails.duration - 1);
+                        const start = new Date(rentalDetails.startDate || new Date());
+                        start.setDate(start.getDate() + newDur);
+                        setRentalDetails({
+                          ...rentalDetails,
+                          duration: newDur,
+                          returnDate: start.toISOString().split('T')[0]
+                        });
+                      }}
+                      className="w-10 h-10 bg-white rounded-xl shadow-sm border border-stone-100 flex items-center justify-center font-bold text-stone-600 hover:bg-stone-50 active:scale-95"
+                    >
+                      -
+                    </button>
+                    <span className="font-bold text-lg text-stone-900">{rentalDetails.duration} {isRtl ? 'أيام' : 'Days'}</span>
+                    <button 
+                      type="button"
+                      onClick={() => {
+                        const newDur = rentalDetails.duration + 1;
+                        const start = new Date(rentalDetails.startDate || new Date());
+                        start.setDate(start.getDate() + newDur);
+                        setRentalDetails({
+                          ...rentalDetails,
+                          duration: newDur,
+                          returnDate: start.toISOString().split('T')[0]
+                        });
+                      }}
+                      className="w-10 h-10 bg-white rounded-xl shadow-sm border border-stone-100 flex items-center justify-center font-bold text-stone-600 hover:bg-stone-50 active:scale-95"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                {/* Start Date Input */}
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{isRtl ? 'تاريخ بداية الكراء' : 'Rental Start Date'}</label>
+                  <input 
+                    type="date" 
+                    value={rentalDetails.startDate}
+                    onChange={(e) => {
+                      const startStr = e.target.value;
+                      if (startStr) {
+                        const start = new Date(startStr);
+                        start.setDate(start.getDate() + rentalDetails.duration);
+                        setRentalDetails({
+                          ...rentalDetails,
+                          startDate: startStr,
+                          returnDate: start.toISOString().split('T')[0]
+                        });
+                      }
+                    }}
+                    className="w-full px-5 py-4 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none font-bold text-stone-900"
+                  />
+                </div>
+
+                {/* Return Date Badge */}
+                <div className="p-4 bg-amber-50/50 border border-amber-100/50 rounded-2xl flex items-center justify-between text-xs font-bold text-stone-800">
+                  <div className="flex items-center gap-2 text-stone-500">
+                    <Calendar className="w-4 h-4 text-gold shrink-0" />
+                    <span>{isRtl ? 'تاريخ الارجاع المتوقع:' : 'Expected Return Date:'}</span>
+                  </div>
+                  <span className="px-3 py-1 bg-gold text-stone-900 rounded-lg">{rentalDetails.returnDate}</span>
+                </div>
+
+                {/* Additional Notes */}
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{isRtl ? 'ملاحظات إضافية' : 'Special Notes'}</label>
+                  <textarea 
+                    value={rentalDetails.notes}
+                    onChange={(e) => setRentalDetails({...rentalDetails, notes: e.target.value})}
+                    placeholder={isRtl ? "مثال: المقاس المطلوب، تفاصيل التوصيل المفضلة..." : "e.g. Preferred size, pickup requests..."}
+                    className="w-full px-5 py-3 bg-stone-50 border border-stone-100 rounded-xl focus:ring-2 focus:ring-gold outline-none text-sm font-medium"
+                    rows={2}
+                  />
+                </div>
+
+                {/* Confirm Hire */}
+                <button 
+                  onClick={() => {
+                    const priceTotal = rentalDetails.duration * (rentingProduct.rentPrice || 0);
+                    setNotifications([
+                      `${isRtl ? 'طلب كراء' : 'Rent request'} (${isRtl ? rentingProduct.name : rentingProduct.nameEn}): ${priceTotal} DZD`, 
+                      ...notifications
+                    ]);
+                    showToast(isRtl ? 'تم إرسال طلب حجز الكراء بنجاح وسيتواصل معك الحرفي!' : 'Rental booking request submitted successfully. The artisan will contact you!');
+                    setIsRentalModalOpen(false);
+                    setRentingProduct(null);
+                  }}
+                  className="w-full py-5 bg-gold text-white rounded-2xl font-bold shadow-xl shadow-gold/20 flex items-center justify-center gap-3 active:scale-95 transition-all text-lg"
+                >
+                  <CheckCircle2 className="w-5 h-5" />
+                  {isRtl ? 'تأكيد حجز الكراء' : 'Confirm Book'}
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       {/* Electronic Payment Modal (Edahabia) */}
       <AnimatePresence>
         {isPaymentModalOpen && (
@@ -2172,7 +2585,56 @@ export default function App() {
                 <p className="text-stone-400 text-sm mt-2">{t.cart.methodTitle}</p>
               </div>
 
-              <div className="p-8 space-y-6">
+              <div className="p-8 space-y-6 max-h-[70vh] overflow-y-auto">
+                {/* Shipping & Delivery Details */}
+                <div className="p-5 bg-stone-50 rounded-[2rem] border border-stone-100 space-y-4">
+                  <p className="text-xs font-black text-stone-900 uppercase tracking-widest border-b border-stone-200 pb-2">
+                    {isRtl ? 'تفاصيل التوصيل والشحن' : 'Shipping & Delivery Details'}
+                  </p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-bold text-stone-500 uppercase tracking-widest">{isRtl ? 'الولاية *' : 'Wilaya *'}</label>
+                      <input 
+                        type="text" 
+                        placeholder={isRtl ? "الجزائر، وهران..." : "e.g. Alger"}
+                        className="w-full px-4 py-2.5 bg-white border border-stone-200 rounded-xl focus:ring-1 focus:ring-gold outline-none text-xs font-bold"
+                        value={deliveryDetails.wilaya}
+                        onChange={(e) => setDeliveryDetails({...deliveryDetails, wilaya: e.target.value})}
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-bold text-stone-500 uppercase tracking-widest">{isRtl ? 'العنوان الكامل *' : 'Full Address *'}</label>
+                      <input 
+                        type="text" 
+                        placeholder={isRtl ? "شارع ديدوش، عمارة 5" : "e.g. 5 Rue Didouche"}
+                        className="w-full px-4 py-2.5 bg-white border border-stone-200 rounded-xl focus:ring-1 focus:ring-gold outline-none text-xs font-bold"
+                        value={deliveryDetails.address}
+                        onChange={(e) => setDeliveryDetails({...deliveryDetails, address: e.target.value})}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-stone-500 uppercase tracking-widest block">{isRtl ? 'مكان استلام التوصيل' : 'Delivery Destination'}</label>
+                    <div className="grid grid-cols-2 gap-2 mt-1">
+                      <button 
+                        type="button"
+                        onClick={() => setDeliveryDetails({...deliveryDetails, type: 'home'})}
+                        className={`py-2 px-4 rounded-xl border text-xs font-bold transition-all ${deliveryDetails.type === 'home' ? 'bg-stone-900 text-white border-stone-900 font-extrabold shadow-sm' : 'bg-white text-stone-500 border-stone-200'}`}
+                      >
+                        {isRtl ? 'توصيل للمنزل' : 'Home Delivery'}
+                      </button>
+                      <button 
+                        type="button"
+                        onClick={() => setDeliveryDetails({...deliveryDetails, type: 'office'})}
+                        className={`py-2 px-4 rounded-xl border text-xs font-bold transition-all ${deliveryDetails.type === 'office' ? 'bg-stone-900 text-white border-stone-900 font-extrabold shadow-sm' : 'bg-white text-stone-500 border-stone-200'}`}
+                      >
+                        {isRtl ? 'توصيل للمكتب' : 'Office Delivery'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-1 gap-4">
                   <button 
                     onClick={() => setPaymentMethod('cod')}

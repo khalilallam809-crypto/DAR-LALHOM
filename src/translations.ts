@@ -159,7 +159,7 @@ export interface Translation {
 
 export const translations: Record<Language, Translation> = {
   ar: {
-    brand: "دار لالاهم",
+    brand: "دَارُ لَالَّاهُمْ",
     hero: {
       badge: "موسم 2024",
       title: "حلي تروي تاريخ الأجداد",
@@ -265,7 +265,7 @@ export const translations: Record<Language, Translation> = {
       addCart: "إضافة للسلة",
       inquiry: "استفسار",
       artisan: "الحرفي المبدع",
-      descPrefix: "هذه القطعة الفنية مصنوعة يدوياً بالكامل، وتخضع لمعايير الجودة الصارمة لدار لالاهم.",
+      descPrefix: "هذه القطعة الفنية مصنوعة يدوياً بالكامل، وتخضع لمعايير الجودة الصارمة لِدَارِ لَالَّاهُمْ.",
       descSuffix: "يتم الشحن في علبة فاخرة تناسب قيمة الحلي.",
       addNew: "إضافة منتج جديد",
       image: "صورة المنتج",
@@ -296,7 +296,7 @@ export const translations: Record<Language, Translation> = {
     },
     auth: {
       title: "حساب جديد",
-      subtitle: "انضم إلى عالم دار لالاهم",
+      subtitle: "انضم إلى عالم دَارِ لَالَّاهُمْ",
       client: "تسجيل كزبون",
       artisan: "تسجيل كحرفي",
       google: "التسجيل عبر جوجل",
@@ -310,7 +310,7 @@ export const translations: Record<Language, Translation> = {
         documents: "سجل تجاري / بطاقة حرفي (اختياري)",
         submit: "فتح متجر"
       },
-      footer: "منصة دار لالاهم تضمن حقوق البائع والمشتري بالكامل.",
+      footer: "منصة دَارِ لَالَّاهُمْ تضمن حقوق البائع والمشتري بالكامل.",
       invalid: "بيانات الدخول غير صحيحة"
     }
   },
@@ -512,7 +512,7 @@ export const translations: Record<Language, Translation> = {
         all: "Tout",
         jewelry: "Bijoux",
         clothing: "Vêtements",
-        copper: "Cuivre",
+        copper: "Nحاس",
         homeDecor: "Décoration maison",
         hennaSetup: "Qâada Henna",
         hennaInk: "Harqous"
