@@ -25,6 +25,7 @@ interface Product {
   price: number;
   rentPrice?: number;
   img: string;
+  gallery?: string[];
   artisan: string;
   artisanImg: string;
   category: 'jewelry' | 'clothing' | 'copper' | 'homeDecor' | 'hennaSetup' | 'hennaInk';
@@ -45,7 +46,7 @@ interface Product {
 
 const products: Product[] = [
   // Jewelry
-  { 
+   { 
     id: 1, 
     name: "خيط الروح ذهب خالص", 
     nameEn: "Khait El Rouh Pure Gold", 
@@ -301,7 +302,8 @@ const products: Product[] = [
     descriptionEn: "El mahrama-algiers bridal headpiece with Crystal fringes available in black gold white",
     descriptionFr: "El mahrama Algéroise à franges disponible trois couleur noir, blanc doré cristal",
     price: 3500,
-    img: "15.jpg",
+    img: "/15.jpg",
+    gallery: ["155.jpeg", "156.jpeg", "157.jpeg"],
     artisan: "لالة الباي",
     artisanImg: "https://i.pravatar.cc/150?u=pay",
     category: 'clothing',
@@ -314,12 +316,12 @@ const products: Product[] = [
     name: "مقياس قبائلي تقليدي",
     nameEn: "Traditional Kabyle Cuff Bracelet",
     nameFr: "Manchette kabyle traditionnelle",
-    description:"مقياس قبائلي تقليدي مصنوع من النحاس الاصلي مستوحى من التراث الامازيغي العريق ’ يتميز بزخارف هندسية دقيقة و الوان زاهية تعكس الهوية الثقافية لمنطقة القبائل "
-    ,
+    description: "مقياس قبائلي تقليدي مصنوع من النحاس الاصلي مستوحى من التراث الامازيغي العريق ’ يتميز بزخارف هندسية دقيقة و الوان زاهية تعكس الهوية الثقافية لمنطقة القبائل ",
     descriptionEn: "Traditional Kabyle cuff bracelet adorned with colorful Amazigh-inspired motifs. A handcrafted piece that combines authenticity and elegance.",
     descriptionFr: "Manchette kabyle traditionnel en cuivre, orné de motifs colorés inspirés du patrimoine amazigh. Une pièce artisanale alliant authenticité et élégance.",
     price: 5000,
-    img: "16.jpeg",
+    img: "/16.jpeg",
+    gallery: ["/16.jpeg"],
     artisan: "أولاد نائل",
     artisanImg: "https://i.pravatar.cc/150?u=nail",
     category: 'jewelry',
@@ -335,7 +337,8 @@ const products: Product[] = [
     descriptionEn: "Majestic Annaba traditional dress with gold embroidery and beads, perfect for weddings.",
     descriptionFr: "Robe traditionnelle d'Annaba avec magnifique broderie artisanale en fil d'or.",
     price: 3500,
-    img: "17.jpg",
+    img: "/17.jpg",
+    gallery: ["/177.jpeg", "/178.jpeg"],
     artisan: "حرائر عنابة",
     artisanImg: "https://i.pravatar.cc/150?u=annaba",
     category: 'jewelry',
@@ -352,7 +355,8 @@ const products: Product[] = [
     descriptionFr: "Le Sakhab El Anbar est un collier traditionnel algérien parfumé, connu chez les Ouled Naïl. Il est fabriqué à base d’ambre, de musc et d’épices naturelles, offrant un parfum durable comme alternative au parfum classique.",
     price: 18000,
     rentPrice: 1500,
-    img: "18.jpg",
+    img: "/18.jpg",
+    gallery: ["/188.jpeg", "/189.jpeg"],
     artisan: "نور (Admin)",
     artisanImg: "https://i.pravatar.cc/150?u=nour",
     category: 'jewelry',
@@ -369,7 +373,8 @@ const products: Product[] = [
     descriptionFr: "Le Sakhab Jawhar est un bijou traditionnel en soie blanche, avec un centre en pâte d’ambre et de parfums, orné d’un pendentif en argent appelé “Meskia”. Il se porte avec des tenues traditionnelles comme le Karakou ou la Blouza.",
     price: 32000,
     rentPrice: 3000,
-    img: "19.jpg",
+    img: "/19.jpg",
+    gallery: ["/199.jpeg", "/1999.jpeg"],
     artisan: "محترف النحاس",
     artisanImg: "https://i.pravatar.cc/150?u=copper",
     category: 'jewelry',
@@ -382,11 +387,12 @@ const products: Product[] = [
     name: "أقراط (حلق) أذن أمازيغية",
     nameEn: "Earrings amazigh kabyle ",
     nameFr: "Boucle d’oreille kabyle",
-    description:"أقراط -حلق- أذن أمازيغية تقليدية شهيرة تنتمي إلى الزينة القبائلية في منطقة القبائل مصنوعة من الفضة الخالصة تتوسطها قطع من المرجان الأحمر حلق أمازيغي",
+    description: "أقراط -حلق- أذن أمازيغية تقليدية شهيرة تنتمي إلى الزينة القبائلية في منطقة القبائل مصنوعة من الفضة الخالصة تتوسطها قطع من المرجان الأحمر حلق أمازيغي",
     descriptionEn: "Traditional Amazigh Kabyle earrings, made of pure silver and decorated with natural red coral pieces.",
     descriptionFr: "Boucles d’oreilles traditionnelles kabyles amazighes, en argent pur, ornées de corail rouge naturel.",
     price: 3500,
-    img: "20.jpg",
+    img: "/20.jpg",
+    gallery: ["/200.jpeg", "/2000.jpeg"],
     artisan: "نور (Admin)",
     artisanImg: "https://i.pravatar.cc/150?u=nour",
     category: 'jewelry',
@@ -398,13 +404,12 @@ const products: Product[] = [
     name: "حقيبة يد",
     nameEn: "clutch",
     nameFr: "pochette",
-    description: "حقيبة يد مصممة خصيصاً لتتماشى بشكل مثالي مع الكاراكو العاصمي مصنوعة من المخمل الملكي (القطيفة) باللون الأزرق النيلي (الداكن) الفاخر مزينة بتطريز يدوي متقن بخيوط ذهبية ناعمة تشكل التواءات هندسية رشيقة ومنحنيات تشبه أجنحة الفراشة."
-    
-    ,
+    description: "حقيبة يد مصممة خصيصاً لتتماشى بشكل مثالي مع الكاراكو العاصمي مصنوعة من المخمل الملكي (القطيفة) باللون الأزرق النيلي (الداكن) الفاخر مزينة بتطريز يدوي متقن بخيوط ذهبية ناعمة تشكل التواءات هندسية رشيقة ومنحنيات تشبه أجنحة الفراشة.",
     descriptionEn: "The clutch is made of midnight blue velvet to match the karakou. It features a vintage gold metal frame and gold thread embroidery. The center is decorated with white flowers and turquoise blue stones.",
     descriptionFr: "La pochette est en velours bleu nuit assorti au karakou. Elle possède un cadre métallique doré vintage et des broderies de fils d'or. Le centre est orné de fleurs blanches et de pierres bleu turquoise.",
     price: 4000,
-    img: "21.jpg",
+    img: "/21.jpg",
+    gallery: ["/221.jpeg", "/222.jpeg"],
     artisan: "نساجات الأوراس",
     artisanImg: "https://i.pravatar.cc/150?u=auras",
     category: 'clothing',
@@ -422,7 +427,8 @@ const products: Product[] = [
     descriptionFr: "Le Sakhab El Anbar est un collier traditionnel algérien parfumé, connu chez les Ouled Naïl. Il est fabriqué à base d’ambre, de musc et d’épices naturelles, offrant un parfum durable comme alternative au parfum classique.",
     price: 18000,
     rentPrice: 1500,
-    img: "22.jpg",
+    img: "/22.jpg",
+    gallery: ["/1.jpeg", "/2.jpeg", "/3.jpeg"],
     artisan: "نور (Admin)",
     artisanImg: "https://i.pravatar.cc/150?u=nour",
     category: 'jewelry',
@@ -438,7 +444,8 @@ const products: Product[] = [
     descriptionEn: "The Meharma is a traditional handkerchief made of midnight blue velvet to match the karakou. It is adorned with a gold crystal flower brooch and finished with long, hand-braided gold thread fringes (ftoul).",
     descriptionFr: "La Meharma est un mouchoir traditionnel en velours bleu nuit assorti au karakou. Elle est ornée d'une broche en cristaux dorés en forme de fleur et finie par de longues franges de fils d'or (ftoul) tressées à la main.",
     price: 2000,
-    img: "23.jpg",
+    img: "/23.jpg",
+    gallery: ["/4.jpeg"],
     artisan: "دار العرس",
     artisanImg: "https://i.pravatar.cc/150?u=wedding",
     category: 'clothing',
@@ -455,7 +462,8 @@ const products: Product[] = [
     descriptionFr: "Le Skhab est un collier traditionnel parfumé. Il associe des billes de musc noir enveloppées de perles blanches, des intercalaires en or, et un grand pendentif doré en forme de goutte.",
     price: 20000,
     rentPrice: 1800,
-    img: "24.jpg",
+    img: "/24.jpg",
+    gallery: ["/5.jpeg", "/6.jpeg"],
     artisan: "خبير الحنة",
     artisanImg: "https://i.pravatar.cc/150?u=henna",
     category: 'jewelry',
@@ -610,6 +618,11 @@ export default function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [activeImgIndex, setActiveImgIndex] = useState<number>(0);
+
+  useEffect(() => {
+    setActiveImgIndex(0);
+  }, [selectedProduct?.id]);
   const [currentUser, setCurrentUser] = useState<{ role: 'artisan' | 'client', name: string } | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   
@@ -866,9 +879,9 @@ export default function App() {
     let productLimit = 3;
     if (activePackage === 'silver') productLimit = 20;
     else if (activePackage === 'gold') productLimit = 50;
-    else if (activePackage === 'platinum') productLimit = 999999;
+    else if (activePackage === 'platinum' || activePackage === 'diamond') productLimit = 999999;
 
-    if (activePackage !== 'platinum' && currentArtisanProductsCount >= productLimit) {
+    if (currentArtisanProductsCount >= productLimit) {
       showToast(isRtl 
         ? `لقد وصلت للحد الأقصى المسموح به لهذه الباقة (${productLimit} منتجات). يرجى ترقيتها من قسم الخدمات.` 
         : `You have reached the maximum product limit for this plan (${productLimit} products). Please upgrade from Services.`
@@ -1282,7 +1295,7 @@ export default function App() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 max-w-7xl mx-auto gap-6">
                 {[
                   { 
                     id: 'free',
@@ -1290,7 +1303,7 @@ export default function App() {
                     title: isRtl ? 'الباقة المجانية' : 'Free Plan', 
                     price: '0',
                     period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
-                    limit: isRtl ? 'إضافة من 3 إلى 5 منتجات' : 'Upload 3 to 5 products', 
+                    limit: isRtl ? 'محدودة بـ 3 منتجات' : 'Limited to 3 products', 
                     icon: Package, 
                     features: [
                       isRtl ? 'خدمة عرض المنتجات الأساسية' : 'Basic product display',
@@ -1304,11 +1317,10 @@ export default function App() {
                     title: isRtl ? 'الباقة الفضية' : 'Silver Plan', 
                     price: '1,000',
                     period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
-                    limit: isRtl ? 'باقة عرض المنتجات الأساسية' : 'Key product display tier', 
+                    limit: isRtl ? 'الحد الأقصى: 20 منتج' : 'Upload limit: 20 products', 
                     icon: Briefcase, 
                     features: [
-                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app',
-                      isRtl ? 'الحد الأقصى للتنزيل: 20 منتج' : 'Upload limit: 20 products'
+                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app'
                     ],
                     accent: false
                   },
@@ -1318,11 +1330,10 @@ export default function App() {
                     title: isRtl ? 'الباقة الذهبية' : 'Gold Plan', 
                     price: '2,000',
                     period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
-                    limit: isRtl ? 'الظهور المميز للزبائن' : 'Premium view tier', 
+                    limit: isRtl ? 'الظهور المميز للزبائن' : 'Featured on home page', 
                     icon: Zap, 
                     features: [
-                      isRtl ? 'خدمة عرض المنتجات في الصفحة الأولى' : 'Featured display on the home page',
-                      isRtl ? 'الحد الأقصى للتنزيل: 50 منتج' : 'Upload limit: 50 products'
+                      isRtl ? 'خدمة عرض المنتجات في الصفحة الأولى' : 'Featured display on the home page'
                     ],
                     accent: true
                   },
@@ -1332,17 +1343,33 @@ export default function App() {
                     title: isRtl ? 'الباقة البلاتينية' : 'Platinum Plan', 
                     price: '8,500',
                     period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
-                    limit: isRtl ? 'حرق الإحصائيات وبناء الهوية' : 'Pro brand builder tier', 
+                    limit: isRtl ? 'منتجات غير محدودة وبناء الهوية' : 'Pro brand builder', 
                     icon: Star, 
                     features: [
-                      isRtl ? 'خدمة عرض منتجات غير محدودة' : 'Unlimited products display',
+                      isRtl ? 'خدمة عرض المنتجات' : 'Product display',
                       isRtl ? 'التصوير الاحترافي للمنتجات' : 'Professional product photography',
-                      isRtl ? 'التسويق الفعال عبر قنوات التواصل' : 'Active social media marketing'
+                      isRtl ? 'التسويق الفعال عبر وسائل التواصل' : 'Active social media marketing'
+                    ],
+                    accent: false
+                  },
+                  { 
+                    id: 'diamond',
+                    tag: 'Diamond',
+                    title: isRtl ? 'الباقة الماسّية' : 'Diamond Plan', 
+                    price: '10,500',
+                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
+                    limit: isRtl ? 'التميز الشامل وبناء العلامة' : 'Elite Brand Tier', 
+                    icon: Trophy, 
+                    features: [
+                      isRtl ? 'خدمة عرض المنتجات' : 'Product display',
+                      isRtl ? 'التصوير الاحترافي للمنتجات' : 'Professional product photography',
+                      isRtl ? 'دراسات جمهور وتحديد الفئة المستهدفة' : 'Audience studies & demographic research',
+                      isRtl ? 'التسويق الفعال عبر وسائل التواصل' : 'Active social media marketing'
                     ],
                     accent: false
                   }
                 ].map((pkg, i) => (
-                  <div key={i} className={`p-8 rounded-[3rem] border flex flex-col ${pkg.accent ? 'bg-stone-900 text-white border-stone-800 ring-4 ring-gold/30' : 'bg-white border-stone-100'} shadow-sm relative transition-all hover:scale-[1.02] hover:shadow-xl`}>
+                  <div key={i} className={`p-6 rounded-[2.5rem] border flex flex-col ${pkg.accent ? 'bg-stone-900 text-white border-stone-800 ring-4 ring-gold/30' : 'bg-white border-stone-100'} shadow-sm relative transition-all hover:scale-[1.02] hover:shadow-xl`}>
                     {pkg.accent && (
                       <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-stone-900 font-extrabold text-[9px] uppercase tracking-wider px-4 py-1.5 rounded-full shadow-lg">
                         {isRtl ? 'الأكثر طلباً' : 'Most Popular'}
@@ -1712,7 +1739,7 @@ export default function App() {
               </div>
 
               {/* Packages Section */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 max-w-7xl mx-auto gap-6">
                 {[
                   { 
                     id: 'free',
@@ -1720,7 +1747,7 @@ export default function App() {
                     title: isRtl ? 'الباقة المجانية' : 'Free Plan', 
                     price: '0',
                     period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
-                    limit: isRtl ? 'إضافة من 3 إلى 5 منتجات' : 'Upload 3 to 5 products', 
+                    limit: isRtl ? 'محدودة بـ 3 منتجات' : 'Limited to 3 products', 
                     icon: Package, 
                     features: [
                       isRtl ? 'خدمة عرض المنتجات الأساسية' : 'Basic product display',
@@ -1734,11 +1761,10 @@ export default function App() {
                     title: isRtl ? 'الباقة الفضية' : 'Silver Plan', 
                     price: '1,000',
                     period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
-                    limit: isRtl ? 'باقة عرض المنتجات الأساسية' : 'Key product display tier', 
+                    limit: isRtl ? 'الحد الأقصى: 20 منتج' : 'Upload limit: 20 products', 
                     icon: Briefcase, 
                     features: [
-                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app',
-                      isRtl ? 'الحد الأقصى للتنزيل: 20 منتج' : 'Upload limit: 20 products'
+                      isRtl ? 'خدمة عرض المنتجات داخل التطبيق' : 'Product display within the app'
                     ],
                     accent: false
                   },
@@ -1748,11 +1774,10 @@ export default function App() {
                     title: isRtl ? 'الباقة الذهبية' : 'Gold Plan', 
                     price: '2,000',
                     period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
-                    limit: isRtl ? 'الظهور المميز للزبائن' : 'Premium view tier', 
+                    limit: isRtl ? 'الظهور المميز للزبائن' : 'Featured on home page', 
                     icon: Zap, 
                     features: [
-                      isRtl ? 'خدمة عرض المنتجات في الصفحة الأولى' : 'Featured display on the home page',
-                      isRtl ? 'الحد الأقصى للتنزيل: 50 منتج' : 'Upload limit: 50 products'
+                      isRtl ? 'خدمة عرض المنتجات في الصفحة الأولى' : 'Featured display on the home page'
                     ],
                     accent: true
                   },
@@ -1762,17 +1787,33 @@ export default function App() {
                     title: isRtl ? 'الباقة البلاتينية' : 'Platinum Plan', 
                     price: '8,500',
                     period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
-                    limit: isRtl ? 'حرق الإحصائيات وبناء الهوية' : 'Pro brand builder tier', 
+                    limit: isRtl ? 'منتجات غير محدودة وبناء الهوية' : 'Pro brand builder', 
                     icon: Star, 
                     features: [
-                      isRtl ? 'خدمة عرض منتجات غير محدودة' : 'Unlimited products display',
+                      isRtl ? 'خدمة عرض المنتجات' : 'Product display',
                       isRtl ? 'التصوير الاحترافي للمنتجات' : 'Professional product photography',
-                      isRtl ? 'التسويق الفعال عبر قنوات التواصل' : 'Active social media marketing'
+                      isRtl ? 'التسويق الفعال عبر وسائل التواصل' : 'Active social media marketing'
+                    ],
+                    accent: false
+                  },
+                  { 
+                    id: 'diamond',
+                    tag: 'Diamond',
+                    title: isRtl ? 'الباقة الماسّية' : 'Diamond Plan', 
+                    price: '10,500',
+                    period: isRtl ? 'دج / شهرياً' : 'DZD / mo',
+                    limit: isRtl ? 'التميز الشامل وبناء العلامة' : 'Elite Brand Tier', 
+                    icon: Trophy, 
+                    features: [
+                      isRtl ? 'خدمة عرض المنتجات' : 'Product display',
+                      isRtl ? 'التصوير الاحترافي للمنتجات' : 'Professional product photography',
+                      isRtl ? 'دراسات جمهور وتحديد الفئة المستهدفة' : 'Audience studies & demographic research',
+                      isRtl ? 'التسويق الفعال عبر وسائل التواصل' : 'Active social media marketing'
                     ],
                     accent: false
                   }
                 ].map((pkg, i) => (
-                  <div key={i} className={`p-8 rounded-[3rem] border flex flex-col ${pkg.accent ? 'bg-stone-900 text-white border-stone-800 ring-4 ring-gold/30' : 'bg-white border-stone-100'} shadow-sm relative transition-all hover:scale-[1.02] hover:shadow-xl`}>
+                  <div key={i} className={`p-6 rounded-[2.5rem] border flex flex-col ${pkg.accent ? 'bg-stone-900 text-white border-stone-800 ring-4 ring-gold/30' : 'bg-white border-stone-100'} shadow-sm relative transition-all hover:scale-[1.02] hover:shadow-xl`}>
                     {pkg.accent && (
                       <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-stone-900 font-extrabold text-[9px] uppercase tracking-wider px-4 py-1.5 rounded-full shadow-lg">
                         {isRtl ? 'الأكثر طلباً' : 'Most Popular'}
@@ -1815,26 +1856,6 @@ export default function App() {
                     </button>
                   </div>
                 ))}
-              </div>
-
-              <div className="bg-stone-900 p-10 md:p-16 rounded-[4rem] relative overflow-hidden text-white group shadow-2xl">
-                <div className="relative z-10 max-w-lg space-y-6">
-                  <span className="bg-gold px-4 py-1.5 text-[10px] font-black rounded-full uppercase tracking-widest">
-                    {t.dashboard.premium.badge}
-                  </span>
-                  <h3 className="font-serif text-4xl md:text-5xl font-bold leading-tight">
-                    {t.dashboard.premium.title}
-                  </h3>
-                  <p className="text-stone-400 text-lg font-light leading-relaxed">
-                    {t.dashboard.premium.desc}
-                  </p>
-                  <button className="bg-white text-stone-900 px-10 py-5 rounded-2xl font-bold shadow-2xl hover:scale-105 transition-transform">
-                    {t.dashboard.premium.cta}
-                  </button>
-                </div>
-                <div className="absolute -left-10 -bottom-10 opacity-10 group-hover:scale-110 transition-transform duration-700">
-                  <Star className="w-[300px] h-[300px] stroke-1" />
-                </div>
               </div>
             </motion.section>
           )}
@@ -2042,8 +2063,53 @@ export default function App() {
                 <X className="w-5 h-5 md:w-6 md:h-6" />
               </button>
 
-              <div className="w-full h-64 sm:h-96 md:h-auto md:w-1/2 shrink-0 overflow-hidden bg-stone-100">
-                <img src={selectedProduct.img} className="w-full h-full object-cover" alt={getName(selectedProduct)} />
+              <div className="relative w-full h-64 sm:h-72 md:h-auto md:w-1/2 shrink-0 overflow-hidden bg-stone-100">
+                {/* Image Gallery/Slideshow */}
+                <div className="w-full h-full relative">
+                  <img 
+                    src={selectedProduct.gallery && selectedProduct.gallery[activeImgIndex] ? selectedProduct.gallery[activeImgIndex] : selectedProduct.img} 
+                    className="w-full h-full object-cover transition-all duration-300" 
+                    alt={getName(selectedProduct)} 
+                  />
+                  
+                  {/* Left & Right Arrows */}
+                  {selectedProduct.gallery && selectedProduct.gallery.length > 1 && (
+                    <>
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveImgIndex(prev => (prev - 1 + selectedProduct.gallery!.length) % selectedProduct.gallery!.length);
+                        }}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white/80 hover:bg-white text-stone-900 rounded-full flex items-center justify-center font-bold transition-all shadow-md z-10"
+                      >
+                        <ArrowLeft className="w-4 h-4" />
+                      </button>
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveImgIndex(prev => (prev + 1) % selectedProduct.gallery!.length);
+                        }}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white/80 hover:bg-white text-stone-900 rounded-full flex items-center justify-center font-bold transition-all shadow-md z-10"
+                      >
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+
+                      {/* Pagination Indicator dots */}
+                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10 bg-stone-900/60 px-2.5 py-1.5 rounded-full backdrop-blur-sm">
+                        {selectedProduct.gallery.map((_, idx) => (
+                          <button
+                            key={idx}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveImgIndex(idx);
+                            }}
+                            className={`w-1.5 h-1.5 rounded-full transition-all ${idx === activeImgIndex ? 'bg-gold w-3' : 'bg-white/60 hover:bg-white'}`}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
 
               <div className="w-full md:w-1/2 p-6 sm:p-10 md:p-12 md:overflow-y-auto no-scrollbar space-y-6 md:space-y-8 flex flex-col justify-start md:justify-center">

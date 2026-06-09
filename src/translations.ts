@@ -159,7 +159,7 @@ export interface Translation {
 
 export const translations: Record<Language, Translation> = {
   ar: {
-    brand: "دَارُ لَالَّاهُمْ",
+    brand: "دار لَلاهم",
     hero: {
       badge: "موسم 2024",
       title: "حلي تروي تاريخ الأجداد",
@@ -310,7 +310,7 @@ export const translations: Record<Language, Translation> = {
         documents: "سجل تجاري / بطاقة حرفي (اختياري)",
         submit: "فتح متجر"
       },
-      footer: "منصة دَارِ لَالَّاهُمْ تضمن حقوق البائع والمشتري بالكامل.",
+      footer: "منصة دار لَلاهم تضمن حقوق البائع والمشتري بالكامل.",
       invalid: "بيانات الدخول غير صحيحة"
     }
   },
@@ -512,7 +512,7 @@ export const translations: Record<Language, Translation> = {
         all: "Tout",
         jewelry: "Bijoux",
         clothing: "Vêtements",
-        copper: "Cuivre",
+        copper: "Cuiver",
         homeDecor: "Décoration maison",
         hennaSetup: "Qâada Henna",
         hennaInk: "Harqous"
