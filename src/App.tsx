@@ -33,6 +33,14 @@ interface Product {
   rating: number;
   isOffer?: boolean;
   isBestSeller?: boolean;
+  
+  // Optional Rental details if added to cart
+  isRentalCartItem?: boolean;
+  rentalDuration?: number;
+  rentalStartDate?: string;
+  rentalReturnDate?: string;
+  rentalNotes?: string;
+  rentalTotalPrice?: number;
 }
 
 const products: Product[] = [
@@ -311,7 +319,7 @@ const products: Product[] = [
     descriptionEn: "Traditional Kabyle cuff bracelet adorned with colorful Amazigh-inspired motifs. A handcrafted piece that combines authenticity and elegance.",
     descriptionFr: "Manchette kabyle traditionnel en cuivre, orné de motifs colorés inspirés du patrimoine amazigh. Une pièce artisanale alliant authenticité et élégance.",
     price: 5000,
-    img: "16.jpg",
+    img: "16.jpeg",
     artisan: "أولاد نائل",
     artisanImg: "https://i.pravatar.cc/150?u=nail",
     category: 'jewelry',
@@ -809,7 +817,7 @@ export default function App() {
         id: Math.random().toString(36).substr(2, 9).toUpperCase(),
         customerName: currentUser?.name || 'Guest',
         items: [...cart],
-        total: cart.reduce((sum: number, item: Product) => sum + item.price, 0),
+        total: cart.reduce((sum: number, item: Product) => sum + (item.isRentalCartItem && item.rentalTotalPrice !== undefined ? item.rentalTotalPrice : item.price), 0),
         date: new Date().toLocaleDateString(lang === 'ar' ? 'ar-DZ' : 'en-US'),
         status: 'pending'
       };
@@ -1520,7 +1528,28 @@ export default function App() {
                         <div className="flex-grow">
                           <p className="text-[10px] text-stone-400 font-bold mb-1 uppercase tracking-widest">{item.artisan}</p>
                           <h4 className="font-bold text-base text-stone-800">{getName(item)}</h4>
-                          <p className="text-gold font-black mt-1">{item.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
+                          
+                          {item.isRentalCartItem ? (
+                            <div className="mt-2 space-y-1">
+                              <span className="inline-flex items-center gap-1 bg-amber-50 text-amber-800 text-[10px] px-2.5 py-0.5 rounded-lg font-black border border-amber-100 uppercase tracking-wider">
+                                <Calendar className="w-3 h-3" />
+                                {isRtl ? 'حجز كراء' : 'Rental'} - {item.rentalDuration} {isRtl ? 'أيام' : 'Days'}
+                              </span>
+                              <p className="text-stone-500 text-xs">
+                                {isRtl ? 'تاريخ الحجز:' : 'Booking Date:'} {item.rentalStartDate} {isRtl ? 'إلى' : 'to'} {item.rentalReturnDate}
+                              </p>
+                              {item.rentalNotes && (
+                                <p className="text-stone-400 text-[11px] italic">
+                                  "{item.rentalNotes}"
+                                </p>
+                              )}
+                              <p className="text-gold font-black text-sm">
+                                {item.rentalTotalPrice?.toLocaleString()} {isRtl ? 'دج إجمالي الكراء' : 'DZD Total'}
+                              </p>
+                            </div>
+                          ) : (
+                            <p className="text-gold font-black mt-1">{item.price.toLocaleString()} {isRtl ? 'دج' : 'DZD'}</p>
+                          )}
                         </div>
                         <button 
                           onClick={() => removeFromCart(idx)}
@@ -1539,7 +1568,7 @@ export default function App() {
                     <div className="flex justify-between items-center text-2xl font-bold relative z-10">
                       <span>{t.cart.total}</span>
                       <span className="text-gold">
-                        {cart.reduce((sum, item) => sum + item.price, 0).toLocaleString()} {isRtl ? 'دج' : 'DZD'}
+                        {cart.reduce((sum, item) => sum + (item.isRentalCartItem && item.rentalTotalPrice !== undefined ? item.rentalTotalPrice : item.price), 0).toLocaleString()} {isRtl ? 'دج' : 'DZD'}
                       </span>
                     </div>
                     <button 
@@ -2004,20 +2033,20 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white w-full max-w-4xl rounded-[3.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
+              className="relative bg-white w-full max-w-4xl rounded-[2.5rem] md:rounded-[3.5rem] overflow-y-auto md:overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
             >
               <button 
                 onClick={() => setSelectedProduct(null)}
-                className="absolute top-6 right-6 z-[510] w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-md text-white rounded-full flex items-center justify-center font-bold transition-all"
+                className="absolute top-4 right-4 md:top-6 md:right-6 z-[510] w-10 h-10 md:w-12 md:h-12 bg-stone-900/80 hover:bg-stone-900 text-white rounded-full flex items-center justify-center font-bold transition-all shadow-lg"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5 md:w-6 md:h-6" />
               </button>
 
-              <div className="md:w-1/2 overflow-hidden bg-stone-100">
+              <div className="w-full h-64 sm:h-96 md:h-auto md:w-1/2 shrink-0 overflow-hidden bg-stone-100">
                 <img src={selectedProduct.img} className="w-full h-full object-cover" alt={getName(selectedProduct)} />
               </div>
 
-              <div className="md:w-1/2 p-10 md:p-12 overflow-y-auto no-scrollbar space-y-8 flex flex-col justify-center">
+              <div className="w-full md:w-1/2 p-6 sm:p-10 md:p-12 md:overflow-y-auto no-scrollbar space-y-6 md:space-y-8 flex flex-col justify-start md:justify-center">
                 <ArtisanSignature artisan={selectedProduct.artisan} artisanImg={selectedProduct.artisanImg} t={t} variant="full" />
 
                 <div className="flex flex-col gap-1">
@@ -2536,18 +2565,31 @@ export default function App() {
                 <button 
                   onClick={() => {
                     const priceTotal = rentalDetails.duration * (rentingProduct.rentPrice || 0);
+                    
+                    const rentalCartItem: Product = {
+                      ...rentingProduct,
+                      isRentalCartItem: true,
+                      rentalDuration: rentalDetails.duration,
+                      rentalStartDate: rentalDetails.startDate,
+                      rentalReturnDate: rentalDetails.returnDate,
+                      rentalNotes: rentalDetails.notes,
+                      rentalTotalPrice: priceTotal
+                    };
+
+                    setCart([...cart, rentalCartItem]);
                     setNotifications([
-                      `${isRtl ? 'طلب كراء' : 'Rent request'} (${isRtl ? rentingProduct.name : rentingProduct.nameEn}): ${priceTotal} DZD`, 
+                      `${isRtl ? 'حجز كراء بالسلة' : 'Rental booking in cart'} (${isRtl ? rentingProduct.name : rentingProduct.nameEn}): ${priceTotal} DZD`, 
                       ...notifications
                     ]);
-                    showToast(isRtl ? 'تم إرسال طلب حجز الكراء بنجاح وسيتواصل معك الحرفي!' : 'Rental booking request submitted successfully. The artisan will contact you!');
+                    showToast(isRtl ? 'تمت إضافة طلب حجز الكراء إلى السلة بنجاح!' : 'Rental booking added to cart successfully!');
                     setIsRentalModalOpen(false);
                     setRentingProduct(null);
+                    setCurrentTab('cart');
                   }}
                   className="w-full py-5 bg-gold text-white rounded-2xl font-bold shadow-xl shadow-gold/20 flex items-center justify-center gap-3 active:scale-95 transition-all text-lg"
                 >
                   <CheckCircle2 className="w-5 h-5" />
-                  {isRtl ? 'تأكيد حجز الكراء' : 'Confirm Book'}
+                  {isRtl ? 'تأكيد حجز الكراء' : 'Confirm Rental'}
                 </button>
               </div>
             </motion.div>

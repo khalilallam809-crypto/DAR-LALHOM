@@ -512,7 +512,7 @@ export const translations: Record<Language, Translation> = {
         all: "Tout",
         jewelry: "Bijoux",
         clothing: "Vêtements",
-        copper: "Nحاس",
+        copper: "Cuivre",
         homeDecor: "Décoration maison",
         hennaSetup: "Qâada Henna",
         hennaInk: "Harqous"
